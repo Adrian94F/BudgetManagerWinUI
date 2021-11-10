@@ -1,0 +1,29 @@
+﻿<Window
+    x:Class="BudgetManager.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BudgetManager"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <NavigationView PaneDisplayMode="Auto" IsSettingsVisible="False" IsPaneToggleButtonVisible="False">
+        <NavigationView.MenuItems>
+            <NavigationViewItem x:Uid="HomeNavItem" Content="Podsumowanie" Tag="home">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE10F;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem x:Uid="TableNavItem" Icon="AllApps" Content="Tabela" Tag="table"/>
+            <NavigationViewItem x:Uid="ListavItem" Icon="Video" Content="Lista wydatków" Tag="exp_list"/>
+            <NavigationViewItem x:Uid="BurndownNavItem" Icon="Audio" Content="Wypalenie" Tag="exp_burndown"/>
+            <NavigationViewItem x:Uid="HistoryNavItem" Icon="AllApps" Content="Historia" Tag="history"/>
+            <NavigationViewItem x:Uid="MonthsNavItem" Icon="Video" Content="Lista miesięcy" Tag="months_list"/>
+        </NavigationView.MenuItems>
+        <NavigationView.FooterMenuItems>
+            <NavigationViewItem x:Uid="CategoriesNavItem" Icon="Audio" Content="Kategorie" Tag="categories"/>
+            <NavigationViewItem x:Uid="CategoriesNavItem" Icon="ContactInfo" Content="Informacje" Tag="about"/>
+            <NavigationViewItem x:Uid="CategoriesNavItem" Icon="Setting" Content="Ustawienia" Tag="settings"/>
+        </NavigationView.FooterMenuItems>
+    </NavigationView>
+</Window>

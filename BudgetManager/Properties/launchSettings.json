@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "BudgetManager": {
+      "commandName": "MsixPackage"
+    }
+  }
+}
