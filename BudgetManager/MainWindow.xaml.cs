@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using BudgetManager.Pages;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -26,6 +27,69 @@ namespace BudgetManager
         public MainWindow()
         {
             this.InitializeComponent();
+        }
+
+        private void NavView_Loaded(object sender, RoutedEventArgs e)
+        {
+            // set the initial SelectedItem 
+            foreach (NavigationViewItemBase item in NavView.MenuItems)
+            {
+                if (item is NavigationViewItem && item.Tag.ToString() == "home")
+                {
+                    NavView.SelectedItem = item;
+                    NavView_Navigate(item as NavigationViewItem);
+                    break;
+                }
+            }
+        }
+
+        private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            if (!args.IsSettingsInvoked)
+            {
+                // find NavigationViewItem with Content that equals InvokedItem
+                var items = sender.MenuItems.Concat(sender.FooterMenuItems);
+                var item = items.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
+                NavView_Navigate(item as NavigationViewItem);
+            }
+        }
+
+        private void NavView_Navigate(NavigationViewItem item)
+        {
+            switch (item.Tag)
+            {
+                case "home":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+
+                case "table":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+
+                case "exp_list":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+
+                case "exp_burndown":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+
+                case "history":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+
+                case "months_list":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+
+                case "categories":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+
+                case "settings":
+                    ContentFrame.Navigate(typeof(BlankPage));
+                    break;
+            }
         }
     }
 }

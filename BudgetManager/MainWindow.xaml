@@ -7,23 +7,62 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <NavigationView PaneDisplayMode="Auto" IsSettingsVisible="False" IsPaneToggleButtonVisible="False">
+    <NavigationView x:Name="NavView"
+                    ItemInvoked="NavView_ItemInvoked"
+                    Loaded="NavView_Loaded"
+                    PaneDisplayMode="Auto"
+                    IsSettingsVisible="False"
+                    IsBackButtonVisible="Collapsed">
         <NavigationView.MenuItems>
             <NavigationViewItem x:Uid="HomeNavItem" Content="Podsumowanie" Tag="home">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE10F;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem x:Uid="TableNavItem" Icon="AllApps" Content="Tabela" Tag="table"/>
-            <NavigationViewItem x:Uid="ListavItem" Icon="Video" Content="Lista wydatków" Tag="exp_list"/>
-            <NavigationViewItem x:Uid="BurndownNavItem" Icon="Audio" Content="Wypalenie" Tag="exp_burndown"/>
-            <NavigationViewItem x:Uid="HistoryNavItem" Icon="AllApps" Content="Historia" Tag="history"/>
-            <NavigationViewItem x:Uid="MonthsNavItem" Icon="Video" Content="Lista miesięcy" Tag="months_list"/>
+            <NavigationViewItem x:Uid="TableNavItem" Content="Tabela" Tag="table">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE138;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem x:Uid="ListavItem" Content="Lista wydatków" Tag="exp_list">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xEA37;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem x:Uid="BurndownNavItem" Content="Wypalenie" Tag="exp_burndown">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE9D2;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItemSeparator/>
+            <NavigationViewItem x:Uid="HistoryNavItem" Content="Historia" Tag="history">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE81C;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem x:Uid="MonthsNavItem" Content="Lista miesięcy" Tag="months_list">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xEA37;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItemSeparator/>
+            <NavigationViewItem x:Uid="CategoriesNavItem" Content="Kategorie" Tag="categories">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xE97C;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
         </NavigationView.MenuItems>
+
         <NavigationView.FooterMenuItems>
-            <NavigationViewItem x:Uid="CategoriesNavItem" Icon="Audio" Content="Kategorie" Tag="categories"/>
-            <NavigationViewItem x:Uid="CategoriesNavItem" Icon="ContactInfo" Content="Informacje" Tag="about"/>
-            <NavigationViewItem x:Uid="CategoriesNavItem" Icon="Setting" Content="Ustawienia" Tag="settings"/>
+            <NavigationViewItem x:Uid="SettingsNavItem" Icon="Setting" Content="Ustawienia" Tag="settings"/>
         </NavigationView.FooterMenuItems>
+
+        <Frame x:Name="ContentFrame" Margin="24">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition/>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
     </NavigationView>
 </Window>
