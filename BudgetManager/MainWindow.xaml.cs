@@ -28,6 +28,8 @@ namespace BudgetManager
         public MainWindow()
         {
             this.InitializeComponent();
+            this.ExtendsContentIntoTitleBar = true;
+            this.SetTitleBar(CustomTitleBar);
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
