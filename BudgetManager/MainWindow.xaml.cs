@@ -33,6 +33,7 @@ namespace BudgetManager
 
             var appWindow = this.GetAppWindowForCurrentWindow();
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+            appWindow.TitleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
