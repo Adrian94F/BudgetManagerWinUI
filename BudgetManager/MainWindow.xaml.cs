@@ -31,15 +31,15 @@ namespace BudgetManager
         {
             this.InitializeComponent();
 
-            AppWindow appWindow = this.GetAppWindowForCurrentWindow();
+            var appWindow = this.GetAppWindowForCurrentWindow();
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
         {
-            var hWnd = WindowNative.GetWindowHandle(this);
-            var myWndId = Win32Interop.GetWindowIdFromWindow(hWnd);
-            return AppWindow.GetFromWindowId(myWndId);
+            var handler = WindowNative.GetWindowHandle(this);
+            var id = Win32Interop.GetWindowIdFromWindow(handler);
+            return AppWindow.GetFromWindowId(id);
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
