@@ -13,7 +13,7 @@
     <DefaultLanguage>pl-PL</DefaultLanguage>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Pages\BlankPage.xaml" />
+    <None Remove="Pages\DebugPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Pages\BlankPage.xaml">
+    <Page Update="Pages\DebugPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

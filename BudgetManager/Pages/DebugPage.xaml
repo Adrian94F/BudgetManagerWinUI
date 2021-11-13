@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="BudgetManager.Pages.BlankPage"
+    x:Class="BudgetManager.Pages.DebugPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BudgetManager.Pages"
