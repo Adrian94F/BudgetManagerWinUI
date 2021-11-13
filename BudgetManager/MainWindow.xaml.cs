@@ -30,10 +30,14 @@ namespace BudgetManager
         public MainWindow()
         {
             this.InitializeComponent();
+            SetUpTitleBar();
+        }
 
-            this.Title = "Menedżer Budżetu";
-
+        private void SetUpTitleBar()
+        {
             var appWindow = this.GetAppWindowForCurrentWindow();
+            appWindow.Title = "Menedżer Budżetu";
+            appWindow.SetIcon("calculator.ico");
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             appWindow.TitleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
         }
