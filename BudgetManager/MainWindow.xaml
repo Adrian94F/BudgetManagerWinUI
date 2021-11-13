@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Stretch"
-          Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
+          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
