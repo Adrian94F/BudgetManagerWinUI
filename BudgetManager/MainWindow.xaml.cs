@@ -1,4 +1,5 @@
 ﻿using BudgetManager.Pages;
+using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -14,6 +15,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,8 +30,18 @@ namespace BudgetManager
         public MainWindow()
         {
             this.InitializeComponent();
-            this.ExtendsContentIntoTitleBar = true;
-            this.SetTitleBar(CustomTitleBar);
+            //this.ExtendsContentIntoTitleBar = true;
+            //this.SetTitleBar(CustomTitleBar);
+
+            AppWindow appWindow = this.GetAppWindowForCurrentWindow();
+            appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+        }
+
+        private AppWindow GetAppWindowForCurrentWindow()
+        {
+            var hWnd = WindowNative.GetWindowHandle(this);
+            var myWndId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            return AppWindow.GetFromWindowId(myWndId);
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)

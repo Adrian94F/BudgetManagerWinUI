@@ -7,27 +7,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid HorizontalAlignment="Stretch"
+                        Background="{ThemeResource SystemControlAcrylicWindowBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="CustomTitleBar"
-                    FlowDirection="LeftToRight"
-                    Grid.Row="0"
-                    Padding="15, 10, 150, 10">
-            <TextBlock Text="Menedżer Budżetu"/>
-        </StackPanel>
-        
+        <TextBlock Text="Menedżer Budżetu"
+                   Grid.Row="0"
+                   Margin="15, 6, 0, 6"/>
+
         <NavigationView x:Name="NavView"
                         Grid.Row="1"
                         ItemInvoked="NavView_ItemInvoked"
                         Loaded="NavView_Loaded"
                         PaneDisplayMode="Auto"
                         IsSettingsVisible="False"
-                        IsBackButtonVisible="Auto"
-                        Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+                        IsBackButtonVisible="Auto">
             <NavigationView.MenuItems>
                 <NavigationViewItem x:Uid="HomeNavItem" Content="Podsumowanie" Tag="home">
                     <NavigationViewItem.Icon>
@@ -72,7 +69,7 @@
                 <NavigationViewItem x:Uid="SettingsNavItem" Icon="Setting" Content="Ustawienia" Tag="settings"/>
             </NavigationView.FooterMenuItems>
 
-            <Frame x:Name="ContentFrame" Margin="24">
+            <Frame x:Name="ContentFrame" Margin="24" Background="Transparent">
                 <Frame.ContentTransitions>
                     <TransitionCollection>
                         <NavigationThemeTransition/>
