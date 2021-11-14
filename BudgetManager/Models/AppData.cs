@@ -9,6 +9,9 @@ namespace BudgetManager.Models
 {
     static class AppData
     {
+        public static SortedSet<Month> months = new SortedSet<Month>();
+        public static HashSet<Category> categories = new HashSet<Category>();
+
         public static void Initialize()
         {
             var data = DataReader.Read();
