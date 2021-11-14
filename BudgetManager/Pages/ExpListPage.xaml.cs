@@ -21,13 +21,13 @@ namespace BudgetManager.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SettingsPage : Page, IPageWithInfo
+    public sealed partial class ExpListPage : Page, IPageWithInfo
     {
-        public string header = "Ustawienia";
+        public string header = "Lista wydatków";
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
-        public SettingsPage()
+        public ExpListPage()
         {
             this.InitializeComponent();
         }

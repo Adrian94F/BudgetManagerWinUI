@@ -79,31 +79,27 @@ namespace BudgetManager
             switch (item.Tag)
             {
                 case "home":
-                    ContentFrame.Navigate(typeof(DebugPage));
+                    ContentFrame.Navigate(typeof(SummaryPage));
                     break;
 
                 case "table":
-                    ContentFrame.Navigate(typeof(DebugPage));
+                    ContentFrame.Navigate(typeof(TablePage));
                     break;
 
                 case "exp_list":
-                    ContentFrame.Navigate(typeof(DebugPage));
+                    ContentFrame.Navigate(typeof(ExpListPage));
                     break;
 
                 case "exp_burndown":
-                    ContentFrame.Navigate(typeof(DebugPage));
+                    ContentFrame.Navigate(typeof(ExpBurndownPage));
                     break;
 
                 case "history":
-                    ContentFrame.Navigate(typeof(DebugPage));
+                    ContentFrame.Navigate(typeof(MonthsHistoryPage));
                     break;
 
                 case "months_list":
-                    ContentFrame.Navigate(typeof(DebugPage));
-                    break;
-
-                case "categories":
-                    ContentFrame.Navigate(typeof(DebugPage));
+                    ContentFrame.Navigate(typeof(MonthsListPage));
                     break;
 
                 case "settings":
@@ -116,8 +112,7 @@ namespace BudgetManager
             }
 
             var page = ContentFrame.Content as IPageWithInfo;
-
-            NavView.Header = page.header != null ? page.header : null;
+            NavView.Header = page.header;
         }
     }
 }

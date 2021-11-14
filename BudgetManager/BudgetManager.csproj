@@ -15,7 +15,13 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\DebugPage.xaml" />
+    <None Remove="Pages\ExpBurndownPage.xaml" />
+    <None Remove="Pages\ExpListPage.xaml" />
+    <None Remove="Pages\MonthsHistoryPage.xaml" />
+    <None Remove="Pages\MonthsListPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
+    <None Remove="Pages\SummaryPage.xaml" />
+    <None Remove="Pages\TablePage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +52,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Data\" />
+    <Folder Include="Models\AppData\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\MonthsListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\MonthsHistoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\ExpBurndownPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\ExpListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\TablePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\SummaryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
