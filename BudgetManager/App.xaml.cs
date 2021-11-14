@@ -45,6 +45,7 @@ namespace BudgetManager
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             AppSettings.Read();
+            AppData.Initialize();
 
             m_window = new MainWindow();
             m_window.Activate();
