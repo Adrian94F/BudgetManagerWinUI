@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+﻿using BudgetManager.Models;
+using BudgetManager.Utilities;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -42,6 +44,8 @@ namespace BudgetManager
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            AppSettings.Read();
+
             m_window = new MainWindow();
             m_window.Activate();
         }

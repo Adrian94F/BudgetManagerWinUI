@@ -1,5 +1,4 @@
-﻿using BudgetManager.Utilities;
-using Microsoft.UI.Xaml;
+﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -22,17 +21,16 @@ namespace BudgetManager.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DebugPage : Page, IPageWithInfo
+    public sealed partial class SettingsPage : Page, IPageWithInfo
     {
-        public string header = "Dziennik zdarzeń";
+
+        public string header = "Ustawienia";
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
-        public DebugPage()
+        public SettingsPage()
         {
             this.InitializeComponent();
-
-            Text.Text = Logger.GetLog();
         }
     }
 }

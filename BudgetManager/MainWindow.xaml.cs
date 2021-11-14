@@ -107,9 +107,17 @@ namespace BudgetManager
                     break;
 
                 case "settings":
+                    ContentFrame.Navigate(typeof(SettingsPage));
+                    break;
+
+                default:
                     ContentFrame.Navigate(typeof(DebugPage));
                     break;
             }
+
+            var page = ContentFrame.Content as IPageWithInfo;
+
+            NavView.Header = page.header != null ? page.header : null;
         }
     }
 }

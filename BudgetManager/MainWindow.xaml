@@ -66,6 +66,7 @@
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Uid="SettingsNavItem" Icon="Read" Content="Dziennik" Tag="log"/>
                 <NavigationViewItem x:Uid="SettingsNavItem" Icon="Setting" Content="Ustawienia" Tag="settings"/>
             </NavigationView.FooterMenuItems>
 
