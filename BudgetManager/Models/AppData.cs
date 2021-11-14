@@ -12,10 +12,17 @@ namespace BudgetManager.Models
         public static SortedSet<Month> months = new SortedSet<Month>();
         public static HashSet<Category> categories = new HashSet<Category>();
 
+        public static int currentMonth = -1;
+
         public static void Initialize()
         {
             var data = DataReader.Read();
             Logger.Log("read " + data.Length + " characters of app data");
+        }
+
+        public static bool IsNotEmpty()
+        {
+            return months.Count > 0;
         }
     }
 }

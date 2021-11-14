@@ -162,6 +162,7 @@ namespace BudgetManager.Utilities
                     AppData.months.Add(month);
                 }
                 Logger.Log("read " + AppData.months.Count + " months");
+                AppData.currentMonth = AppData.months.Count - 1;
 
                 return jsonString;
             }
