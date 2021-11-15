@@ -7,60 +7,31 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <ScrollViewer Grid.Row="1"
-                      Grid.Column="0"
-                      VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Vertical"
-                        Margin="10, 0, 30, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <!-- expenses -->
-                <Grid Margin="0, 15">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="80"/>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Row="0"
-                               Grid.Column="0"
-                               Text="Wydatki codzienne"/>
-                    <TextBlock x:Name="DailyExpensesSumTextBlock"
-                               Grid.Row="0"
-                               Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               TextAlignment="Right"
-                               Text="...zł"/>
-                    <TextBlock Grid.Row="2"
-                               Grid.Column="0"
-                               Text="Wydatki miesięczne"/>
-                    <TextBlock x:Name="MonthlyExpensesSumTextBlock"
-                               Grid.Row="2"
-                               Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               TextAlignment="Right"
-                               Text="...zł"/>
-
-                    <TextBlock Grid.Row="4"
-                               Grid.Column="0"
-                               Text="Suma wydatków"/>
-                    <TextBlock x:Name="ExpensesSumTextBlock"
-                               Grid.Row="4"
-                               Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               TextAlignment="Right"
-                               Text="...zł"/>
-                </Grid>
-
-                <!-- incomes -->
-                <Grid Margin="0, 15">
+            <!-- incomes -->
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="16"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <Grid Margin="16">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -68,7 +39,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="180"/>
                         <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
 
@@ -101,9 +72,19 @@
                                TextAlignment="Right"
                                Text="...zł"/>
                 </Grid>
+            </Border>
 
-                <!-- balance -->
-                <Grid Margin="0, 15">
+            <!-- expenses -->
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Margin="16"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <Grid Margin="16">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -112,7 +93,61 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Text="Wydatki codzienne"/>
+                    <TextBlock x:Name="DailyExpensesSumTextBlock"
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               HorizontalAlignment="Right"
+                               TextAlignment="Right"
+                               Text="...zł"/>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Text="Wydatki miesięczne"/>
+                    <TextBlock x:Name="MonthlyExpensesSumTextBlock"
+                               Grid.Row="2"
+                               Grid.Column="1"
+                               HorizontalAlignment="Right"
+                               TextAlignment="Right"
+                               Text="...zł"/>
+
+                    <TextBlock Grid.Row="4"
+                               Grid.Column="0"
+                               Text="Suma wydatków"/>
+                    <TextBlock x:Name="ExpensesSumTextBlock"
+                               Grid.Row="4"
+                               Grid.Column="1"
+                               HorizontalAlignment="Right"
+                               TextAlignment="Right"
+                               Text="...zł"/>
+                </Grid>
+            </Border>
+
+            <!-- balance -->
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="16"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <Grid Margin="16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
                         <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
 
@@ -154,9 +189,19 @@
                                TextAlignment="Right"
                                Text="...zł"/>
                 </Grid>
+            </Border>
 
-                <!-- daily expense estimation -->
-                <Grid Margin="0, 15">
+            <!-- daily expense estimation -->
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Margin="16"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <Grid Margin="16">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -165,7 +210,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="80"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0"
@@ -202,7 +247,7 @@
                                TextAlignment="Right"
                                Text="...%"/>
                 </Grid>
-            </StackPanel>
-        </ScrollViewer>
-    </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
 </Page>
