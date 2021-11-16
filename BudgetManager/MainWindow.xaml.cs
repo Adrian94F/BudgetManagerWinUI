@@ -71,7 +71,7 @@ namespace BudgetManager
                 // find NavigationViewItem with Content that equals InvokedItem
                 var items = sender.MenuItems.Concat(sender.FooterMenuItems);
                 var item = items.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
-                NavView_Navigate(item as NavigationViewItem);
+                NavView_Navigate(item);
             }
         }
 
