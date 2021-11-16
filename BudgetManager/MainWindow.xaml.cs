@@ -1,4 +1,5 @@
 ﻿using BudgetManager.Pages;
+using BudgetManager.Utilities;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
@@ -113,6 +114,7 @@ namespace BudgetManager
 
             var page = ContentFrame.Content as IPageWithInfo;
             NavView.Header = page.header;
+            Logger.Log("changed page to: " + page.header);
         }
     }
 }

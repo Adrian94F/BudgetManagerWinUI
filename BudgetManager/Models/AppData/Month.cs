@@ -25,6 +25,13 @@ namespace BudgetManager
             expenses = new HashSet<Expense>();
         }
 
+        public override string ToString()
+        {
+            var start = startDate.ToString("dd.MM.yyyy");
+            var end = endDate.ToString("dd.MM.yyyy");
+            return start + "-" + end;
+        }
+
         public decimal GetSumOfIncomes(Income.IncomeType? type = null)
         {
             var sum = decimal.Zero;

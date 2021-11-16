@@ -7,7 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <SplitView IsPaneOpen="True"
+               DisplayMode="Inline"
+               OpenPaneLength="296"
+               PaneBackground="Transparent">
+        <SplitView.Pane>
+            <TextBlock Text="Lista"
+                   FontSize="24"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        </SplitView.Pane>
 
-    </Grid>
+        <Grid>
+            <TextBlock Text="Szczegóły"
+                   FontSize="24"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+        </Grid>
+    </SplitView>
 </Page>
