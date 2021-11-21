@@ -14,6 +14,7 @@
     <ApplicationIcon>calculator.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Controls\ExpenseListViewItem.xaml" />
     <None Remove="Pages\DebugPage.xaml" />
     <None Remove="Pages\ExpBurndownPage.xaml" />
     <None Remove="Pages\ExpListPage.xaml" />
@@ -43,6 +44,12 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.20348.19" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\ExpenseListViewItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
@@ -89,6 +96,9 @@
 
   <ItemGroup>
     <Page Update="Pages\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

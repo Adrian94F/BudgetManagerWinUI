@@ -19,5 +19,20 @@ namespace BudgetManager
             date = DateTime.Today;
             monthlyExpense = false;
         }
+
+        public string MonthlyExpense()
+        {
+            return monthlyExpense ? "↺" : "";
+        }
+
+        public string Value()
+        {
+            return value.ToString("F");
+        }
+
+        public override string ToString()
+        {
+            return date.ToString("dd.MM.yyyy") + " " + value.ToString() + " " + MonthlyExpense() + " " + category.name + " " + comment;
+        }
     }
 }

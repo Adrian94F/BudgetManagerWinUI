@@ -38,8 +38,8 @@ namespace BudgetManager.Pages
         {
             if (AppData.months != null && AppData.months.Count > 0)
             {
-                var period = AppData.months.ElementAt(AppData.currentMonth);
-                FillSummaryGrid(period);
+                var month = AppData.CurrentMonth;
+                FillSummaryGrid(month);
             }
         }
 

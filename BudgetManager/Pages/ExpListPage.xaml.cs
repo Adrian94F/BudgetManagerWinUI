@@ -1,4 +1,7 @@
-﻿using BudgetManager.Models;
+﻿using BudgetManager.Controls;
+using BudgetManager.Models;
+using BudgetManager.Utilities;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -31,6 +34,54 @@ namespace BudgetManager.Pages
         public ExpListPage()
         {
             this.InitializeComponent();
+            FillWithExpenses();
+        }
+
+        private void FillWithExpenses()
+        {
+            var lastDay = "";
+            var month = AppData.CurrentMonth;
+            if (month == null)
+            {
+                return;
+            }
+
+            foreach (var exp in month.expenses)
+            {
+                var day = exp.date.ToString("d");
+                if (lastDay != day)
+                {
+                    lastDay = day;
+                    var text = new TextBlock()
+                    {
+                        Text = day,
+                        FontWeight = FontWeights.Bold
+                    };
+                    ExpListListView.Items.Add(text);
+                }
+
+                var expItem = new ExpenseListViewItem()
+                {
+                    OriginalExpense = exp,
+                };
+
+                ExpListListView.Items.Add(expItem);
+            }
+        }
+
+        private void ExpListListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var exp = e.ClickedItem as ExpenseListViewItem;
+            if (exp != null && !ExpListSplitView.IsPaneOpen)
+            {
+                Logger.Log("clicked expense: " + exp.OriginalExpense.ToString());
+                
+                ExpListSplitView.IsPaneOpen = true;
+            }
+            else
+            {
+                ExpListSplitView.IsPaneOpen = false;
+            }
         }
     }
 }

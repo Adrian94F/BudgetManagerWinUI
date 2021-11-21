@@ -14,6 +14,8 @@ namespace BudgetManager.Models
 
         public static int currentMonth = -1;
 
+        public static Month CurrentMonth {get => months.ElementAtOrDefault(currentMonth); set => currentMonth = months.ToList().IndexOf(value);}
+
         public static void Initialize()
         {
             var data = DataReader.Read();

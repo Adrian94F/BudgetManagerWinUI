@@ -52,8 +52,8 @@ namespace BudgetManager.Pages
                     };
                     var item = new ListViewItem()
                     {
-                        Content = text,
-                        IsEnabled = false,
+                        Padding = new Thickness(20, 0, 0, 0),
+                        Content = text
                     };
                     MonthsListView.Items.Add(item);
                 }
