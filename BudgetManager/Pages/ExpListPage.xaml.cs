@@ -46,7 +46,9 @@ namespace BudgetManager.Pages
                 return;
             }
 
-            foreach (var exp in month.expenses)
+            var expenses = new SortedSet<Expense>(month.expenses);
+
+            foreach (var exp in expenses.Reverse())
             {
                 var day = exp.date.ToString("d");
                 if (lastDay != day)
