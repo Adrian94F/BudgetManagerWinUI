@@ -95,20 +95,30 @@ namespace BudgetManager
                     ContentFrame.Navigate(typeof(ExpBurndownPage));
                     break;
 
+                case "month_details":
+                    ContentFrame.Navigate(typeof(MonthDetailsPage));
+                    break;
+
                 case "history":
                     ContentFrame.Navigate(typeof(MonthsHistoryPage));
                     break;
 
                 case "months_list":
-                    ContentFrame.Navigate(typeof(MonthsListPage));
+                    SideFrame.Navigate(typeof(MonthsListPage));
+                    MainSplitView.OpenPaneLength = 200;
+                    MainSplitView.IsPaneOpen = true;
                     break;
 
                 case "settings":
-                    ContentFrame.Navigate(typeof(SettingsPage));
+                    SideFrame.Navigate(typeof(SettingsPage));
+                    MainSplitView.OpenPaneLength = 600;
+                    MainSplitView.IsPaneOpen = true;
                     break;
 
                 default:
-                    ContentFrame.Navigate(typeof(DebugPage));
+                    SideFrame.Navigate(typeof(DebugPage));
+                    MainSplitView.OpenPaneLength = 500;
+                    MainSplitView.IsPaneOpen = true;
                     break;
             }
 

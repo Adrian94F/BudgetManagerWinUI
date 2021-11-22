@@ -17,11 +17,12 @@
         <TextBlock Text="Menedżer Budżetu"
                    Grid.Row="0"
                    Margin="15, 6, 0, 6"/>
-        <SplitView IsPaneOpen="False"
+        <SplitView x:Name="MainSplitView"
+                   IsPaneOpen="False"
                    PanePlacement="Right"
                    Grid.Row="1">
             <SplitView.Pane>
-                <TextBlock Text="Ustawienia"/>
+                <Frame x:Name="SideFrame"/>
             </SplitView.Pane>
 
             <NavigationView x:Name="NavView"
@@ -51,21 +52,26 @@
                             <FontIcon Glyph="&#xE9D2;"/>
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
+                    <NavigationViewItem x:Uid="MonthDetailsNavItem" Content="Szczegóły" Tag="month_details">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xED43;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
                     <NavigationViewItemSeparator/>
                     <NavigationViewItem x:Uid="HistoryNavItem" Content="Historia" Tag="history">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE81C;"/>
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
-                    <NavigationViewItem x:Uid="MonthsNavItem" Content="Lista miesięcy" Tag="months_list">
-                        <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xEA37;"/>
-                        </NavigationViewItem.Icon>
-                    </NavigationViewItem>
                 </NavigationView.MenuItems>
 
                 <NavigationView.FooterMenuItems>
                     <NavigationViewItem x:Uid="SettingsNavItem" Icon="Read" Content="Dziennik" Tag="log"/>
+                    <NavigationViewItem x:Uid="MonthsNavItem" Content="Miesiące" Tag="months_list">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xEA37;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
                     <NavigationViewItem x:Uid="SettingsNavItem" Icon="Setting" Content="Ustawienia" Tag="settings"/>
                 </NavigationView.FooterMenuItems>
 

@@ -58,6 +58,10 @@ namespace BudgetManager.Pages
                     MonthsListView.Items.Add(item);
                 }
                 MonthsListView.Items.Add(month);
+                if (AppData.CurrentMonth == month)
+                {
+                    MonthsListView.SelectedItem = month;
+                }
             }
         }
 
@@ -68,6 +72,7 @@ namespace BudgetManager.Pages
             if (month != null)
             {
                 Logger.Log("clicked month: " + month.ToString());
+                AppData.CurrentMonth = month;
             }
         }
     }

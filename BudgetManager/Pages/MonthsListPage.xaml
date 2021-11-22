@@ -7,36 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <SplitView IsPaneOpen="True"
-               DisplayMode="Inline"
-               OpenPaneLength="250"
-               PaneBackground="Transparent">
-        <SplitView.Pane>
-            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Stretch"
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="16"
-                    CornerRadius="8"
-                    BorderThickness="1"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
                               VerticalAlignment="Stretch"
                               VerticalContentAlignment="Top">
-                    <ListView x:Name="MonthsListView"
+        <ListView x:Name="MonthsListView"
                               IsItemClickEnabled="True"
                               ItemClick="MonthsListView_ItemClick"
                               SelectionMode="Single"/>
-                </ScrollViewer>
-            </Border>
-        </SplitView.Pane>
-
-        <Grid>
-            <TextBlock Text="Szczegóły"
-                       FontSize="24"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-        </Grid>
-    </SplitView>
+    </ScrollViewer>
 </Page>
