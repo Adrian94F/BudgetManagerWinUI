@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace BudgetManager
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        private NavigationViewItem previousItem;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -57,7 +60,7 @@ namespace BudgetManager
             {
                 if (item is NavigationViewItem && item.Tag.ToString() == "home")
                 {
-                    NavView.SelectedItem = item;
+                    NavView.SelectedItem = previousItem = item as NavigationViewItem;
                     NavView_Navigate(item as NavigationViewItem);
                     break;
                 }
@@ -72,6 +75,15 @@ namespace BudgetManager
                 var items = sender.MenuItems.Concat(sender.FooterMenuItems);
                 var item = items.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
                 NavView_Navigate(item);
+
+                if (sender.FooterMenuItems.Contains(item))
+                {
+                    NavView.SelectedItem = previousItem;
+                }
+                else
+                {
+                    previousItem = NavView.SelectedItem as NavigationViewItem;
+                }
             }
         }
 
@@ -104,19 +116,19 @@ namespace BudgetManager
                     break;
 
                 case "months_list":
-                    SideFrame.Navigate(typeof(MonthsListPage));
+                    SideFrame.Navigate(typeof(MonthsListPage), null, new SuppressNavigationTransitionInfo());
                     MainSplitView.OpenPaneLength = 200;
                     MainSplitView.IsPaneOpen = true;
                     break;
 
                 case "settings":
-                    SideFrame.Navigate(typeof(SettingsPage));
+                    SideFrame.Navigate(typeof(SettingsPage), null, new SuppressNavigationTransitionInfo());
                     MainSplitView.OpenPaneLength = 600;
                     MainSplitView.IsPaneOpen = true;
                     break;
 
                 default:
-                    SideFrame.Navigate(typeof(DebugPage));
+                    SideFrame.Navigate(typeof(DebugPage), null, new SuppressNavigationTransitionInfo());
                     MainSplitView.OpenPaneLength = 500;
                     MainSplitView.IsPaneOpen = true;
                     break;
