@@ -4,10 +4,92 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BudgetManager.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <Grid>
+    <ScrollViewer>
+        <StackPanel HorizontalAlignment="Stretch">
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    VerticalAlignment="Top"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="16"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <StackPanel Margin="16">
+                    <TextBlock Text="Początek"
+                               Style="{StaticResource BodyTextBlockStyle}"/>
+                    <DatePicker x:Name="StartDatePicker"
+                                Margin="16"
+                                DateChanged="DatePicker_DateChanged"/>
+                    <TextBlock Text="Koniec"
+                               Style="{StaticResource BodyTextBlockStyle}"/>
+                    <DatePicker x:Name="EndDatePicker"
+                                Margin="16"
+                                DateChanged="DatePicker_DateChanged"/>
+                </StackPanel>
+            </Border>
 
-    </Grid>
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="16"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <StackPanel Margin="16"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="Dochody"
+                               Style="{StaticResource BodyTextBlockStyle}"/>
+                    <controls:DataGrid x:Name="IncomesDataGrid"
+                                       Margin="16"
+                                       ItemsSource="{Binding}"
+                                       AutoGenerateColumns="False"
+                                       SelectionMode="Single"
+                                       RowEditEnded="IncomesDataGrid_RowEditEnded">
+                        <controls:DataGrid.RowStyle>
+                            <Style TargetType="controls:DataGridRow">
+                                <Setter Property="controls:DataGridRow.ContextFlyout">
+                                    <Setter.Value>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem x:Name="DeleteRow"
+                                                            Click="DeleteRow_Click"
+                                                            Text="Usuń"/>
+                                        </MenuFlyout>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </controls:DataGrid.RowStyle>
+                        <controls:DataGrid.Columns>
+                            <controls:DataGridTextColumn Header="Kwota [zł]"
+                                                         Binding="{Binding value}"
+                                                         SortDirection="Descending"
+                                                         CanUserReorder="False">
+                                <controls:DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="VerticalAlignment"
+                                                Value="Center"/>
+                                        <Setter Property="HorizontalAlignment"
+                                                Value="Right"/>
+                                        <Setter Property="Padding"
+                                                Value="8, 0"/>
+                                    </Style>
+                                </controls:DataGridTextColumn.ElementStyle>
+                            </controls:DataGridTextColumn>
+                            <controls:DataGridCheckBoxColumn Header="Wypłata"
+                                                             Binding="{Binding isSalary}"
+                                                             SortDirection="Descending"
+                                                             CanUserReorder="False"/>
+                            <controls:DataGridTextColumn Header="Komentarz"
+                                                         Binding="{Binding comment}"
+                                                         CanUserReorder="False"/>
+                        </controls:DataGrid.Columns>
+                    </controls:DataGrid>
+                    <Button Click="AddIncomeButton_Click"
+                            Content="Dodaj"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

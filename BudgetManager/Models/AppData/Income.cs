@@ -17,5 +17,10 @@ namespace BudgetManager.Models
         public decimal value;
         public IncomeType type;
         public string comment;
+
+        public Income()
+        {
+            type = IncomeType.Additional;
+        }
     }
 }
