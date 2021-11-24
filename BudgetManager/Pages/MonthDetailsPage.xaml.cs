@@ -41,6 +41,7 @@ namespace BudgetManager.Pages
             var month = AppData.CurrentMonth;
             StartDatePicker.SelectedDate = month.startDate;
             EndDatePicker.SelectedDate = month.endDate;
+            PlannedSavingsNumberBox.Value = decimal.ToDouble(month.plannedSavings);
             FillTable();
         }
 
@@ -112,6 +113,11 @@ namespace BudgetManager.Pages
             var oldDate = e.OldDate;
             picker.SelectedDate = oldDate;
             picker.Date = oldDate;
+        }
+
+        private void PlannedSavingsNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            AppData.CurrentMonth.plannedSavings = new decimal(args.NewValue);
         }
     }
 

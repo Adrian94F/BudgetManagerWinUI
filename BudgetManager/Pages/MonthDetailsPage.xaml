@@ -90,6 +90,25 @@
                             Content="Dodaj"/>
                 </StackPanel>
             </Border>
+
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    VerticalAlignment="Top"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="16"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <StackPanel Margin="16"
+                            HorizontalAlignment="Left">
+                    <TextBlock Text="Planowane oszczędności"
+                               Style="{StaticResource BodyTextBlockStyle}"/>
+                    <NumberBox x:Name="PlannedSavingsNumberBox"
+                               Margin="16"
+                               Width="100"
+                               ValueChanged="PlannedSavingsNumberBox_ValueChanged"/>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Page>
