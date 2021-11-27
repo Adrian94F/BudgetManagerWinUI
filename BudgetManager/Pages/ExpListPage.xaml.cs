@@ -79,6 +79,10 @@ namespace BudgetManager.Pages
                 Logger.Log("clicked expense: " + exp.OriginalExpense.ToString());
                 
                 ExpListSplitView.IsPaneOpen = true;
+                ExpListSplitViewPane.Child = new ExpDetails()
+                {
+                    Expense = exp.OriginalExpense
+                };
             }
             else
             {

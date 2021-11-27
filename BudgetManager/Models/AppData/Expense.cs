@@ -10,6 +10,7 @@ namespace BudgetManager
     {
         public DateTime date { get; set; }
         public decimal value { get; set; }
+        public double value2 { get => Convert.ToDouble(value); set => this.value = Convert.ToDecimal(value); }
         public string comment { get; set; }
         public Category category { get; set; }
         public bool monthlyExpense { get; set; }

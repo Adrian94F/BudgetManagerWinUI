@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="BudgetManager.Controls.ExpDetails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BudgetManager.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Margin="16">
+        <TextBlock Text="Szczegóły"
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   Margin="16"/>
+        
+        <TextBlock Text="Data"/>
+        <DatePicker Margin="16"
+                    SelectedDate="{x:Bind Expense.date}"
+                    Date="{x:Bind Expense.date}"/>
+
+        <TextBlock Text="Wartość"/>
+        <NumberBox Margin="16"
+                   Value="{x:Bind Expense.value2}"/>
+        
+        <TextBlock Text="Kategoria"/>
+        <ComboBox Margin="16"
+                  SelectedValue="{x:Bind Expense.category.name}"/>
+
+        <TextBlock Text="Cykliczny"/>
+        <CheckBox Margin="16"
+                  IsChecked="{x:Bind Expense.monthlyExpense}"/>
+
+        <TextBlock Text="Komentarz"/>
+        <TextBox Margin="16"
+                 Text="{x:Bind Expense.comment}"/>
+    </StackPanel>
+</UserControl>

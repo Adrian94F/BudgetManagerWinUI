@@ -5,16 +5,18 @@
     xmlns:local="using:BudgetManager.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:BudgetManager.Controls"
     mc:Ignorable="d">
 
     <SplitView x:Name="ExpListSplitView"
                IsPaneOpen="False"
                PanePlacement="Right"
                DisplayMode="Overlay"
-               OpenPaneLength="500"
+               OpenPaneLength="400"
                PaneBackground="Transparent">
         <SplitView.Pane>
-            <Border Background="{ThemeResource FlyoutBackgroundThemeBrush}"
+            <Border x:Name="ExpListSplitViewPane"
+                    Background="{ThemeResource FlyoutBackgroundThemeBrush}"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Grid.Row="0"
@@ -22,24 +24,17 @@
                     Margin="0"
                     CornerRadius="8"
                     BorderThickness="1"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <TextBlock Text="Szczegóły"
-                       FontSize="24"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-            </Border>
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"/>
         </SplitView.Pane>
 
         <Grid>
             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Stretch"
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="16"
-                    CornerRadius="8"
-                    BorderThickness="1"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                VerticalAlignment="Top"
+                HorizontalAlignment="Stretch"
+                Margin="16"
+                CornerRadius="8"
+                BorderThickness="1"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
                               VerticalAlignment="Stretch"
                               VerticalContentAlignment="Top">
