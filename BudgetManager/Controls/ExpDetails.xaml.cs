@@ -1,4 +1,6 @@
-﻿using Microsoft.UI.Xaml;
+﻿using BudgetManager.Models;
+using BudgetManager.Utilities;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -7,6 +9,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -21,10 +24,99 @@ namespace BudgetManager.Controls
     public sealed partial class ExpDetails : UserControl
     {
         public Expense Expense { get; set; }
+        private bool isExpenseNew;
+
+        public EventHandler ExpenseChanged { get; set; }
+
+        private readonly ObservableCollection<Category> expenseCategories = new(AppData.categories);
 
         public ExpDetails()
         {
             this.InitializeComponent();
+            if (Expense == null)
+            {
+                Expense = new Expense();
+            }
+        }
+
+        private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        {
+            var picker = sender as DatePicker;
+            var dateTimeOffset = picker.SelectedDate;
+            if (dateTimeOffset != null)
+            {
+                var date = dateTimeOffset.Value.Date;
+                Expense.date = date;
+                OnExpUpdate();
+            }
+        }
+
+        private void NumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            var box = sender as NumberBox;
+            var number = box.Value;
+            var value = Convert.ToDecimal(number);
+            Expense.value = value;
+            OnExpUpdate();
+        }
+
+        private void CheckBox_CheckedUnchecked(object sender, RoutedEventArgs e)
+        {
+            var box = sender as CheckBox;
+            var value = box.IsChecked;
+            Expense.monthlyExpense = (bool)value;
+            OnExpUpdate();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var box = sender as TextBox;
+            var text = box.Text;
+            Expense.comment = text;
+            OnExpUpdate();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var box = sender as ComboBox;
+            var category = box.SelectedItem as Category;
+            Expense.category = category;
+            OnExpUpdate();
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppData.CurrentMonth.expenses.Remove(Expense);
+            OnExpUpdate(onRemoval: true);
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            AppData.CurrentMonth.expenses.Add(Expense);
+            OnExpUpdate();
+        }
+
+
+        private void OnExpUpdate(bool onRemoval = false)
+        {
+            if (!onRemoval)
+            {
+                isExpenseNew = !AppData.CurrentMonth.expenses.Contains(Expense);
+                Logger.Log(isExpenseNew ? "new expense" : "existing expense");
+
+                AddButton.Visibility = isExpenseNew ? Visibility.Visible : Visibility.Collapsed;
+                AddButton.IsEnabled = isExpenseNew && isReadyToBeAdded();
+            }
+
+            if (!isExpenseNew || onRemoval)
+            {
+                ExpenseChanged?.Invoke(this, new EventArgs());
+            }
+        }
+
+        private bool isReadyToBeAdded()
+        {
+            return DatePicker.SelectedDate != null && ValueNumberBox.Value != 0 && CategoryComboBox.SelectedItem != null;
         }
     }
 }

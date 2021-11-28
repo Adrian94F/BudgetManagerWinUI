@@ -28,22 +28,44 @@
         </SplitView.Pane>
 
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Stretch"
-                Margin="16"
-                CornerRadius="8"
-                BorderThickness="1"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Stretch"
+                    Margin="16"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+
+                <ScrollViewer Grid.Row="0"
+                              VerticalScrollBarVisibility="Auto"
                               VerticalAlignment="Stretch"
                               VerticalContentAlignment="Top">
                     <ListView x:Name="ExpListListView"
                               IsItemClickEnabled="True"
                               ItemClick="ExpListListView_ItemClick"
-                              SelectionMode="Single"/>
+                              SelectionMode="Single">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel>
+                                    <VirtualizingStackPanel.ChildrenTransitions>
+                                        <TransitionCollection/>
+                                    </VirtualizingStackPanel.ChildrenTransitions>
+                                </VirtualizingStackPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
                 </ScrollViewer>
             </Border>
+            
+            <Button Content="Dodaj"
+                    Grid.Row="1"
+                    Margin="16, 0"
+                    Click="AddButton_Click"/>
         </Grid>
     </SplitView>
 </Page>

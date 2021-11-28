@@ -9,7 +9,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -18,11 +18,11 @@
         <TextBlock x:Name="valueTextBox"
                    Grid.Column="0"
                    HorizontalTextAlignment="Right"
-                   Text="{x:Bind OriginalExpense.Value()}"/>
+                   Text="{x:Bind OriginalExpense.Value}"/>
         <TextBlock x:Name="monthlyTextBlock"
                    Grid.Column="1"
                    HorizontalTextAlignment="Center"
-                   Text="{x:Bind OriginalExpense.MonthlyExpense()}"/>
+                   Text="{x:Bind OriginalExpense.MonthlyExpense}"/>
         <TextBlock x:Name="categoryTextBlock"
                    Grid.Column="2"
                    Text="{x:Bind OriginalExpense.category.ToString()}"/>

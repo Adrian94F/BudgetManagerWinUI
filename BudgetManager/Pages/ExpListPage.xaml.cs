@@ -48,6 +48,7 @@ namespace BudgetManager.Pages
 
             var expenses = new SortedSet<Expense>(month.expenses);
 
+            ExpListListView.Items.Clear();
             foreach (var exp in expenses.Reverse())
             {
                 var day = exp.date.ToString("d");
@@ -79,15 +80,39 @@ namespace BudgetManager.Pages
                 Logger.Log("clicked expense: " + exp.OriginalExpense.ToString());
                 
                 ExpListSplitView.IsPaneOpen = true;
-                ExpListSplitViewPane.Child = new ExpDetails()
+                var detailsControl = new ExpDetails()
                 {
                     Expense = exp.OriginalExpense
                 };
+                detailsControl.ExpenseChanged += new EventHandler(ExpDetails_ExpChanged);
+                ExpListSplitViewPane.Child = detailsControl;
             }
             else
             {
                 ExpListSplitView.IsPaneOpen = false;
             }
+        }
+
+        private void ExpDetails_ExpChanged(object sender, EventArgs args)
+        {
+            FillWithExpenses();
+            var details = sender as ExpDetails;
+            if (details != null)
+            {
+                if (!AppData.CurrentMonth.expenses.Contains(details.Expense))
+                {
+                    ExpListSplitView.IsPaneOpen = false;
+                }
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Logger.Log("add expense clicked");
+            ExpListSplitView.IsPaneOpen = true;
+            var detailsControl = new ExpDetails();
+            detailsControl.ExpenseChanged += new EventHandler(ExpDetails_ExpChanged);
+            ExpListSplitViewPane.Child = detailsControl;
         }
     }
 }

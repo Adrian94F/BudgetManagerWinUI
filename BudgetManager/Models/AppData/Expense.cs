@@ -25,19 +25,15 @@ namespace BudgetManager
             ID = _counter++;
         }
 
-        public string MonthlyExpense()
-        {
-            return monthlyExpense ? "↺" : "";
-        }
+        public string Date { get => date.ToString("dd.MM.yyyy"); }
 
-        public string Value()
-        {
-            return value.ToString("F");
-        }
+        public string MonthlyExpense { get => monthlyExpense ? "↺" : ""; }
+
+        public string Value { get => value.ToString("F"); }
 
         public override string ToString()
         {
-            return date.ToString("s") + " " + category.name + " " + Value() + " " + ID.ToString();
+            return date.ToString("s") + " " + category.name + " " + Value + " " + ID.ToString();
         }
 
         public int CompareTo(Expense other)
