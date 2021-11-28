@@ -55,6 +55,10 @@ namespace BudgetManager.Controls
         {
             var box = sender as NumberBox;
             var number = box.Value;
+            if (double.IsNaN(number))
+            {
+                return;
+            }
             var value = Convert.ToDecimal(number);
             Expense.value = value;
             OnExpUpdate();
@@ -116,7 +120,10 @@ namespace BudgetManager.Controls
 
         private bool isReadyToBeAdded()
         {
-            return DatePicker.SelectedDate != null && ValueNumberBox.Value != 0 && CategoryComboBox.SelectedItem != null;
+            return DatePicker.SelectedDate != null
+                   && ValueNumberBox.Value != 0
+                   && ValueNumberBox.Value != double.NaN
+                   && CategoryComboBox.SelectedItem != null;
         }
     }
 }

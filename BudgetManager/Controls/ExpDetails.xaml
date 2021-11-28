@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BudgetManager.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
     <ScrollViewer VerticalAlignment="Stretch">
@@ -21,37 +21,57 @@
                            Style="{ThemeResource TitleTextBlockStyle}"
                            Margin="16"/>
 
-                <TextBlock Text="Data"/>
-                <DatePicker x:Name="DatePicker"
-                            Margin="16"
-                            SelectedDate="{x:Bind Expense.date}"
-                            Date="{x:Bind Expense.date}"
-                            DateChanged="DatePicker_DateChanged"/>
+                <TextBlock Text="Data"
+                           Margin="0, 8"/>
+                <controls:DockPanel HorizontalAlignment="Stretch"
+                                    LastChildFill="False"
+                                    Margin="0, 8">
+                    <DatePicker x:Name="DatePicker"
+                                controls:DockPanel.Dock="Left"
+                                SelectedDate="{x:Bind Expense.date}"
+                                Date="{x:Bind Expense.date}"
+                                DateChanged="DatePicker_DateChanged"/>
 
-                <TextBlock Text="Wartość"/>
-                <NumberBox x:Name="ValueNumberBox"
-                           Margin="16"
+                    <CheckBox x:Name="MonthlyCheckBox"
+                              controls:DockPanel.Dock="Right"
+                              Content="Cykliczny"
+                              IsChecked="{x:Bind Expense.monthlyExpense}"
+                              Checked="CheckBox_CheckedUnchecked"
+                              Unchecked="CheckBox_CheckedUnchecked"/>
+                </controls:DockPanel >
+
+                <controls:DockPanel HorizontalAlignment="Stretch"
+                                    Margin="0, 8">
+                    <StackPanel Margin="0, 0, 16, 0"
+                                MinWidth="100">
+                        <TextBlock Text="Wartość"
+                           Margin="0, 8"/>
+                        
+                        <NumberBox x:Name="ValueNumberBox"
+                           Margin="0, 8"
                            Value="{x:Bind Expense.value2}"
                            ValueChanged="NumberBox_ValueChanged"/>
+                    </StackPanel>
 
-                <TextBlock Text="Kategoria"/>
-                <ComboBox x:Name="CategoryComboBox"
-                          Margin="16"
+                    <StackPanel Margin="16, 0, 0, 0">
+                        <TextBlock Text="Kategoria"
+                          Margin="0, 8"/>
+                        
+                        <ComboBox x:Name="CategoryComboBox"
+                          Margin="0, 8"
                           SelectionChanged="ComboBox_SelectionChanged"
                           HorizontalAlignment="Stretch"
                           SelectedItem="{x:Bind Expense.category}"
                           ItemsSource="{x:Bind expenseCategories}"/>
+                    </StackPanel>
+                </controls:DockPanel>
 
-                <TextBlock Text="Cykliczny"/>
-                <CheckBox x:Name="MonthlyCheckBox"
-                          Margin="16"
-                          IsChecked="{x:Bind Expense.monthlyExpense}"
-                          Checked="CheckBox_CheckedUnchecked"
-                          Unchecked="CheckBox_CheckedUnchecked"/>
 
-                <TextBlock Text="Komentarz"/>
+
+                <TextBlock Text="Komentarz"
+                           Margin="0, 8"/>
                 <TextBox x:Name="CommentTextBox"
-                         Margin="16"
+                         Margin="0, 8"
                          Text="{x:Bind Expense.comment}"
                          TextChanged="TextBox_TextChanged"/>
             </StackPanel>
