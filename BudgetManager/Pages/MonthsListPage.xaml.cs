@@ -30,6 +30,8 @@ namespace BudgetManager.Pages
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
+        public EventHandler MonthSelected { get; set; }
+
         public MonthsListPage()
         {
             this.InitializeComponent();
@@ -73,6 +75,7 @@ namespace BudgetManager.Pages
             {
                 Logger.Log("clicked month: " + month.ToString());
                 AppData.CurrentMonth = month;
+                MonthSelected?.Invoke(this, new EventArgs());
             }
         }
     }

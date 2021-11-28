@@ -117,6 +117,8 @@ namespace BudgetManager
 
                 case "months_list":
                     SideFrame.Navigate(typeof(MonthsListPage), null, new SuppressNavigationTransitionInfo());
+                    var monthsList = SideFrame.Content as MonthsListPage;
+                    monthsList.MonthSelected += new EventHandler(MonthsList_MonthSelected);
                     MainSplitView.OpenPaneLength = 200;
                     MainSplitView.IsPaneOpen = true;
                     break;
@@ -137,6 +139,12 @@ namespace BudgetManager
             var page = ContentFrame.Content as IPageWithInfo;
             NavView.Header = page.header;
             Logger.Log("changed page to: " + page.header);
+        }
+
+        private void MonthsList_MonthSelected(object sender, EventArgs args)
+        {
+            MainSplitView.IsPaneOpen = false;
+            NavView_Navigate(NavView.SelectedItem as NavigationViewItem);
         }
     }
 }
