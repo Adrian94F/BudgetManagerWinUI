@@ -67,7 +67,6 @@ namespace BudgetManager.Pages
             }
         }
 
-
         private void MonthsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var month = e.ClickedItem as Month;
@@ -77,6 +76,11 @@ namespace BudgetManager.Pages
                 AppData.CurrentMonth = month;
                 MonthSelected?.Invoke(this, new EventArgs());
             }
+        }
+
+        private void NewButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -5,14 +5,24 @@
     xmlns:local="using:BudgetManager.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                              VerticalAlignment="Stretch"
-                              VerticalContentAlignment="Top">
-        <ListView x:Name="MonthsListView"
-                              IsItemClickEnabled="True"
-                              ItemClick="MonthsListView_ItemClick"
-                              SelectionMode="Single"/>
-    </ScrollViewer>
+    <controls:DockPanel>
+        <Button x:Name="NewButton"
+                Margin="16, 8"
+                controls:DockPanel.Dock="Top"
+                Content="Nowy miesiąc"
+                Click="NewButton_Click"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      VerticalAlignment="Stretch"
+                      VerticalContentAlignment="Top"
+                      controls:DockPanel.Dock="Bottom">
+            <ListView x:Name="MonthsListView"
+                      IsItemClickEnabled="True"
+                      ItemClick="MonthsListView_ItemClick"
+                      SelectionMode="Single"/>
+        </ScrollViewer>
+    </controls:DockPanel>
 </Page>
