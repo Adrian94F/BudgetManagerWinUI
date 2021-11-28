@@ -32,6 +32,11 @@
                         IsSettingsVisible="False"
                         IsBackButtonVisible="Collapsed">
                 <NavigationView.MenuItems>
+                    <NavigationViewItem x:Uid="HomeNavItem" Content="Podsumowanie" Tag="home">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE10F;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
                     <NavigationViewItem x:Uid="TableNavItem" Content="Tabela" Tag="table">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE138;"/>
