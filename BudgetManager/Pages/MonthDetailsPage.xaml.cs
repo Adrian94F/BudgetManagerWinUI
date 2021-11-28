@@ -117,7 +117,12 @@ namespace BudgetManager.Pages
 
         private void PlannedSavingsNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
         {
-            AppData.CurrentMonth.plannedSavings = new decimal(args.NewValue);
+            var newValue = args.NewValue;
+            if (double.IsNaN(newValue))
+            {
+                newValue = 0;
+            }
+            AppData.CurrentMonth.plannedSavings = new decimal(newValue);
         }
     }
 

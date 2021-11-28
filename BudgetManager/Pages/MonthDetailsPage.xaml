@@ -11,43 +11,43 @@
         <StackPanel HorizontalAlignment="Stretch">
             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                     VerticalAlignment="Top"
-                    Grid.Row="0"
-                    Grid.Column="1"
                     Margin="16"
                     CornerRadius="8"
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <StackPanel Margin="16">
+                <StackPanel Margin="8">
                     <TextBlock Text="Początek"
+                               Margin="8"
                                Style="{StaticResource BodyTextBlockStyle}"/>
                     <DatePicker x:Name="StartDatePicker"
-                                Margin="16"
+                                Margin="8"
                                 DateChanged="DatePicker_DateChanged"/>
                     <TextBlock Text="Koniec"
+                               Margin="8"
                                Style="{StaticResource BodyTextBlockStyle}"/>
                     <DatePicker x:Name="EndDatePicker"
-                                Margin="16"
+                                Margin="8"
                                 DateChanged="DatePicker_DateChanged"/>
                 </StackPanel>
             </Border>
 
             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    Grid.Row="0"
-                    Grid.Column="1"
                     Margin="16"
                     CornerRadius="8"
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <StackPanel Margin="16"
-                            HorizontalAlignment="Left">
+                <StackPanel Margin="8"
+                            HorizontalAlignment="Stretch">
                     <TextBlock Text="Dochody"
+                               Margin="8"
                                Style="{StaticResource BodyTextBlockStyle}"/>
                     <controls:DataGrid x:Name="IncomesDataGrid"
-                                       Margin="16"
+                                       Margin="8"
                                        ItemsSource="{Binding}"
                                        AutoGenerateColumns="False"
                                        SelectionMode="Single"
-                                       RowEditEnded="IncomesDataGrid_RowEditEnded">
+                                       RowEditEnded="IncomesDataGrid_RowEditEnded"
+                                       HorizontalAlignment="Stretch">
                         <controls:DataGrid.RowStyle>
                             <Style TargetType="controls:DataGridRow">
                                 <Setter Property="controls:DataGridRow.ContextFlyout">
@@ -83,29 +83,29 @@
                                                              CanUserReorder="False"/>
                             <controls:DataGridTextColumn Header="Komentarz"
                                                          Binding="{Binding comment}"
-                                                         CanUserReorder="False"/>
+                                                         CanUserReorder="False"
+                                                         Width="*"/>
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>
                     <Button Click="AddIncomeButton_Click"
+                            Margin="8"
                             Content="Dodaj"/>
                 </StackPanel>
             </Border>
 
             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                     VerticalAlignment="Top"
-                    Grid.Row="0"
-                    Grid.Column="1"
                     Margin="16"
                     CornerRadius="8"
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <StackPanel Margin="16"
+                <StackPanel Margin="8"
                             HorizontalAlignment="Left">
                     <TextBlock Text="Planowane oszczędności"
+                               Margin="8"
                                Style="{StaticResource BodyTextBlockStyle}"/>
                     <NumberBox x:Name="PlannedSavingsNumberBox"
-                               Margin="16"
-                               Width="100"
+                               Margin="8"
                                ValueChanged="PlannedSavingsNumberBox_ValueChanged"/>
                 </StackPanel>
             </Border>
