@@ -18,16 +18,16 @@
         <TextBlock x:Name="valueTextBox"
                    Grid.Column="0"
                    HorizontalTextAlignment="Right"
-                   Text="{x:Bind OriginalExpense.Value}"/>
+                   Text="{x:Bind OriginalExpense.ValueString}"/>
         <TextBlock x:Name="monthlyTextBlock"
                    Grid.Column="1"
                    HorizontalTextAlignment="Center"
-                   Text="{x:Bind OriginalExpense.MonthlyExpense}"/>
+                   Text="{x:Bind OriginalExpense.MonthlyExpenseString}"/>
         <TextBlock x:Name="categoryTextBlock"
                    Grid.Column="2"
-                   Text="{x:Bind OriginalExpense.category.ToString()}"/>
+                   Text="{x:Bind OriginalExpense.Category.ToString()}"/>
         <TextBlock x:Name="commentTextBlock"
                    Grid.Column="3"
-                   Text="{x:Bind OriginalExpense.comment}"/>
+                   Text="{x:Bind OriginalExpense.Comment}"/>
     </Grid>
 </UserControl>

@@ -51,7 +51,7 @@ namespace BudgetManager.Pages
             ExpListListView.Items.Clear();
             foreach (var exp in expenses.Reverse())
             {
-                var day = exp.date.ToString("d");
+                var day = exp.Date.ToString("d");
                 if (lastDay != day)
                 {
                     lastDay = day;

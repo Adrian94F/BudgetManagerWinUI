@@ -8,32 +8,32 @@ namespace BudgetManager
 {
     public class Expense : IComparable<Expense>
     {
-        public DateTime date { get; set; }
-        public decimal value { get; set; }
-        public double value2 { get => Convert.ToDouble(value); set => this.value = Convert.ToDecimal(value); }
-        public string comment { get; set; }
-        public Category category { get; set; }
-        public bool monthlyExpense { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Value { get; set; }
+        public double Value2 { get => Convert.ToDouble(Value); set => this.Value = Convert.ToDecimal(value); }
+        public string Comment { get; set; }
+        public Category Category { get; set; }
+        public bool MonthlyExpense { get; set; }
         private int ID { get; }
 
         private static int _counter = 0;
 
         public Expense()
         {
-            date = DateTime.Today;
-            monthlyExpense = false;
+            Date = DateTime.Today;
+            MonthlyExpense = false;
             ID = _counter++;
         }
 
-        public string Date { get => date.ToString("dd.MM.yyyy"); }
+        public string DateString { get => Date.ToString("dd.MM.yyyy"); }
 
-        public string MonthlyExpense { get => monthlyExpense ? "↺" : ""; }
+        public string MonthlyExpenseString { get => MonthlyExpense ? "↺" : ""; }
 
-        public string Value { get => value.ToString("F"); }
+        public string ValueString { get => Value.ToString("F"); }
 
         public override string ToString()
         {
-            return date.ToString("s") + " " + category.Name + " " + Value + " " + ID.ToString();
+            return Date.ToString("s") + " " + Category.Name + " " + ValueString + " " + ID.ToString();
         }
 
         public int CompareTo(Expense other)

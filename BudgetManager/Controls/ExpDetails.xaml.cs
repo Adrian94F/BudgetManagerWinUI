@@ -46,7 +46,7 @@ namespace BudgetManager.Controls
             if (dateTimeOffset != null)
             {
                 var date = dateTimeOffset.Value.Date;
-                Expense.date = date;
+                Expense.Date = date;
                 OnExpUpdate();
             }
         }
@@ -60,7 +60,7 @@ namespace BudgetManager.Controls
                 return;
             }
             var value = Convert.ToDecimal(number);
-            Expense.value = value;
+            Expense.Value = value;
             OnExpUpdate();
         }
 
@@ -68,7 +68,7 @@ namespace BudgetManager.Controls
         {
             var box = sender as CheckBox;
             var value = box.IsChecked;
-            Expense.monthlyExpense = (bool)value;
+            Expense.MonthlyExpense = (bool)value;
             OnExpUpdate();
         }
 
@@ -76,7 +76,7 @@ namespace BudgetManager.Controls
         {
             var box = sender as TextBox;
             var text = box.Text;
-            Expense.comment = text;
+            Expense.Comment = text;
             OnExpUpdate();
         }
 
@@ -84,7 +84,7 @@ namespace BudgetManager.Controls
         {
             var box = sender as ComboBox;
             var category = box.SelectedItem as Category;
-            Expense.category = category;
+            Expense.Category = category;
             OnExpUpdate();
         }
 

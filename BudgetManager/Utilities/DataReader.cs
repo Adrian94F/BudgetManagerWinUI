@@ -150,11 +150,11 @@ namespace BudgetManager.Utilities
 
                         var expense = new Expense()
                         {
-                            value = value,
-                            date = date,
-                            comment = comment,
-                            monthlyExpense = monthlyExpense,
-                            category = category
+                            Value = value,
+                            Date = date,
+                            Comment = comment,
+                            MonthlyExpense = monthlyExpense,
+                            Category = category
                         };
                         month.Expenses.Add(expense);
                     }

@@ -46,15 +46,15 @@ namespace BudgetManager
             var ret = new HashSet<Expense>();
             foreach (var exp in Expenses)
             {
-                if (exp.monthlyExpense)
+                if (exp.MonthlyExpense)
                 {
                     var newExp = new Expense()
                     {
-                        value = exp.value,
-                        date = exp.date.AddMonths(1),
-                        comment = exp.comment,
-                        category = exp.category,
-                        monthlyExpense = true
+                        Value = exp.Value,
+                        Date = exp.Date.AddMonths(1),
+                        Comment = exp.Comment,
+                        Category = exp.Category,
+                        MonthlyExpense = true
                     };
                     ret.Add(newExp);
                 }
@@ -82,11 +82,11 @@ namespace BudgetManager
             {
                 foreach (var expense in Expenses)
                 {
-                    var expDay = expense.date.Day;
-                    var expMonth = expense.date.Month;
-                    if (expense.category == category && day == expDay && month == expMonth)
+                    var expDay = expense.Date.Day;
+                    var expMonth = expense.Date.Month;
+                    if (expense.Category == category && day == expDay && month == expMonth)
                     {
-                        ret += expense.value;
+                        ret += expense.Value;
                     }
                 }
             }
@@ -102,8 +102,8 @@ namespace BudgetManager
             {
                 foreach (var expense in Expenses)
                 {
-                    var expDay = expense.date.Day;
-                    var expMonth = expense.date.Month;
+                    var expDay = expense.Date.Day;
+                    var expMonth = expense.Date.Month;
 
                     if (day == expDay && month == expMonth)
                     {
@@ -111,7 +111,7 @@ namespace BudgetManager
                         {
                             ret.Add(expense);
                         }
-                        else if (expense.category == category)
+                        else if (expense.Category == category)
                         {
                             ret.Add(expense);
                         }
@@ -132,7 +132,7 @@ namespace BudgetManager
                     {
                         ret.Add(expense);
                     }
-                    else if (expense.category == category)
+                    else if (expense.Category == category)
                     {
                         ret.Add(expense);
                     }
@@ -150,13 +150,13 @@ namespace BudgetManager
             {
                 foreach (var expense in Expenses)
                 {
-                    var expDay = expense.date.Day;
-                    var expMonth = expense.date.Month;
+                    var expDay = expense.Date.Day;
+                    var expMonth = expense.Date.Month;
                     if (day == expDay && month == expMonth)
                     {
                         if (validator(expense))
                         {
-                            ret += expense.value;
+                            ret += expense.Value;
                         }
                     }
                 }
@@ -171,7 +171,7 @@ namespace BudgetManager
 
         public decimal GetSumOfDailyExpensesOfDate(DateTime date)
         {
-            return GetSumOfValidExpensesOfDate(date, exp => !exp.monthlyExpense);
+            return GetSumOfValidExpensesOfDate(date, exp => !exp.MonthlyExpense);
         }
 
         public decimal GetSumOfMonthlyExpensesOfDate(DateTime date)
@@ -186,9 +186,9 @@ namespace BudgetManager
             {
                 foreach (var expense in Expenses)
                 {
-                    if (expense.monthlyExpense)
+                    if (expense.MonthlyExpense)
                     {
-                        ret += expense.value;
+                        ret += expense.Value;
                     }
                 }
             }
@@ -202,9 +202,9 @@ namespace BudgetManager
             {
                 foreach (var expense in Expenses)
                 {
-                    if (expense.category == category)
+                    if (expense.Category == category)
                     {
-                        ret += expense.value;
+                        ret += expense.Value;
                     }
                 }
             }
@@ -218,7 +218,7 @@ namespace BudgetManager
             {
                 foreach (var expense in Expenses)
                 {
-                    ret += expense.value;
+                    ret += expense.Value;
                 }
             }
             return ret;
