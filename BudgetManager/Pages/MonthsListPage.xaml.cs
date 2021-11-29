@@ -43,7 +43,7 @@ namespace BudgetManager.Pages
             var lastYear = 0;
             foreach (var month in AppData.months.Reverse())
             {
-                var startYear = month.startDate.Year;
+                var startYear = month.StartDate.Year;
                 if (startYear != lastYear)
                 {
                     lastYear = startYear;

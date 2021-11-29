@@ -68,9 +68,9 @@ namespace BudgetManager.Utilities
 
                     var month = new Month()
                     {
-                        startDate = startDate,
-                        endDate = endDate,
-                        plannedSavings = plannedSavings
+                        StartDate = startDate,
+                        EndDate = endDate,
+                        PlannedSavings = plannedSavings
                     };
 
                     // new incomes
@@ -97,7 +97,7 @@ namespace BudgetManager.Utilities
                                 type = type,
                                 comment = comment
                             };
-                            month.incomes.Add(income);
+                            month.Incomes.Add(income);
                         }
                     }
                     else
@@ -110,7 +110,7 @@ namespace BudgetManager.Utilities
                                 type = Income.IncomeType.Salary
                             };
                             if (income.value > decimal.Zero)
-                                month.incomes.Add(income);
+                                month.Incomes.Add(income);
                         }
                         if (monthFromJson.Keys.Contains(monthAdditionalIncomeKey))
                         {
@@ -120,7 +120,7 @@ namespace BudgetManager.Utilities
                                 type = Income.IncomeType.Additional
                             };
                             if (income.value > decimal.Zero)
-                                month.incomes.Add(income);
+                                month.Incomes.Add(income);
                         }
                     }
 
@@ -156,7 +156,7 @@ namespace BudgetManager.Utilities
                             monthlyExpense = monthlyExpense,
                             category = category
                         };
-                        month.expenses.Add(expense);
+                        month.Expenses.Add(expense);
                     }
 
                     AppData.months.Add(month);

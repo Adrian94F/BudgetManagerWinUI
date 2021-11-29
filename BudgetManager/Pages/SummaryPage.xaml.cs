@@ -45,18 +45,18 @@ namespace BudgetManager.Pages
 
         private void FillSummaryGrid(Month month)
         {
-            var startDate = month.startDate.ToString("dd.MM.yyyy");
-            var endDate = month.endDate.ToString("dd.MM.yyyy");
+            var startDate = month.StartDate.ToString("dd.MM.yyyy");
+            var endDate = month.EndDate.ToString("dd.MM.yyyy");
             var net = month.GetSumOfIncomes(Income.IncomeType.Salary);
             var incSum = month.GetSumOfIncomes();
             var add = incSum - net;
             var expSum = month.GetSumOfExpenses();
             var monthlyExpSum = month.GetSumOfMonthlyExpenses();
             var dailyExpSum = expSum - monthlyExpSum;
-            var savings = month.plannedSavings;
+            var savings = month.PlannedSavings;
             var balance = incSum - expSum - savings;
-            var isActualMonth = (DateTime.Today - month.startDate).Days >= 0 && (month.endDate - DateTime.Today).Days >= 0;
-            var daysLeft = (month.endDate - DateTime.Today).Days + 1;
+            var isActualMonth = (DateTime.Today - month.StartDate).Days >= 0 && (month.EndDate - DateTime.Today).Days >= 0;
+            var daysLeft = (month.EndDate - DateTime.Today).Days + 1;
             var balanceWithoutToday = balance + month.GetSumOfAllExpensesOfDate(DateTime.Today);
             var estimatedExpense = balanceWithoutToday >= 0 ? (isActualMonth ? Math.Round(balanceWithoutToday / daysLeft, 2) : Math.Round(balance, 2)) : 0;
             var todayExpenses = month.GetSumOfDailyExpensesOfDate(DateTime.Today);

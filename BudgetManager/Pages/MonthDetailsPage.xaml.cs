@@ -39,10 +39,10 @@ namespace BudgetManager.Pages
         private void FillPage()
         {
             var month = AppData.CurrentMonth;
-            StartDatePicker.SelectedDate = month.startDate;
-            EndDatePicker.SelectedDate = month.endDate;
-            PlannedSavingsNumberBox.Value = decimal.ToDouble(month.plannedSavings);
-            if (month.expenses.Count == 0)
+            StartDatePicker.SelectedDate = month.StartDate;
+            EndDatePicker.SelectedDate = month.EndDate;
+            PlannedSavingsNumberBox.Value = decimal.ToDouble(month.PlannedSavings);
+            if (month.Expenses.Count == 0)
             {
                 RemoveMonthButton.IsEnabled = true;
             }
@@ -53,7 +53,7 @@ namespace BudgetManager.Pages
         {
             var month = AppData.CurrentMonth;
             var incomesCollection = new ObservableCollection<IncomeDataItem>();
-            foreach (var inc in month.incomes)
+            foreach (var inc in month.Incomes)
             {
                 incomesCollection.Add(new IncomeDataItem(inc));
             }
@@ -64,7 +64,7 @@ namespace BudgetManager.Pages
         {
             var item = (sender as FrameworkElement).DataContext as IncomeDataItem;
             var income = item.originalIncome as Income;
-            AppData.CurrentMonth.incomes.Remove(income);
+            AppData.CurrentMonth.Incomes.Remove(income);
             (IncomesDataGrid.ItemsSource as ObservableCollection<IncomeDataItem>).Remove(item);
         }
 
@@ -89,7 +89,7 @@ namespace BudgetManager.Pages
         private void AddIncomeButton_Click(object sender, RoutedEventArgs e)
         {
             var inc = new Income();
-            AppData.CurrentMonth.incomes.Add(inc);
+            AppData.CurrentMonth.Incomes.Add(inc);
             FillIncomesTable();
         }
 
@@ -100,16 +100,16 @@ namespace BudgetManager.Pages
             switch (picker.Name)
             {
                 case "StartDatePicker":
-                    if (date <= AppData.CurrentMonth.endDate)
+                    if (date <= AppData.CurrentMonth.EndDate)
                     {
-                        AppData.CurrentMonth.startDate = picker.SelectedDate.Value.Date;
+                        AppData.CurrentMonth.StartDate = picker.SelectedDate.Value.Date;
                         return;
                     }
                     break;
                 case "EndDatePicker":
-                    if (date >= AppData.CurrentMonth.startDate)
+                    if (date >= AppData.CurrentMonth.StartDate)
                     {
-                        AppData.CurrentMonth.endDate = picker.SelectedDate.Value.Date;
+                        AppData.CurrentMonth.EndDate = picker.SelectedDate.Value.Date;
                         return;
                     }
                     break;
@@ -126,7 +126,7 @@ namespace BudgetManager.Pages
             {
                 newValue = 0;
             }
-            AppData.CurrentMonth.plannedSavings = new decimal(newValue);
+            AppData.CurrentMonth.PlannedSavings = new decimal(newValue);
         }
 
         private void RemoveMonthButton_Click(object sender, RoutedEventArgs e)

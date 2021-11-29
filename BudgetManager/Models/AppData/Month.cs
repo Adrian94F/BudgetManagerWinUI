@@ -11,31 +11,31 @@ namespace BudgetManager
 {
     public class Month : IComparable
     {
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
-        public decimal plannedSavings { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public decimal PlannedSavings { get; set; }
 
-        public HashSet<Expense> expenses { get; set; }
+        public HashSet<Expense> Expenses { get; set; }
 
-        public HashSet<Income> incomes { get; set; }
+        public HashSet<Income> Incomes { get; set; }
 
         public Month()
         {
-            incomes = new HashSet<Income>();
-            expenses = new HashSet<Expense>();
+            Incomes = new HashSet<Income>();
+            Expenses = new HashSet<Expense>();
         }
 
         public override string ToString()
         {
-            var start = startDate.ToString("dd.MM.yyyy");
-            var end = endDate.ToString("dd.MM.yyyy");
+            var start = StartDate.ToString("dd.MM.yyyy");
+            var end = EndDate.ToString("dd.MM.yyyy");
             return start + "-" + end;
         }
 
         public decimal GetSumOfIncomes(Income.IncomeType? type = null)
         {
             var sum = decimal.Zero;
-            foreach (var income in incomes)
+            foreach (var income in Incomes)
                 if (type == null || income.type == type)
                     sum += income.value;
             return sum;
@@ -44,7 +44,7 @@ namespace BudgetManager
         public HashSet<Expense> GetCopyOfMonthlyExpensesForNextPeriod()
         {
             var ret = new HashSet<Expense>();
-            foreach (var exp in expenses)
+            foreach (var exp in Expenses)
             {
                 if (exp.monthlyExpense)
                 {
@@ -64,12 +64,12 @@ namespace BudgetManager
 
         public bool IsEmpty()
         {
-            return expenses.Count == 0;
+            return Expenses.Count == 0;
         }
 
         public int CompareTo(object obj)
         {
-            return startDate.CompareTo(((Month)obj).startDate);
+            return StartDate.CompareTo(((Month)obj).StartDate);
         }
 
         public decimal GetSumOfExpensesOfCategoryAndDate(Category category, DateTime date)
@@ -78,9 +78,9 @@ namespace BudgetManager
             var day = date.Day;
             var month = date.Month;
 
-            if (expenses != null)
+            if (Expenses != null)
             {
-                foreach (var expense in expenses)
+                foreach (var expense in Expenses)
                 {
                     var expDay = expense.date.Day;
                     var expMonth = expense.date.Month;
@@ -98,9 +98,9 @@ namespace BudgetManager
             var ret = new HashSet<Expense>();
             var day = date.Day;
             var month = date.Month;
-            if (expenses != null)
+            if (Expenses != null)
             {
-                foreach (var expense in expenses)
+                foreach (var expense in Expenses)
                 {
                     var expDay = expense.date.Day;
                     var expMonth = expense.date.Month;
@@ -124,9 +124,9 @@ namespace BudgetManager
         public HashSet<Expense> GetExpensesOfCategory(Category category)
         {
             var ret = new HashSet<Expense>();
-            if (expenses != null)
+            if (Expenses != null)
             {
-                foreach (var expense in expenses)
+                foreach (var expense in Expenses)
                 {
                     if (category == null)
                     {
@@ -146,9 +146,9 @@ namespace BudgetManager
             var ret = Decimal.Zero;
             var day = date.Day;
             var month = date.Month;
-            if (expenses != null)
+            if (Expenses != null)
             {
-                foreach (var expense in expenses)
+                foreach (var expense in Expenses)
                 {
                     var expDay = expense.date.Day;
                     var expMonth = expense.date.Month;
@@ -182,9 +182,9 @@ namespace BudgetManager
         public decimal GetSumOfMonthlyExpenses()
         {
             var ret = Decimal.Zero;
-            if (expenses != null)
+            if (Expenses != null)
             {
-                foreach (var expense in expenses)
+                foreach (var expense in Expenses)
                 {
                     if (expense.monthlyExpense)
                     {
@@ -198,9 +198,9 @@ namespace BudgetManager
         public decimal GetSumOfExpensesOfCategory(Category category)
         {
             var ret = Decimal.Zero;
-            if (expenses != null)
+            if (Expenses != null)
             {
-                foreach (var expense in expenses)
+                foreach (var expense in Expenses)
                 {
                     if (expense.category == category)
                     {
@@ -214,9 +214,9 @@ namespace BudgetManager
         public decimal GetSumOfExpenses()
         {
             var ret = Decimal.Zero;
-            if (expenses != null)
+            if (Expenses != null)
             {
-                foreach (var expense in expenses)
+                foreach (var expense in Expenses)
                 {
                     ret += expense.value;
                 }

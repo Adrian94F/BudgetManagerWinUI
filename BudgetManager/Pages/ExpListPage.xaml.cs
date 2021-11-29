@@ -46,7 +46,7 @@ namespace BudgetManager.Pages
                 return;
             }
 
-            var expenses = new SortedSet<Expense>(month.expenses);
+            var expenses = new SortedSet<Expense>(month.Expenses);
 
             ExpListListView.Items.Clear();
             foreach (var exp in expenses.Reverse())
@@ -99,7 +99,7 @@ namespace BudgetManager.Pages
             var details = sender as ExpDetails;
             if (details != null)
             {
-                if (!AppData.CurrentMonth.expenses.Contains(details.Expense))
+                if (!AppData.CurrentMonth.Expenses.Contains(details.Expense))
                 {
                     ExpListSplitView.IsPaneOpen = false;
                 }

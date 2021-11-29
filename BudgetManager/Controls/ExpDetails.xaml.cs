@@ -90,13 +90,13 @@ namespace BudgetManager.Controls
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
-            AppData.CurrentMonth.expenses.Remove(Expense);
+            AppData.CurrentMonth.Expenses.Remove(Expense);
             OnExpUpdate(onRemoval: true);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            AppData.CurrentMonth.expenses.Add(Expense);
+            AppData.CurrentMonth.Expenses.Add(Expense);
             OnExpUpdate();
         }
 
@@ -105,7 +105,7 @@ namespace BudgetManager.Controls
         {
             if (!onRemoval)
             {
-                isExpenseNew = !AppData.CurrentMonth.expenses.Contains(Expense);
+                isExpenseNew = !AppData.CurrentMonth.Expenses.Contains(Expense);
                 Logger.Log(isExpenseNew ? "new expense" : "existing expense");
 
                 AddButton.Visibility = isExpenseNew ? Visibility.Visible : Visibility.Collapsed;
