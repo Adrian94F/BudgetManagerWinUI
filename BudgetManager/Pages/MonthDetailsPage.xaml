@@ -109,6 +109,25 @@
                                ValueChanged="PlannedSavingsNumberBox_ValueChanged"/>
                 </StackPanel>
             </Border>
+
+            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    VerticalAlignment="Top"
+                    Margin="16"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                <StackPanel Orientation="Vertical"
+                            Margin="8">
+                    <TextBlock Margin="8"
+                               VerticalAlignment="Center"
+                               Text="Możesz usunąć miesiąc, jeśli nie zawiera on żadnych wydatków."/>
+                    <Button x:Name="RemoveMonthButton"
+                            Margin="8"
+                            Content="Usuń miesiąc"
+                            Click="RemoveMonthButton_Click"
+                            IsEnabled="False"/>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </Page>

@@ -42,10 +42,14 @@ namespace BudgetManager.Pages
             StartDatePicker.SelectedDate = month.startDate;
             EndDatePicker.SelectedDate = month.endDate;
             PlannedSavingsNumberBox.Value = decimal.ToDouble(month.plannedSavings);
-            FillTable();
+            if (month.expenses.Count == 0)
+            {
+                RemoveMonthButton.IsEnabled = true;
+            }
+            FillIncomesTable();
         }
 
-        private void FillTable()
+        private void FillIncomesTable()
         {
             var month = AppData.CurrentMonth;
             var incomesCollection = new ObservableCollection<IncomeDataItem>();
@@ -78,7 +82,7 @@ namespace BudgetManager.Pages
                     income.type = item.isSalary ? Income.IncomeType.Salary : Income.IncomeType.Additional;
                     income.comment = item.comment;
                 }
-                FillTable();
+                FillIncomesTable();
             }
         }
 
@@ -86,7 +90,7 @@ namespace BudgetManager.Pages
         {
             var inc = new Income();
             AppData.CurrentMonth.incomes.Add(inc);
-            FillTable();
+            FillIncomesTable();
         }
 
         private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
@@ -123,6 +127,13 @@ namespace BudgetManager.Pages
                 newValue = 0;
             }
             AppData.CurrentMonth.plannedSavings = new decimal(newValue);
+        }
+
+        private void RemoveMonthButton_Click(object sender, RoutedEventArgs e)
+        {
+            var current = AppData.CurrentMonth;
+            AppData.months.Remove(current);
+            AppData.CurrentMonth = AppData.months.LastOrDefault();
         }
     }
 
