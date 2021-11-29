@@ -50,7 +50,7 @@ namespace BudgetManager.Utilities
                 {
                     var category = new Category()
                     {
-                        name = cat.ToString()
+                        Name = cat.ToString()
                     };
                     AppData.categories.Add(category);
                 }
@@ -139,7 +139,7 @@ namespace BudgetManager.Utilities
                         var categoryName = expenseFromJson[expenseCategoryKey].ToString();
                         var category = new Category()
                         {
-                            name = categoryName
+                            Name = categoryName
                         };
                         foreach (var cat in AppData.categories)
                             if (cat.Equals(category))

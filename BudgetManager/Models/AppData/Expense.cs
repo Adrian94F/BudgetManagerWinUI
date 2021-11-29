@@ -33,7 +33,7 @@ namespace BudgetManager
 
         public override string ToString()
         {
-            return date.ToString("s") + " " + category.name + " " + Value + " " + ID.ToString();
+            return date.ToString("s") + " " + category.Name + " " + Value + " " + ID.ToString();
         }
 
         public int CompareTo(Expense other)

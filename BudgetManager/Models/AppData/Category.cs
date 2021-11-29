@@ -8,18 +8,18 @@ namespace BudgetManager
 {
     public class Category : IEquatable<Category>
     {
-        public string name { get; set; }
+        public string Name { get; set; }
 
         override public string ToString()
         {
-            return name;
+            return Name;
         }
 
         public bool Equals(Category other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return name == other.name;
+            return Name == other.Name;
         }
 
         public override bool Equals(object obj)
@@ -32,7 +32,7 @@ namespace BudgetManager
 
         public override int GetHashCode()
         {
-            return (name != null ? name.GetHashCode() : 0);
+            return (Name != null ? Name.GetHashCode() : 0);
         }
     }
 }
