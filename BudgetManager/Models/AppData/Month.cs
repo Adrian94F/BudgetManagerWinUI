@@ -36,8 +36,8 @@ namespace BudgetManager
         {
             var sum = decimal.Zero;
             foreach (var income in Incomes)
-                if (type == null || income.type == type)
-                    sum += income.value;
+                if (type == null || income.Type == type)
+                    sum += income.Value;
             return sum;
         }
 

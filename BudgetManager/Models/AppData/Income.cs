@@ -14,13 +14,13 @@ namespace BudgetManager.Models
             Additional
         };
 
-        public decimal value;
-        public IncomeType type;
-        public string comment;
+        public decimal Value { get; set; }
+        public IncomeType Type { get; set; }
+        public string Comment { get; set; }
 
         public Income()
         {
-            type = IncomeType.Additional;
+            Type = IncomeType.Additional;
         }
     }
 }

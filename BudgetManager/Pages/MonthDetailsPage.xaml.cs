@@ -78,9 +78,9 @@ namespace BudgetManager.Pages
                 if (parsed)
                 {
                     var income = item.originalIncome;
-                    income.value = value;
-                    income.type = item.isSalary ? Income.IncomeType.Salary : Income.IncomeType.Additional;
-                    income.comment = item.comment;
+                    income.Value = value;
+                    income.Type = item.isSalary ? Income.IncomeType.Salary : Income.IncomeType.Additional;
+                    income.Comment = item.comment;
                 }
                 FillIncomesTable();
             }
@@ -146,9 +146,9 @@ namespace BudgetManager.Pages
 
         public IncomeDataItem(Income inc)
         {
-            value = inc.value.ToString("F");
-            isSalary = inc.type == Income.IncomeType.Salary;
-            comment = inc.comment;
+            value = inc.Value.ToString("F");
+            isSalary = inc.Type == Income.IncomeType.Salary;
+            comment = inc.Comment;
             originalIncome = inc;
         }
     }

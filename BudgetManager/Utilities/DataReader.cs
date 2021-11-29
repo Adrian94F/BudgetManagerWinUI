@@ -93,9 +93,9 @@ namespace BudgetManager.Utilities
 
                             var income = new Income()
                             {
-                                value = value,
-                                type = type,
-                                comment = comment
+                                Value = value,
+                                Type = type,
+                                Comment = comment
                             };
                             month.Incomes.Add(income);
                         }
@@ -106,20 +106,20 @@ namespace BudgetManager.Utilities
                         {
                             var income = new Income()
                             {
-                                value = Decimal.Parse(monthFromJson[monthNetIncomeKey].ToString(), CultureInfo.InvariantCulture),
-                                type = Income.IncomeType.Salary
+                                Value = Decimal.Parse(monthFromJson[monthNetIncomeKey].ToString(), CultureInfo.InvariantCulture),
+                                Type = Income.IncomeType.Salary
                             };
-                            if (income.value > decimal.Zero)
+                            if (income.Value > decimal.Zero)
                                 month.Incomes.Add(income);
                         }
                         if (monthFromJson.Keys.Contains(monthAdditionalIncomeKey))
                         {
                             var income = new Income()
                             {
-                                value = Decimal.Parse(monthFromJson[monthAdditionalIncomeKey].ToString(), CultureInfo.InvariantCulture),
-                                type = Income.IncomeType.Additional
+                                Value = Decimal.Parse(monthFromJson[monthAdditionalIncomeKey].ToString(), CultureInfo.InvariantCulture),
+                                Type = Income.IncomeType.Additional
                             };
-                            if (income.value > decimal.Zero)
+                            if (income.Value > decimal.Zero)
                                 month.Incomes.Add(income);
                         }
                     }
