@@ -8,6 +8,107 @@
     mc:Ignorable="d">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"
+                              MaxWidth="300"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
+
+        <!--<Rectangle Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.RowSpan="2"
+                   Grid.ColumnSpan="3"/>
+
+        <Rectangle Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.RowSpan="3"
+                   Grid.ColumnSpan="2"/>
+
+        <Rectangle Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="3"/>
+
+        <Rectangle Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.RowSpan="3"/>-->
+
+
+        <TextBlock x:Name="TextBlock01"
+                   Grid.Row="1"
+                   Text="Kategoria"
+                   Padding="12, 4"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"/>
+        <TextBlock x:Name="TextBlock10"
+                   Grid.Column="1"
+                   Text="Data"
+                   Padding="4"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <TextBlock x:Name="TextBlock11"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Text="Suma"
+                   Padding="4"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+
+
+        <ScrollViewer x:Name="DaysScrollViewer"
+                      Grid.Row="0"
+                      Grid.Column="2"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Hidden"
+                      ViewChanged="ScrollViewer_ViewChanged">
+            <StackPanel x:Name="DaysGrid"
+                        Orientation="Horizontal"/>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="DaySumsScrollViewer"
+                      Grid.Row="1"
+                      Grid.Column="2"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Hidden"
+                      ViewChanged="ScrollViewer_ViewChanged">
+            <StackPanel x:Name="DaySumsGrid"
+                        Orientation="Horizontal"/>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="CategoriesScrollViewer"
+                      Grid.Row="2"
+                      Grid.Column="0"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Hidden"
+                      ViewChanged="ScrollViewer_ViewChanged"
+                      Padding="10,0,10,0">
+            <StackPanel x:Name="CategoriesGrid"/>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="CategorySumsScrollViewer"
+                      Grid.Row="2"
+                      Grid.Column="1"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Hidden"
+                      ViewChanged="ScrollViewer_ViewChanged">
+            <StackPanel x:Name="CategorySumsGrid"/>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="ExpensesScrollViewer"
+                      HorizontalScrollBarVisibility="Visible"
+                      VerticalAlignment="Stretch"
+                      VerticalScrollBarVisibility="Visible"
+                      Grid.Row="2"
+                      Grid.Column="2"
+                      Margin="0,0,0,0"
+                      ViewChanged="ScrollViewer_ViewChanged">
+            <Grid x:Name="ExpensesGrid"/>
+        </ScrollViewer>
     </Grid>
 </Page>
