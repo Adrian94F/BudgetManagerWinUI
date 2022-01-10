@@ -44,6 +44,7 @@ namespace BudgetManager
             appWindow.Title = "Menedżer Budżetu";
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             appWindow.TitleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
+            appWindow.TitleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
