@@ -5,8 +5,9 @@
     xmlns:local="using:BudgetManager.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -15,89 +16,70 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"
-                              MaxWidth="300"/>
+                            MaxWidth="300"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
 
-        <!--<Rectangle Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.RowSpan="2"
-                   Grid.ColumnSpan="3"/>
-
-        <Rectangle Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.RowSpan="3"
-                   Grid.ColumnSpan="2"/>
-
-        <Rectangle Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.ColumnSpan="3"/>
-
-        <Rectangle Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.RowSpan="3"/>-->
-
-
         <TextBlock x:Name="TextBlock01"
                    Grid.Row="1"
                    Text="Kategoria"
-                   Padding="12, 4"
+                   Padding="4, 0"
                    HorizontalAlignment="Left"
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"/>
         <TextBlock x:Name="TextBlock10"
                    Grid.Column="1"
                    Text="Data"
-                   Padding="4"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   Padding="4, 0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"/>
         <TextBlock x:Name="TextBlock11"
                    Grid.Row="1"
                    Grid.Column="1"
                    Text="Suma"
-                   Padding="4"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
+                   Padding="4, 0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Visibility="Collapsed"/>
 
 
         <ScrollViewer x:Name="DaysScrollViewer"
                       Grid.Row="0"
                       Grid.Column="2"
                       HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollBarVisibility="Hidden"
+                      VerticalScrollMode="Disabled"
                       ViewChanged="ScrollViewer_ViewChanged">
-            <StackPanel x:Name="DaysGrid"
-                        Orientation="Horizontal"/>
+            <Grid x:Name="DaysGrid"/>
         </ScrollViewer>
 
         <ScrollViewer x:Name="DaySumsScrollViewer"
                       Grid.Row="1"
                       Grid.Column="2"
                       HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollBarVisibility="Hidden"
+                      VerticalScrollMode="Disabled"
                       ViewChanged="ScrollViewer_ViewChanged">
-            <StackPanel x:Name="DaySumsGrid"
-                        Orientation="Horizontal"/>
+            <Grid x:Name="DaySumsGrid"/>
         </ScrollViewer>
 
         <ScrollViewer x:Name="CategoriesScrollViewer"
                       Grid.Row="2"
                       Grid.Column="0"
-                      HorizontalScrollBarVisibility="Hidden"
+                      HorizontalScrollMode="Disabled"
                       VerticalScrollBarVisibility="Hidden"
-                      ViewChanged="ScrollViewer_ViewChanged"
-                      Padding="10,0,10,0">
-            <StackPanel x:Name="CategoriesGrid"/>
+                      ViewChanged="ScrollViewer_ViewChanged">
+            <Grid x:Name="CategoriesGrid"/>
         </ScrollViewer>
 
         <ScrollViewer x:Name="CategorySumsScrollViewer"
                       Grid.Row="2"
                       Grid.Column="1"
-                      HorizontalScrollBarVisibility="Hidden"
+                      HorizontalScrollMode="Disabled"
                       VerticalScrollBarVisibility="Hidden"
                       ViewChanged="ScrollViewer_ViewChanged">
-            <StackPanel x:Name="CategorySumsGrid"/>
+            <Grid x:Name="CategorySumsGrid"/>
         </ScrollViewer>
 
         <ScrollViewer x:Name="ExpensesScrollViewer"
@@ -106,9 +88,20 @@
                       VerticalScrollBarVisibility="Visible"
                       Grid.Row="2"
                       Grid.Column="2"
-                      Margin="0,0,0,0"
                       ViewChanged="ScrollViewer_ViewChanged">
             <Grid x:Name="ExpensesGrid"/>
         </ScrollViewer>
+
+        <controls:Loading x:Name="LoadingControl"
+                          IsLoading="True"
+                          Grid.RowSpan="3"
+                          Grid.ColumnSpan="3">
+            <StackPanel Padding="12">
+                <ProgressRing IsActive="True"
+                              Margin="8"/>
+                <TextBlock Text="Ładowanie"
+                           VerticalAlignment="Center" />
+            </StackPanel>
+        </controls:Loading>
     </Grid>
 </Page>

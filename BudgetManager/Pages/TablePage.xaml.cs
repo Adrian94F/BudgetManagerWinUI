@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -30,29 +31,55 @@ namespace BudgetManager.Pages
         private List<double> catSums;
         private List<List<double>> dateCatSums;
 
-
         string IPageWithInfo.header { get => header; set => header = value; }
 
         public TablePage()
         {
             this.InitializeComponent();
-            FillTable();
         }
 
         private void ScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            
+            var scrolledObject = sender as ScrollViewer;
+
+            if (scrolledObject != null)
+            {
+                if (scrolledObject == ExpensesScrollViewer)
+                {
+                    DaysScrollViewer.ScrollToHorizontalOffset(scrolledObject.HorizontalOffset);
+                    DaySumsScrollViewer.ScrollToHorizontalOffset(scrolledObject.HorizontalOffset);
+                    CategoriesScrollViewer.ScrollToVerticalOffset(scrolledObject.VerticalOffset);
+                    CategorySumsScrollViewer.ScrollToVerticalOffset(scrolledObject.VerticalOffset);
+                }
+                else if (scrolledObject == DaysScrollViewer || scrolledObject == DaySumsScrollViewer)
+                {
+                    ExpensesScrollViewer.ScrollToHorizontalOffset(scrolledObject.HorizontalOffset);
+                }
+                else if (scrolledObject == CategoriesScrollViewer || scrolledObject == CategorySumsScrollViewer)
+                {
+                    ExpensesScrollViewer.ScrollToVerticalOffset(scrolledObject.VerticalOffset);
+                }
+            }
         }
 
-        private void FillTable()
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            CountSums();
-            FillTableWithSums();
+            await Task.Run(() => CountSums());
+            ShowTableLabels();
+            FillTableWithSumsAndlabels();
+            LoadingControl.IsLoading = false;
+        }
+
+        private void ShowTableLabels()
+        {
+            TextBlock01.Visibility = Visibility.Visible;
+            TextBlock10.Visibility = Visibility.Visible;
+            TextBlock11.Visibility = Visibility.Visible;
         }
 
         private void CountSums()
         {
-            var nOfColumns = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days;
+            var nOfColumns = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 1;
             var nOfRows = AppData.categories.Count;
             
             dateSums = Enumerable.Repeat(0d, nOfColumns).ToList();
@@ -76,58 +103,85 @@ namespace BudgetManager.Pages
             }
         }
 
-        private void FillTableWithSums()
+        private void FillTableWithSumsAndlabels()
         {
-            var columnWidth = 40;
-            var padding = new Thickness(1);
-            var border = new Thickness(0);
+            var columnWidth = 50;
+            var padding = new Thickness(5, 1, 5, 1);
+            var margin = new Thickness(0.5);
+            var border = new Thickness(1);
 
             var date = AppData.CurrentMonth.StartDate;
+            var colIdx = 0;
             foreach (var sum in dateSums)
             {
-                DaysGrid.Children.Add(new Button()
+                DaysGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                var button = new Button()
                 {
                     Content = date.ToString("d.MM"),
                     Width = columnWidth,
-                    Background = null,
+                    Margin = margin,
                     BorderThickness = border,
                     Padding = padding,
-                });
+                    HorizontalContentAlignment = HorizontalAlignment.Center
+                };
+                Grid.SetColumn(button, colIdx);
+                DaysGrid.Children.Add(button);
 
-                DaySumsGrid.Children.Add(new Button()
+                DaySumsGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                button = new Button()
                 {
                     Content = ((int)sum).ToString(),
                     Width = columnWidth,
-                    Background = null,
+                    Margin = margin,
                     BorderThickness = border,
-                    Padding = padding
-                });
+                    Padding = padding,
+                    HorizontalContentAlignment = HorizontalAlignment.Right
+                };
+                Grid.SetColumn(button, colIdx);
+                DaySumsGrid.Children.Add(button);
 
                 date = date.AddDays(1);
+                colIdx++;
             }
+            AddStretchColumn(DaysGrid);
+            AddStretchColumn(DaySumsGrid);
 
+            var rowIdx = 0;
             foreach (var cat in AppData.categories)
             {
-                CategoriesGrid.Children.Add(new Button()
+                CategoriesGrid.RowDefinitions.Add(new RowDefinition());
+                var button = new Button()
                 {
                     Content = cat.Name,
-                    Background = null,
+                    Width = 300,
+                    Margin = margin,
                     BorderThickness = border,
                     Padding = padding,
-                });
+                    HorizontalContentAlignment = HorizontalAlignment.Left
+                };
+                Grid.SetRow(button, rowIdx++);
+                CategoriesGrid.Children.Add(button);
             }
+            AddStretchRow(CategoriesGrid);
 
+            rowIdx = 0;
             foreach (var sum in catSums)
             {
-                CategorySumsGrid.Children.Add(new Button()
+                CategorySumsGrid.RowDefinitions.Add(new RowDefinition());
+                var button = new Button()
                 {
                     Content = ((int)sum).ToString(),
                     Width = columnWidth,
-                    Background = null,
+                    Margin = margin,
                     BorderThickness = border,
                     Padding = padding,
-                });
+                    HorizontalContentAlignment = HorizontalAlignment.Right
+                };
+                Grid.SetRow(button, rowIdx++);
+                CategorySumsGrid.Children.Add(button);
             }
+            AddStretchRow(CategorySumsGrid);
+
 
             var catIdx = 0;
             while (catIdx < dateCatSums.Count)
@@ -141,13 +195,14 @@ namespace BudgetManager.Pages
 
                     var content = dateCatSums[catIdx][dateIdx] != 0
                         ? ((int)dateCatSums[catIdx][dateIdx]).ToString()
-                        : "";
+                        : " ";
                     var button = new Button() {
                         Content = content,
                         Width = columnWidth,
-                        Background = null,
+                        Margin = margin,
                         BorderThickness = border,
                         Padding = padding,
+                        HorizontalContentAlignment = HorizontalAlignment.Right
                     };
                     Grid.SetColumn(button, dateIdx);
                     Grid.SetRow(button, catIdx);
@@ -159,6 +214,29 @@ namespace BudgetManager.Pages
 
                 catIdx++;
             }
+
+            AddStretchColumn(ExpensesGrid);
+            AddStretchRow(ExpensesGrid);
+        }
+
+        private void AddStretchRow(Grid grid)
+        {
+            var rowDef = new RowDefinition
+            {
+                Height = new GridLength(100, GridUnitType.Star),
+                MinHeight = 16
+            };
+            grid.RowDefinitions.Add(rowDef);
+        }
+
+        private void AddStretchColumn(Grid grid)
+        {
+            var colDef = new ColumnDefinition
+            {
+                Width = new GridLength(100, GridUnitType.Star),
+                MinWidth = 16,
+            };
+            grid.ColumnDefinitions.Add(colDef);
         }
     }
 }
