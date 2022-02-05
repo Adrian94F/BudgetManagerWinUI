@@ -37,6 +37,47 @@ namespace BudgetManager.Controls
             {
                 Expense = new Expense();
             }
+            ValueNumberBox.Focus(FocusState.Pointer);
+        }
+
+        public ExpDetails(DateTime date)
+        {
+            this.InitializeComponent();
+            if (Expense == null)
+            {
+                Expense = new Expense()
+                {
+                    Date = date
+                };
+            }
+            ValueNumberBox.Focus(FocusState.Pointer);
+        }
+
+        public ExpDetails(Category category)
+        {
+            this.InitializeComponent();
+            if (Expense == null)
+            {
+                Expense = new Expense()
+                {
+                    Category = category
+                };
+            }
+            ValueNumberBox.Focus(FocusState.Pointer);
+        }
+
+        public ExpDetails(DateTime date, Category category)
+        {
+            this.InitializeComponent();
+            if (Expense == null)
+            {
+                Expense = new Expense()
+                {
+                    Category = category,
+                    Date = date
+                };
+            }
+            ValueNumberBox.Focus(FocusState.Pointer);
         }
 
         private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)

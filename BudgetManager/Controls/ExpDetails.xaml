@@ -48,21 +48,21 @@
                            Margin="0, 8"/>
                         
                         <NumberBox x:Name="ValueNumberBox"
-                           Margin="0, 8"
-                           Value="{x:Bind Expense.Value2}"
-                           ValueChanged="NumberBox_ValueChanged"/>
+                                   Margin="0, 8"
+                                   Value="{x:Bind Expense.Value2}"
+                                   ValueChanged="NumberBox_ValueChanged"/>
                     </StackPanel>
 
                     <StackPanel Margin="16, 0, 0, 0">
                         <TextBlock Text="Kategoria"
-                          Margin="0, 8"/>
+                                   Margin="0, 8"/>
                         
                         <ComboBox x:Name="CategoryComboBox"
-                          Margin="0, 8"
-                          SelectionChanged="ComboBox_SelectionChanged"
-                          HorizontalAlignment="Stretch"
-                          SelectedItem="{x:Bind Expense.Category}"
-                          ItemsSource="{x:Bind expenseCategories}"/>
+                                  Margin="0, 8"
+                                  SelectionChanged="ComboBox_SelectionChanged"
+                                  HorizontalAlignment="Stretch"
+                                  SelectedItem="{x:Bind Expense.Category}"
+                                  ItemsSource="{x:Bind expenseCategories}"/>
                     </StackPanel>
                 </controls:DockPanel>
 

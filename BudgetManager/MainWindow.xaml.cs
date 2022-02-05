@@ -1,4 +1,5 @@
-﻿using BudgetManager.Pages;
+﻿using BudgetManager.Models;
+using BudgetManager.Pages;
 using BudgetManager.Utilities;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
@@ -34,6 +35,8 @@ namespace BudgetManager
         public MainWindow()
         {
             this.InitializeComponent();
+            AppData.navigationView = NavView;
+            AppData.mainFrame = ContentFrame;
             SetUpTitleBar();
         }
 
@@ -146,6 +149,17 @@ namespace BudgetManager
         {
             MainSplitView.IsPaneOpen = false;
             NavView_Navigate(NavView.SelectedItem as NavigationViewItem);
+        }
+
+        private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            ContentFrame.GoBack();
+            if (!ContentFrame.CanGoBack)
+            {
+                NavView.IsBackEnabled = false;
+            }
+            NavView.Header = (ContentFrame.Content as IPageWithInfo).header;
+            Logger.Log("changed page to: " + NavView.Header);
         }
     }
 }

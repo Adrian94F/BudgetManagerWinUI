@@ -98,13 +98,13 @@ namespace BudgetManager
             var ret = new HashSet<Expense>();
             var day = date.Day;
             var month = date.Month;
+
             if (Expenses != null)
             {
                 foreach (var expense in Expenses)
                 {
                     var expDay = expense.Date.Day;
                     var expMonth = expense.Date.Month;
-
                     if (day == expDay && month == expMonth)
                     {
                         if (category == null)

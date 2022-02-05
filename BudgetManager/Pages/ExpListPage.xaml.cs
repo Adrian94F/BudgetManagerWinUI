@@ -29,24 +29,55 @@ namespace BudgetManager.Pages
     {
         public string header = "Lista wydatków";
 
+        private Month month_ = AppData.CurrentMonth;
+        private DateTime? date_ = null;
+        private Category category_ = null;
+
         string IPageWithInfo.header { get => header; set => header = value; }
 
         public ExpListPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter != null)
+            {
+                if (e.Parameter is DateTime date)
+                {
+                    date_ = date;
+                }
+                else if (e.Parameter is Category category)
+                {
+                    category_ = category;  // AppData.categories.Where( cat => cat.Name.Equals(category) ).First();
+                }
+                else if (e.Parameter is Tuple<DateTime, Category> dateAndCategory)
+                {
+                    date_ = dateAndCategory.Item1;
+                    category_ = dateAndCategory.Item2;
+                }
+
+                if (date_ != null)
+                {
+                    header += " w dniu " + date_.Value.ToString("dd.MM.yyyy");
+                }
+                if (category_ != null)
+                {
+                    header += " z kategorii " + category_.Name;
+                }
+            }
             FillWithExpenses();
         }
 
         private void FillWithExpenses()
         {
+            var expenses = new SortedSet<Expense>(date_ == null
+                ? category_ == null
+                    ? month_.Expenses
+                    : month_.GetExpensesOfCategory(category_)
+                : month_.GetExpensesOfCategoryAndDate(category_, date_.Value));
             var lastDay = "";
-            var month = AppData.CurrentMonth;
-            if (month == null)
-            {
-                return;
-            }
-
-            var expenses = new SortedSet<Expense>(month.Expenses);
 
             ExpListListView.Items.Clear();
             foreach (var exp in expenses.Reverse())
@@ -110,7 +141,11 @@ namespace BudgetManager.Pages
         {
             Logger.Log("add expense clicked");
             ExpListSplitView.IsPaneOpen = true;
-            var detailsControl = new ExpDetails();
+            var detailsControl = date_ == null
+                ? new ExpDetails(category_)
+                : category_ == null
+                    ? new ExpDetails(date_.Value)
+                    : new ExpDetails(date_.Value, category_);
             detailsControl.ExpenseChanged += new EventHandler(ExpDetails_ExpChanged);
             ExpListSplitViewPane.Child = detailsControl;
         }

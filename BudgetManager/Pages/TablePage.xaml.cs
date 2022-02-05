@@ -95,12 +95,20 @@ namespace BudgetManager.Pages
             foreach (var exp in AppData.CurrentMonth.Expenses)
             {
                 var dateIndex = (exp.Date - AppData.CurrentMonth.StartDate).Days;
+                dateIndex = dateIndex < 0 ? 0 : dateIndex;
                 var catIndex = AppData.categories.ToList().IndexOf(exp.Category);
 
                 catSums[catIndex] += exp.Value2;
                 dateSums[dateIndex] += exp.Value2;
                 dateCatSums[catIndex][dateIndex] += exp.Value2;
             }
+        }
+
+        private void NavigateToExpListPageWithParam(object par)
+        {
+            AppData.navigationView.IsBackEnabled = true;
+            AppData.mainFrame.Navigate(typeof(ExpListPage), par);
+            AppData.navigationView.Header = (AppData.mainFrame.Content as IPageWithInfo).header;
         }
 
         private void FillTableWithSumsAndlabels()
@@ -114,15 +122,20 @@ namespace BudgetManager.Pages
             var colIdx = 0;
             foreach (var sum in dateSums)
             {
+                var sumDate = new DateTime(date.Ticks);
                 DaysGrid.ColumnDefinitions.Add(new ColumnDefinition());
                 var button = new Button()
                 {
-                    Content = date.ToString("d.MM"),
+                    Content = sumDate.ToString("d.MM"),
                     Width = columnWidth,
                     Margin = margin,
                     BorderThickness = border,
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Center
+                };
+                button.Click += (sender, e) =>
+                {
+                    NavigateToExpListPageWithParam(sumDate);
                 };
                 Grid.SetColumn(button, colIdx);
                 DaysGrid.Children.Add(button);
@@ -137,6 +150,10 @@ namespace BudgetManager.Pages
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Right
                 };
+                button.Click += (sender, e) =>
+                {
+                    NavigateToExpListPageWithParam(sumDate);
+                };
                 Grid.SetColumn(button, colIdx);
                 DaySumsGrid.Children.Add(button);
 
@@ -149,6 +166,7 @@ namespace BudgetManager.Pages
             var rowIdx = 0;
             foreach (var cat in AppData.categories)
             {
+                var row = rowIdx++;
                 CategoriesGrid.RowDefinitions.Add(new RowDefinition());
                 var button = new Button()
                 {
@@ -159,7 +177,11 @@ namespace BudgetManager.Pages
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Left
                 };
-                Grid.SetRow(button, rowIdx++);
+                button.Click += (sender, e) =>
+                {
+                    NavigateToExpListPageWithParam(cat);
+                };
+                Grid.SetRow(button, row);
                 CategoriesGrid.Children.Add(button);
             }
             AddStretchRow(CategoriesGrid);
@@ -167,6 +189,7 @@ namespace BudgetManager.Pages
             rowIdx = 0;
             foreach (var sum in catSums)
             {
+                var row = rowIdx++;
                 CategorySumsGrid.RowDefinitions.Add(new RowDefinition());
                 var button = new Button()
                 {
@@ -177,24 +200,29 @@ namespace BudgetManager.Pages
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Right
                 };
-                Grid.SetRow(button, rowIdx++);
+                button.Click += (sender, e) =>
+                {
+                    NavigateToExpListPageWithParam(AppData.categories.ToArray()[row]);
+                };
+                Grid.SetRow(button, row);
                 CategorySumsGrid.Children.Add(button);
             }
             AddStretchRow(CategorySumsGrid);
-
 
             var catIdx = 0;
             while (catIdx < dateCatSums.Count)
             {
                 ExpensesGrid.RowDefinitions.Add(new RowDefinition());
 
+                var row = catIdx++;
                 var dateIdx = 0;
-                while (dateIdx < dateCatSums[catIdx].Count)
+                while (dateIdx < dateCatSums[row].Count)
                 {
+                    var column = dateIdx++;
                     ExpensesGrid.ColumnDefinitions.Add(new ColumnDefinition());
 
-                    var content = dateCatSums[catIdx][dateIdx] != 0
-                        ? ((int)dateCatSums[catIdx][dateIdx]).ToString()
+                    var content = dateCatSums[row][column] != 0
+                        ? ((int)dateCatSums[row][column]).ToString()
                         : " ";
                     var button = new Button() {
                         Content = content,
@@ -204,15 +232,18 @@ namespace BudgetManager.Pages
                         Padding = padding,
                         HorizontalContentAlignment = HorizontalAlignment.Right
                     };
-                    Grid.SetColumn(button, dateIdx);
-                    Grid.SetRow(button, catIdx);
+                    button.Click += (sender, e) =>
+                    {
+                        var sumDate = AppData.CurrentMonth.StartDate.AddDays(column);
+                        var category = AppData.categories.ToArray().GetValue(row) as Category;
+                        var param = new Tuple<DateTime, Category>(sumDate, category);
+                        NavigateToExpListPageWithParam(param);
+                    };
+                    Grid.SetColumn(button, column);
+                    Grid.SetRow(button, row);
 
                     ExpensesGrid.Children.Add(button);
-
-                    dateIdx++;
                 }
-
-                catIdx++;
             }
 
             AddStretchColumn(ExpensesGrid);

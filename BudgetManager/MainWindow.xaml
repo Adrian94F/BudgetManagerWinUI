@@ -30,7 +30,7 @@
                             Loaded="NavView_Loaded"
                             PaneDisplayMode="Auto"
                             IsSettingsVisible="False"
-                            IsBackButtonVisible="Collapsed">
+                            BackRequested="NavView_BackRequested">
                 <NavigationView.MenuItems>
                     <NavigationViewItem x:Uid="HomeNavItem"
                                         Content="Podsumowanie"

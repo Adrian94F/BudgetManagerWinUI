@@ -1,4 +1,5 @@
 ﻿using BudgetManager.Utilities;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace BudgetManager.Models
     {
         public static SortedSet<Month> months = new SortedSet<Month>();
         public static HashSet<Category> categories = new HashSet<Category>();
+
+        public static NavigationView navigationView;
+        public static Frame mainFrame;
 
         public static int currentMonth = -1;
 
