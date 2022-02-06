@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,9 +28,15 @@ namespace BudgetManager.Pages
     {
         public string header = "Tabela";
 
-        private List<double> dateSums;
-        private List<double> catSums;
-        private List<List<double>> dateCatSums;
+        private static List<double> dateSums;
+        private static List<double> catSums;
+        private static List<List<double>> dateCatSums;
+
+        private double columnWidth = 50;
+        private Thickness padding = new Thickness(5, 1, 5, 1);
+        private Thickness margin = new Thickness(1);
+        private Thickness border = new Thickness(1);
+        private CornerRadius cornerRadius = new CornerRadius(0);
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
@@ -77,7 +84,7 @@ namespace BudgetManager.Pages
             TextBlock11.Visibility = Visibility.Visible;
         }
 
-        private void CountSums()
+        private static void CountSums()
         {
             var nOfColumns = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 1;
             var nOfRows = AppData.categories.Count;
@@ -113,10 +120,10 @@ namespace BudgetManager.Pages
 
         private void FillTableWithSumsAndlabels()
         {
-            var columnWidth = 50;
-            var padding = new Thickness(5, 1, 5, 1);
-            var margin = new Thickness(0.5);
-            var border = new Thickness(1);
+            AddWeekendsRectangles(DaysGrid, AppData.CurrentMonth);
+            AddWeekendsRectangles(DaySumsGrid, AppData.CurrentMonth);
+            AddTodayRectangle(DaysGrid, AppData.CurrentMonth);
+            AddTodayRectangle(DaySumsGrid, AppData.CurrentMonth);
 
             var date = AppData.CurrentMonth.StartDate;
             var colIdx = 0;
@@ -130,6 +137,7 @@ namespace BudgetManager.Pages
                     Width = columnWidth,
                     Margin = margin,
                     BorderThickness = border,
+                    CornerRadius = cornerRadius,
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Center
                 };
@@ -147,6 +155,7 @@ namespace BudgetManager.Pages
                     Width = columnWidth,
                     Margin = margin,
                     BorderThickness = border,
+                    CornerRadius = cornerRadius,
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Right
                 };
@@ -174,6 +183,7 @@ namespace BudgetManager.Pages
                     Width = 300,
                     Margin = margin,
                     BorderThickness = border,
+                    CornerRadius = cornerRadius,
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Left
                 };
@@ -197,6 +207,7 @@ namespace BudgetManager.Pages
                     Width = columnWidth,
                     Margin = margin,
                     BorderThickness = border,
+                    CornerRadius = cornerRadius,
                     Padding = padding,
                     HorizontalContentAlignment = HorizontalAlignment.Right
                 };
@@ -209,11 +220,16 @@ namespace BudgetManager.Pages
             }
             AddStretchRow(CategorySumsGrid);
 
+            foreach (var row in dateCatSums)
+            {
+                ExpensesGrid.RowDefinitions.Add(new RowDefinition());
+            }
+            AddWeekendsRectangles(ExpensesGrid, AppData.CurrentMonth);
+            AddTodayRectangle(ExpensesGrid, AppData.CurrentMonth);
+
             var catIdx = 0;
             while (catIdx < dateCatSums.Count)
             {
-                ExpensesGrid.RowDefinitions.Add(new RowDefinition());
-
                 var row = catIdx++;
                 var dateIdx = 0;
                 while (dateIdx < dateCatSums[row].Count)
@@ -229,6 +245,7 @@ namespace BudgetManager.Pages
                         Width = columnWidth,
                         Margin = margin,
                         BorderThickness = border,
+                        CornerRadius = cornerRadius,
                         Padding = padding,
                         HorizontalContentAlignment = HorizontalAlignment.Right
                     };
@@ -268,6 +285,79 @@ namespace BudgetManager.Pages
                 MinWidth = 16,
             };
             grid.ColumnDefinitions.Add(colDef);
+        }
+
+        private static Microsoft.UI.Xaml.Shapes.Rectangle AddRectangleAt(int row, int col, int rowSpan, int colSpan, SolidColorBrush fill, Grid grid)
+        {
+            if (row < 0 || col < 0)
+            {
+                return null;
+            }
+            var rect = new Microsoft.UI.Xaml.Shapes.Rectangle() {
+                Fill = fill,
+            };
+
+            if (rowSpan < 1)
+            {
+                rowSpan = 1;
+            }
+            if (colSpan < 1)
+            {
+                colSpan = 1;
+            }
+            Grid.SetRow(rect, row);
+            Grid.SetRowSpan(rect, rowSpan);
+            Grid.SetColumn(rect, col);
+            Grid.SetColumnSpan(rect, colSpan);
+
+            grid.Children.Add(rect);
+
+            return rect;
+        }
+
+        private static void AddWeekendsRectangles(Grid grid, Month month)
+        {
+            var row = 0;
+            var rowSpan = grid.RowDefinitions.Count + 1;
+            var col = 0;
+            var colSpan = 1;
+            var fill = new SolidColorBrush(new Windows.UI.Color() {
+                A = 25,
+                R = 128,
+                G = 128,
+                B = 128,
+            });
+
+            var day = month.StartDate;
+            while (day.Date <= month.EndDate.Date)
+            {
+                if (day.DayOfWeek == DayOfWeek.Saturday || day.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    AddRectangleAt(row, col, rowSpan, colSpan, fill, grid);
+                }
+                day = day.AddDays(1);
+                col++;
+            }
+        }
+
+        private static void AddTodayRectangle(Grid grid, Month month)
+        {
+            if (DateTime.Today.Date > month.EndDate.Date)
+            {
+                return;
+            }
+            var row = 0;
+            var rowSpan = grid.RowDefinitions.Count + 1;
+            var col = (DateTime.Now - month.StartDate).Days;
+            var colSpan = 1;
+            var fill = new SolidColorBrush(new Windows.UI.Color()
+            {
+                A = 50,
+                R = 144,
+                G = 238,
+                B = 144,
+            });
+            AddRectangleAt(row, col, rowSpan, colSpan, fill, grid);
         }
     }
 }
