@@ -85,18 +85,37 @@
 
                 <NavigationView.FooterMenuItems>
                     <NavigationViewItem x:Uid="SettingsNavItem"
-                                        Icon="Read"
                                         Content="Dziennik"
-                                        Tag="log"/>
-                    
-                    <NavigationViewItem x:Uid="MonthsNavItem"
-                                        Content="Miesiące"
-                                        Tag="months_list">
+                                        Tag="log">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xEA37;"/>
+                            <FontIcon Glyph="&#xE7C3;"/>
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
-                    
+
+                    <NavigationViewItem x:Uid="PrevMonthNavItem"
+                                        Content="Poprzedni"
+                                        Tag="prev_month">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE76B;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+
+                    <NavigationViewItem x:Uid="NextMonthNavItem"
+                                        Content="Następny"
+                                        Tag="next_month">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE76C;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+
+                    <NavigationViewItem x:Uid="MonthsNavItem"
+                                        Content="Miesiąc"
+                                        Tag="months_list">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE787;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+
                     <NavigationViewItem x:Uid="SettingsNavItem"
                                         Icon="Setting"
                                         Content="Ustawienia"
