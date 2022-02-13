@@ -13,6 +13,7 @@ namespace BudgetManager.Models
         private static string dataPathKey = "data path";
 
         public static string dataPath = "C:\\Users\\adria\\Dropbox\\BudgetManager\\dataset.json";
+        public static int defaultFirstDayOfMonth = 19;
 
         public static void Save()
         {
