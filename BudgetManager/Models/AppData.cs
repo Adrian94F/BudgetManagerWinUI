@@ -30,5 +30,18 @@ namespace BudgetManager.Models
         {
             return months.Count > 0;
         }
+
+        public static bool IsCategoryRemovable(Category cat)
+        {
+            foreach (var month in months)
+            {
+                foreach (var exp in month.Expenses)
+                {
+                    if (exp.Category == cat)
+                        return false;
+                }
+            }
+            return true;
+        }
     }
 }

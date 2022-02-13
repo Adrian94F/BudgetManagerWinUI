@@ -4,10 +4,69 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BudgetManager.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <Grid>
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel Margin="8">
+                <TextBlock Text="Pierwszy dzień miesiąca"
+                           Margin="8"/>
+                <NumberBox x:Name="DefaultFirstDayOfMonthNumberBox"
+                           Margin="8"
+                           Width="100"
+                           HorizontalAlignment="Left"/>
+            </StackPanel>
 
-    </Grid>
+            <StackPanel Margin="8">
+                <TextBlock Text="Ścieżka do pliku z danymi"
+                           Margin="8"/>
+                <controls:DockPanel>
+                    <Button x:Name="ChangePathButton"
+                            Margin="8"
+                            controls:DockPanel.Dock="Right"
+                            Content="Zmień"
+                            Click="ChangePathButton_Click"/>
+                    <TextBox x:Name="PathTextBox"
+                             Margin="8"/>
+                </controls:DockPanel>
+            </StackPanel>
+
+            <controls:DockPanel Margin="8">
+                <TextBlock Text="Kategorie"
+                           Margin="8"
+                           controls:DockPanel.Dock="Top"/>
+                <Button Click="AddCategoryButton_Click"
+                        Margin="8"
+                        Content="Dodaj"
+                        controls:DockPanel.Dock="Bottom"/>
+                <controls:DataGrid x:Name="CategoriesDataGrid"
+                                   Margin="8"
+                                   ItemsSource="{Binding}"
+                                   AutoGenerateColumns="False"
+                                   SelectionMode="Single"
+                                   HorizontalAlignment="Stretch">
+                    <controls:DataGrid.RowStyle>
+                        <Style TargetType="controls:DataGridRow">
+                            <Setter Property="controls:DataGridRow.ContextFlyout">
+                                <Setter.Value>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem x:Name="DeleteCategory"
+                                                        Click="DeleteCategory_Click"
+                                                        Text="Usuń"/>
+                                    </MenuFlyout>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </controls:DataGrid.RowStyle>
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn Header="Nazwa"
+                                                     Binding="{Binding Name}"
+                                                     Width="*"/>
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+            </controls:DockPanel>
+
+        </StackPanel>
+    </ScrollViewer>
 </Page>

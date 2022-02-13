@@ -16,14 +16,15 @@ Aplikacja umożliwiająca zapisywanie codziennych wydatków i wyświetlanie stat
 
 - Zapis danych
 - Pasek menu?
+- Przechodzenie do poprzedniego/następnego miesiąca
 - Skróty klawiszowe
 - Ustawienia
+  - zmiana ścieżki do danych
+
 - Historia (wykres)
-- Kategorie (edycja, dodawanie, usuwanie)
 - Wypalenie:
   - cały wykres z poprzedniej wersji
   - szacowany dzienny wydatek na każdy dzień
-
 - Raport
 - Zrzut ekranu
 - Cofnij/powtórz wykonaną operację

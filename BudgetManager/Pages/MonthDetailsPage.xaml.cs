@@ -51,39 +51,15 @@ namespace BudgetManager.Pages
 
         private void FillIncomesTable()
         {
-            var month = AppData.CurrentMonth;
-            var incomesCollection = new ObservableCollection<IncomeDataItem>();
-            foreach (var inc in month.Incomes)
-            {
-                incomesCollection.Add(new IncomeDataItem(inc));
-            }
+            var incomesCollection = new ObservableCollection<Income>(AppData.CurrentMonth.Incomes);
             IncomesDataGrid.ItemsSource = incomesCollection;
         }
 
         private void DeleteRow_Click(object sender, RoutedEventArgs e)
         {
-            var item = (sender as FrameworkElement).DataContext as IncomeDataItem;
-            var income = item.originalIncome as Income;
+            var income = (sender as FrameworkElement).DataContext as Income;
             AppData.CurrentMonth.Incomes.Remove(income);
-            (IncomesDataGrid.ItemsSource as ObservableCollection<IncomeDataItem>).Remove(item);
-        }
-
-        private void IncomesDataGrid_RowEditEnded(object sender, DataGridRowEditEndedEventArgs e)
-        {
-            var item = e.Row.DataContext as IncomeDataItem;
-            if (item != null)
-            {
-                decimal value;
-                var parsed = decimal.TryParse(item.value, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.CurrentCulture, out value);
-                if (parsed)
-                {
-                    var income = item.originalIncome;
-                    income.Value = value;
-                    income.Type = item.isSalary ? Income.IncomeType.Salary : Income.IncomeType.Additional;
-                    income.Comment = item.comment;
-                }
-                FillIncomesTable();
-            }
+            (IncomesDataGrid.ItemsSource as ObservableCollection<Income>).Remove(income);
         }
 
         private void AddIncomeButton_Click(object sender, RoutedEventArgs e)

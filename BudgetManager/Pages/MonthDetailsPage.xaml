@@ -45,13 +45,14 @@
                     <TextBlock Text="Dochody"
                                Margin="8"
                                Style="{StaticResource BodyTextBlockStyle}"/>
+                    
                     <controls:DataGrid x:Name="IncomesDataGrid"
                                        Margin="8"
                                        ItemsSource="{Binding}"
                                        AutoGenerateColumns="False"
                                        SelectionMode="Single"
-                                       RowEditEnded="IncomesDataGrid_RowEditEnded"
                                        HorizontalAlignment="Stretch">
+                        
                         <controls:DataGrid.RowStyle>
                             <Style TargetType="controls:DataGridRow">
                                 <Setter Property="controls:DataGridRow.ContextFlyout">
@@ -65,9 +66,10 @@
                                 </Setter>
                             </Style>
                         </controls:DataGrid.RowStyle>
+                        
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn Header="Kwota [zł]"
-                                                         Binding="{Binding value}"
+                                                         Binding="{Binding Value}"
                                                          SortDirection="Descending"
                                                          CanUserReorder="False">
                                 <controls:DataGridTextColumn.ElementStyle>
@@ -82,15 +84,16 @@
                                 </controls:DataGridTextColumn.ElementStyle>
                             </controls:DataGridTextColumn>
                             <controls:DataGridCheckBoxColumn Header="Wypłata"
-                                                             Binding="{Binding isSalary}"
+                                                             Binding="{Binding IsSalary}"
                                                              SortDirection="Descending"
                                                              CanUserReorder="False"/>
                             <controls:DataGridTextColumn Header="Komentarz"
-                                                         Binding="{Binding comment}"
+                                                         Binding="{Binding Comment}"
                                                          CanUserReorder="False"
                                                          Width="*"/>
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>
+                    
                     <Button Click="AddIncomeButton_Click"
                             Margin="8"
                             Content="Dodaj"/>

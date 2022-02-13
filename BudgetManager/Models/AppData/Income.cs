@@ -17,6 +17,10 @@ namespace BudgetManager.Models
         public decimal Value { get; set; }
         public IncomeType Type { get; set; }
         public string Comment { get; set; }
+        public bool IsSalary {
+            get => Type == IncomeType.Salary;
+            set => Type = value ? IncomeType.Salary : IncomeType.Additional;
+        }
 
         public Income()
         {

@@ -22,7 +22,8 @@
                    PanePlacement="Right"
                    Grid.Row="1">
             <SplitView.Pane>
-                <Frame x:Name="SideFrame"/>
+                <Frame x:Name="SideFrame"
+                       VerticalAlignment="Stretch"/>
             </SplitView.Pane>
 
             <NavigationView x:Name="NavView"
