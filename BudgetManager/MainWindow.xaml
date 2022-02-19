@@ -56,7 +56,7 @@
                             <FontIcon Glyph="&#xEA37;"/>
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
-                    
+
                     <NavigationViewItem x:Uid="BurndownNavItem"
                                         Content="Wypalenie"
                                         Tag="exp_burndown">
@@ -64,7 +64,19 @@
                             <FontIcon Glyph="&#xE9D2;"/>
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
-                    
+
+                    <NavigationViewItem x:Uid="ListAndBurndownNavItem"
+                                        Content="Lista i wypalenie"
+                                        Tag="exp_list_and_burndown">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xEA37;&#xE9D2;">
+                                <FontIcon.Clip>
+                                    <RectangleGeometry Rect="5, 0, 28, 28"/>
+                                </FontIcon.Clip>
+                            </FontIcon>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+
                     <NavigationViewItem x:Uid="MonthDetailsNavItem"
                                         Content="Szczegóły"
                                         Tag="month_details">
@@ -87,7 +99,8 @@
                 <NavigationView.FooterMenuItems>
                     <NavigationViewItem x:Uid="SettingsNavItem"
                                         Content="Dziennik"
-                                        Tag="log">
+                                        Tag="log"
+                                        SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE7C3;"/>
                         </NavigationViewItem.Icon>
@@ -95,7 +108,8 @@
 
                     <NavigationViewItem x:Uid="PrevMonthNavItem"
                                         Content="Poprzedni"
-                                        Tag="prev_month">
+                                        Tag="prev_month"
+                                        SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE76B;"/>
                         </NavigationViewItem.Icon>
@@ -103,15 +117,17 @@
 
                     <NavigationViewItem x:Uid="NextMonthNavItem"
                                         Content="Następny"
-                                        Tag="next_month">
+                                        Tag="next_month"
+                                        SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE76C;"/>
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
                     <NavigationViewItem x:Uid="MonthsNavItem"
-                                        Content="Miesiąc"
-                                        Tag="months_list">
+                                        Content="Wybierz miesiąc"
+                                        Tag="months_list"
+                                        SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE787;"/>
                         </NavigationViewItem.Icon>

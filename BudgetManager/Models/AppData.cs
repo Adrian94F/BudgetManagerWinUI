@@ -43,5 +43,17 @@ namespace BudgetManager.Models
             }
             return true;
         }
+
+        internal static void SelectPreviousMonth()
+        {
+            if (currentMonth != 0)
+                currentMonth--;
+        }
+
+        internal static void SelectNextMonth()
+        {
+            if (currentMonth < months.Count - 1)
+                currentMonth++;
+        }
     }
 }

@@ -9,31 +9,34 @@
 
     <ScrollViewer>
         <StackPanel>
-            <StackPanel Margin="8">
-                <TextBlock Text="Pierwszy dzień miesiąca"
-                           Margin="8"/>
-                <NumberBox x:Name="DefaultFirstDayOfMonthNumberBox"
-                           Margin="8"
-                           Width="100"
-                           HorizontalAlignment="Left"
-                           Minimum="1"
-                           Maximum="31"
-                           ValueChanged="DefaultFirstDayOfMonthNumberBox_ValueChanged"/>
-            </StackPanel>
+            <controls:DockPanel>
+                <StackPanel Margin="8"
+                            controls:DockPanel.Dock="Left">
+                    <TextBlock Text="Pierwszy dzień miesiąca"
+                               Margin="8"/>
+                    <NumberBox x:Name="DefaultFirstDayOfMonthNumberBox"
+                               Margin="8"
+                               Width="100"
+                               HorizontalAlignment="Left"
+                               Minimum="1"
+                               Maximum="31"
+                               ValueChanged="DefaultFirstDayOfMonthNumberBox_ValueChanged"/>
+                </StackPanel>
 
-            <StackPanel Margin="8">
-                <TextBlock Text="Ścieżka do pliku z danymi"
-                           Margin="8"/>
-                <controls:DockPanel>
-                    <Button x:Name="ChangePathButton"
-                            Margin="8"
-                            controls:DockPanel.Dock="Right"
-                            Content="Zmień"
-                            Click="ChangePathButton_Click"/>
-                    <TextBox x:Name="PathTextBox"
-                             Margin="8"/>
-                </controls:DockPanel>
-            </StackPanel>
+                <StackPanel Margin="8">
+                    <TextBlock Text="Ścieżka do pliku z danymi"
+                               Margin="8"/>
+                    <controls:DockPanel>
+                        <Button x:Name="ChangePathButton"
+                                Margin="8"
+                                controls:DockPanel.Dock="Right"
+                                Content="Zmień"
+                                Click="ChangePathButton_Click"/>
+                        <TextBox x:Name="PathTextBox"
+                                 Margin="8"/>
+                    </controls:DockPanel>
+                </StackPanel>
+            </controls:DockPanel>
 
             <controls:DockPanel Margin="8">
                 <TextBlock Text="Kategorie"

@@ -30,8 +30,6 @@ namespace BudgetManager
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        private NavigationViewItem previousItem;
-
         public MainWindow()
         {
             this.InitializeComponent();
@@ -62,9 +60,8 @@ namespace BudgetManager
             // set the initial SelectedItem 
             foreach (NavigationViewItemBase item in NavView.MenuItems)
             {
-                if (item is NavigationViewItem && item.Tag.ToString() == "home")
+                if (item is NavigationViewItem && item.Tag.ToString().Equals("home")
                 {
-                    NavView.SelectedItem = previousItem = item as NavigationViewItem;
                     NavView_Navigate(item as NavigationViewItem);
                     break;
                 }
@@ -79,15 +76,6 @@ namespace BudgetManager
                 var items = sender.MenuItems.Concat(sender.FooterMenuItems);
                 var item = items.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
                 NavView_Navigate(item);
-
-                if (sender.FooterMenuItems.Contains(item))
-                {
-                    NavView.SelectedItem = previousItem;
-                }
-                else
-                {
-                    previousItem = NavView.SelectedItem as NavigationViewItem;
-                }
             }
         }
 
@@ -119,6 +107,16 @@ namespace BudgetManager
                     ContentFrame.Navigate(typeof(MonthsHistoryPage));
                     break;
 
+                case "prev_month":
+                    AppData.SelectPreviousMonth();
+                    ContentFrame.Navigate(ContentFrame.Content.GetType());
+                    break;
+
+                case "next_month":
+                    AppData.SelectNextMonth();
+                    ContentFrame.Navigate(ContentFrame.Content.GetType());
+                    break;
+
                 case "months_list":
                     SideFrame.Navigate(typeof(MonthsListPage), null, new SuppressNavigationTransitionInfo());
                     var monthsList = SideFrame.Content as MonthsListPage;
@@ -128,9 +126,7 @@ namespace BudgetManager
                     break;
 
                 case "settings":
-                    SideFrame.Navigate(typeof(SettingsPage), null, new SuppressNavigationTransitionInfo());
-                    MainSplitView.OpenPaneLength = 600;
-                    MainSplitView.IsPaneOpen = true;
+                    ContentFrame.Navigate(typeof(SettingsPage));
                     break;
 
                 default:
