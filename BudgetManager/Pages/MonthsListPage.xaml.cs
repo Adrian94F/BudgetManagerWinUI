@@ -51,7 +51,6 @@ namespace BudgetManager.Pages
                     {
                         Padding = new Thickness(20, 0, 0, 0),
                         Content = startYear,
-                        IsEnabled = false
                     };
                     MonthsListView.Items.Add(item);
                 }
@@ -65,8 +64,7 @@ namespace BudgetManager.Pages
 
         private void MonthsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var month = e.ClickedItem as Month;
-            if (month != null)
+            if (e.ClickedItem is Month month)
             {
                 Logger.Log("clicked month: " + month.ToString());
                 AppData.CurrentMonth = month;
@@ -74,9 +72,18 @@ namespace BudgetManager.Pages
             }
         }
 
+        private void MonthsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.First() is not Month)
+            {
+                MonthsListView.SelectedItem = AppData.CurrentMonth;
+            }
+        }
+
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
-
+            // create new month
+            // select new month in AppData.CurrentMonth
         }
     }
 }

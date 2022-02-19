@@ -105,8 +105,7 @@ namespace BudgetManager.Pages
 
         private void ExpListListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var exp = e.ClickedItem as ExpenseListViewItem;
-            if (exp != null && !ExpListSplitView.IsPaneOpen)
+            if (e.ClickedItem is ExpenseListViewItem exp && !ExpListSplitView.IsPaneOpen)
             {
                 Logger.Log("clicked expense: " + exp.OriginalExpense.ToString());
                 

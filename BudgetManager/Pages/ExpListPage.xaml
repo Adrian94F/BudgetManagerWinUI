@@ -48,7 +48,7 @@
                     <ListView x:Name="ExpListListView"
                               IsItemClickEnabled="True"
                               ItemClick="ExpListListView_ItemClick"
-                              SelectionMode="Single">
+                              SelectionMode="None">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel>

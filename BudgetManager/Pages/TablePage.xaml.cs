@@ -322,7 +322,7 @@ namespace BudgetManager.Pages
             var col = 0;
             var colSpan = 1;
             var fill = new SolidColorBrush(new Windows.UI.Color() {
-                A = 25,
+                A = 50,
                 R = 128,
                 G = 128,
                 B = 128,
@@ -352,7 +352,7 @@ namespace BudgetManager.Pages
             var colSpan = 1;
             var fill = new SolidColorBrush(new Windows.UI.Color()
             {
-                A = 50,
+                A = 100,
                 R = 144,
                 G = 238,
                 B = 144,

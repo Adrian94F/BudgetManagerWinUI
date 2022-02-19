@@ -22,6 +22,7 @@
             <ListView x:Name="MonthsListView"
                       IsItemClickEnabled="True"
                       ItemClick="MonthsListView_ItemClick"
+                      SelectionChanged="MonthsListView_SelectionChanged"
                       SelectionMode="Single"/>
         </ScrollViewer>
     </controls:DockPanel>
