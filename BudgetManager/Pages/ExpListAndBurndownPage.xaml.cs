@@ -32,5 +32,18 @@ namespace BudgetManager.Pages
             this.InitializeComponent();
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Left.Navigate(typeof(ExpListPage));
+            Right.Navigate(typeof(ExpBurndownPage));
+
+            (Left.Content as ExpListPage).ExpChanged += ExpListAndBurndownPage_ExpChanged;
+        }
+
+        private void ExpListAndBurndownPage_ExpChanged(object sender, EventArgs e)
+        {
+            // refresh burndown
+            Right.Navigate(typeof(ExpBurndownPage));
+        }
     }
 }

@@ -29,6 +29,8 @@ namespace BudgetManager.Pages
     {
         public string header = "Lista wydatków";
 
+        public event EventHandler ExpChanged;
+
         private Month month_ = AppData.CurrentMonth;
         private DateTime? date_ = null;
         private Category category_ = null;
@@ -134,6 +136,7 @@ namespace BudgetManager.Pages
                     ExpListSplitView.IsPaneOpen = false;
                 }
             }
+            ExpChanged(this, args);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

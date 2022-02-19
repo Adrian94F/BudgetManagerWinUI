@@ -25,6 +25,7 @@
                    Text="{x:Bind OriginalExpense.MonthlyExpenseString}"/>
         <TextBlock x:Name="categoryTextBlock"
                    Grid.Column="2"
+                   Margin="0, 0, 8, 0"
                    Text="{x:Bind OriginalExpense.Category.ToString()}"/>
         <TextBlock x:Name="commentTextBlock"
                    Grid.Column="3"
