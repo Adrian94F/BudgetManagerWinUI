@@ -52,7 +52,7 @@ namespace BudgetManager.Pages
         {
         }
 
-        private void DeleteCategory_Click(object sender, RoutedEventArgs e)
+        private async void DeleteCategory_Click(object sender, RoutedEventArgs e)
         {
             var item = (sender as FrameworkElement).DataContext as Category;
 
@@ -63,14 +63,14 @@ namespace BudgetManager.Pages
             }
             else
             {
-                var flyout = new Flyout()
+                var contentDialog = new ContentDialog()
                 {
-                    Content = new TextBlock()
-                    {
-                        Text = "Nie można usunąć kategorii, która jest w użytku."
-                    }
+                    Title = "Operacja niedozwolona",
+                    Content = "Nie można usunąć kategorii, która jest w użytku. Usuń operacje przypisane do tej kategorii lub zmień ich kategorię we wszystkich miesiącach, a następnie spróbuj ponownie.",
+                    CloseButtonText = "Ok",
+                    XamlRoot = AppData.navigationView.XamlRoot,
                 };
-                flyout.ShowAt(this);
+               await contentDialog.ShowAsync();
             }
         }
 
