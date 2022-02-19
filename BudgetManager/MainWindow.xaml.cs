@@ -155,10 +155,9 @@ namespace BudgetManager
         private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             ContentFrame.GoBack();
-            if (!ContentFrame.CanGoBack)
-            {
-                NavView.IsBackEnabled = false;
-            }
+            NavView.IsPaneToggleButtonVisible = true;
+            NavView.IsBackEnabled = false;
+            NavView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
             NavView.Header = (ContentFrame.Content as IPageWithInfo).header;
             Logger.Log("changed page to: " + NavView.Header);
         }

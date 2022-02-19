@@ -31,6 +31,8 @@
                             Loaded="NavView_Loaded"
                             PaneDisplayMode="Auto"
                             IsSettingsVisible="False"
+                            IsBackButtonVisible="Collapsed"
+                            IsPaneToggleButtonVisible="True"
                             BackRequested="NavView_BackRequested">
                 <NavigationView.MenuItems>
                     <NavigationViewItemHeader Content="Wybrany miesiąc"/>
