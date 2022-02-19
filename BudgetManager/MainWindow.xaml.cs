@@ -162,5 +162,10 @@ namespace BudgetManager
             NavView.Header = (ContentFrame.Content as IPageWithInfo).header;
             Logger.Log("changed page to: " + NavView.Header);
         }
+
+        private void Screenshot_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

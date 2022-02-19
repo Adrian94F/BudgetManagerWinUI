@@ -82,26 +82,37 @@ namespace BudgetManager.Pages
             var lastDay = "";
 
             ExpListListView.Items.Clear();
-            foreach (var exp in expenses.Reverse())
+            if (expenses.Count == 0)
             {
-                var day = exp.Date.ToString("d");
-                if (lastDay != day)
+                var item = new TextBlock()
                 {
-                    lastDay = day;
-                    var item = new ListViewHeaderItem()
-                    {
-                        Content = day,
-                        IsEnabled = false,
-                    };
-                    ExpListListView.Items.Add(item);
-                }
-
-                var expItem = new ExpenseListViewItem()
-                {
-                    OriginalExpense = exp,
+                    Text = "brak wydatków",
+                    FontStyle = Windows.UI.Text.FontStyle.Italic
                 };
+                ExpListListView.Items.Add(item);
+            }
+            else
+            {
+                foreach (var exp in expenses.Reverse())
+                {
+                    var day = exp.Date.ToString("d");
+                    if (lastDay != day)
+                    {
+                        lastDay = day;
+                        var item = new ListViewHeaderItem()
+                        {
+                            Content = day,
+                        };
+                        ExpListListView.Items.Add(item);
+                    }
 
-                ExpListListView.Items.Add(expItem);
+                    var expItem = new ExpenseListViewItem()
+                    {
+                        OriginalExpense = exp,
+                    };
+
+                    ExpListListView.Items.Add(expItem);
+                }
             }
         }
 
@@ -136,7 +147,8 @@ namespace BudgetManager.Pages
                     ExpListSplitView.IsPaneOpen = false;
                 }
             }
-            ExpChanged(this, args);
+
+            ExpChanged?.Invoke(this, args);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
