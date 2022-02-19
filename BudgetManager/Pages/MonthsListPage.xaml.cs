@@ -47,15 +47,11 @@ namespace BudgetManager.Pages
                 if (startYear != lastYear)
                 {
                     lastYear = startYear;
-                    var text = new TextBlock()
-                    {
-                        Text = startYear.ToString(),
-                        FontWeight = FontWeights.Bold
-                    };
-                    var item = new ListViewItem()
+                    var item = new ListViewHeaderItem()
                     {
                         Padding = new Thickness(20, 0, 0, 0),
-                        Content = text
+                        Content = startYear,
+                        IsEnabled = false
                     };
                     MonthsListView.Items.Add(item);
                 }

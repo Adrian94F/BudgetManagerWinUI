@@ -25,6 +25,7 @@
     <None Remove="Controls\ExpenseListViewItem.xaml" />
     <None Remove="Pages\DebugPage.xaml" />
     <None Remove="Pages\ExpBurndownPage.xaml" />
+    <None Remove="Pages\ExpListAndBurndownPage.xaml" />
     <None Remove="Pages\ExpListPage.xaml" />
     <None Remove="Pages\MonthDetailsPage.xaml" />
     <None Remove="Pages\MonthsHistoryPage.xaml" />
@@ -56,6 +57,12 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22504-preview" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\ExpListAndBurndownPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

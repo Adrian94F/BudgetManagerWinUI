@@ -33,6 +33,8 @@
                             IsSettingsVisible="False"
                             BackRequested="NavView_BackRequested">
                 <NavigationView.MenuItems>
+                    <NavigationViewItemHeader Content="Wybrany miesiąc"/>
+
                     <NavigationViewItem x:Uid="HomeNavItem"
                                         Content="Podsumowanie"
                                         Tag="home">
@@ -84,9 +86,11 @@
                             <FontIcon Glyph="&#xED43;"/>
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
-                    
+
                     <NavigationViewItemSeparator/>
                     
+                    <NavigationViewItemHeader Content="Wszystkie miesiące"/>
+
                     <NavigationViewItem x:Uid="HistoryNavItem"
                                         Content="Historia"
                                         Tag="history">

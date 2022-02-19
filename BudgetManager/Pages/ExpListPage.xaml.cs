@@ -86,12 +86,12 @@ namespace BudgetManager.Pages
                 if (lastDay != day)
                 {
                     lastDay = day;
-                    var text = new TextBlock()
+                    var item = new ListViewHeaderItem()
                     {
-                        Text = day,
-                        FontWeight = FontWeights.Bold
+                        Content = day,
+                        IsEnabled = false,
                     };
-                    ExpListListView.Items.Add(text);
+                    ExpListListView.Items.Add(item);
                 }
 
                 var expItem = new ExpenseListViewItem()

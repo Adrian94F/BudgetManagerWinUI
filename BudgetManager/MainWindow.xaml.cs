@@ -60,8 +60,9 @@ namespace BudgetManager
             // set the initial SelectedItem 
             foreach (NavigationViewItemBase item in NavView.MenuItems)
             {
-                if (item is NavigationViewItem && item.Tag.ToString().Equals("home")
+                if (item is NavigationViewItem && item.Tag.ToString().Equals("home"))
                 {
+                    NavView.SelectedItem = item;
                     NavView_Navigate(item as NavigationViewItem);
                     break;
                 }
@@ -97,6 +98,10 @@ namespace BudgetManager
 
                 case "exp_burndown":
                     ContentFrame.Navigate(typeof(ExpBurndownPage));
+                    break;
+
+                case "exp_list_and_burndown":
+                    ContentFrame.Navigate(typeof(ExpListAndBurndownPage));
                     break;
 
                 case "month_details":
