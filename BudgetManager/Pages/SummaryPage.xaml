@@ -11,7 +11,14 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <!-- burndown -->
-            
+            <Frame x:Name="BurndownFrame"
+                   Height="250"
+                   Margin="0, 0, 0, 16">
+                <Frame.Content>
+                    <local:ExpBurndownPage Simplified="True"/>
+                </Frame.Content>
+            </Frame>
+
             <controls:WrapPanel HorizontalAlignment="Center">
                 <!-- incomes -->
                 <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
