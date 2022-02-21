@@ -40,6 +40,7 @@ namespace BudgetManager.Pages
         public ExpListPage()
         {
             this.InitializeComponent();
+            FillWithExpenses();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
