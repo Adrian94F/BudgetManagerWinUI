@@ -5,9 +5,13 @@
     xmlns:local="using:BudgetManager.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:livecharts="using:LiveChartsCore.SkiaSharpView.WinUI"
     mc:Ignorable="d">
 
     <Grid>
-
+        <livecharts:CartesianChart x:Name="BurndownChart"
+                                   Series="{x:Bind Series}"
+                                   XAxes="{x:Bind XAxis}"
+                                   YAxes="{x:Bind YAxis}"/>
     </Grid>
 </Page>
