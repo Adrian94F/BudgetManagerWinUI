@@ -14,10 +14,18 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Frame x:Name="Left"
-               Grid.Column="0"/>
+        <Frame x:Name="ListFrame"
+               Grid.Column="0">
+            <Frame.Content>
+                <local:ExpListPage/>
+            </Frame.Content>
+        </Frame>
 
-        <Frame x:Name="Right"
-               Grid.Column="1"/>
+        <Frame x:Name="BurndownFrame"
+               Grid.Column="1">
+            <Frame.Content>
+                <local:ExpBurndownPage Simplified="True"/>
+            </Frame.Content>
+        </Frame>
     </Grid>
 </Page>

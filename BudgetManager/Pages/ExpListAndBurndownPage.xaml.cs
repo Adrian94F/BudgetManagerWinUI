@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -34,16 +35,13 @@ namespace BudgetManager.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Left.Navigate(typeof(ExpListPage));
-            Right.Navigate(typeof(ExpBurndownPage));
-
-            (Left.Content as ExpListPage).ExpChanged += ExpListAndBurndownPage_ExpChanged;
+            (ListFrame.Content as ExpListPage).ExpChanged += ExpListAndBurndownPage_ExpChanged;
         }
 
         private void ExpListAndBurndownPage_ExpChanged(object sender, EventArgs e)
         {
             // refresh burndown
-            Right.Navigate(typeof(ExpBurndownPage));
+            BurndownFrame.Navigate(typeof(ExpBurndownPage), null, new SuppressNavigationTransitionInfo());
         }
     }
 }
