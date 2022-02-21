@@ -80,6 +80,13 @@ namespace BudgetManager
             }
         }
 
+        private bool IsSelectedMonthPage()
+        {
+            var item = NavView.SelectedItem as NavigationViewItem;
+            string[] selectedMonthTags = { "home", "table", "exp_list", "exp_burndown", "exp_list_and_burndown", "month_details" };
+            return selectedMonthTags.Contains(item.Tag);
+        }
+
         private void NavView_Navigate(NavigationViewItem item)
         {
             switch (item.Tag)
@@ -113,17 +120,23 @@ namespace BudgetManager
                     break;
 
                 case "prev_month":
-                    AppData.SelectPreviousMonth();
-                    ContentFrame.Navigate(ContentFrame.Content.GetType(),
-                                          null,
-                                          new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+                    if (IsSelectedMonthPage())
+                    {
+                        AppData.SelectPreviousMonth();
+                        ContentFrame.Navigate(ContentFrame.Content.GetType(),
+                                              null,
+                                              new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+                    }
                     break;
 
                 case "next_month":
-                    AppData.SelectNextMonth();
-                    ContentFrame.Navigate(ContentFrame.Content.GetType(),
-                                          null,
-                                          new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    if (IsSelectedMonthPage())
+                    {
+                        AppData.SelectNextMonth();
+                        ContentFrame.Navigate(ContentFrame.Content.GetType(),
+                                              null,
+                                              new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    }
                     break;
 
                 case "months_list":
