@@ -32,8 +32,8 @@ namespace BudgetManager.Pages
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
-        private readonly static int WidthOfMonth = 100;
-        private readonly static int nOfMonths = AppData.months.Count - 1;  // omit last (current) month
+        private static readonly int WidthOfMonth = 100;
+        private static readonly int nOfMonths = AppData.months.Count - 1;  // omit last (current) month
 
         public IEnumerable<ISeries> Series { get; set; }
         public IEnumerable<ICartesianAxis> XAxis { get; set; }
@@ -80,7 +80,7 @@ namespace BudgetManager.Pages
             return labels;
         }
 
-        private ObservableCollection<ISeries> GetSeries()
+        private static ObservableCollection<ISeries> GetSeries()
         {
             // incomes, expenses and balances
             var monthIncomes = new double[nOfMonths];
