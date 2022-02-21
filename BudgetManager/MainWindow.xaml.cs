@@ -114,12 +114,16 @@ namespace BudgetManager
 
                 case "prev_month":
                     AppData.SelectPreviousMonth();
-                    ContentFrame.Navigate(ContentFrame.Content.GetType());
+                    ContentFrame.Navigate(ContentFrame.Content.GetType(),
+                                          null,
+                                          new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
                     break;
 
                 case "next_month":
                     AppData.SelectNextMonth();
-                    ContentFrame.Navigate(ContentFrame.Content.GetType());
+                    ContentFrame.Navigate(ContentFrame.Content.GetType(),
+                                          null,
+                                          new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                     break;
 
                 case "months_list":
@@ -154,7 +158,7 @@ namespace BudgetManager
 
         private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
-            ContentFrame.GoBack();
+            ContentFrame.GoBack(new DrillInNavigationTransitionInfo());
             NavView.IsPaneToggleButtonVisible = true;
             NavView.IsBackEnabled = false;
             NavView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;

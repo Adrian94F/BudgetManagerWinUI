@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -116,7 +117,7 @@ namespace BudgetManager.Pages
             AppData.navigationView.IsBackEnabled = true;
             AppData.navigationView.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible;
             AppData.navigationView.IsPaneToggleButtonVisible = false;
-            AppData.mainFrame.Navigate(typeof(ExpListPage), par);
+            AppData.mainFrame.Navigate(typeof(ExpListPage), par, new DrillInNavigationTransitionInfo());
             AppData.navigationView.Header = (AppData.mainFrame.Content as IPageWithInfo).header;
         }
 
@@ -320,7 +321,7 @@ namespace BudgetManager.Pages
         private static void AddWeekendsRectangles(Grid grid, Month month)
         {
             var row = 0;
-            var rowSpan = grid.RowDefinitions.Count + 1;
+            var rowSpan = grid.RowDefinitions.Count;
             var col = 0;
             var colSpan = 1;
             var fill = new SolidColorBrush(new Windows.UI.Color() {
@@ -349,7 +350,7 @@ namespace BudgetManager.Pages
                 return;
             }
             var row = 0;
-            var rowSpan = grid.RowDefinitions.Count + 1;
+            var rowSpan = grid.RowDefinitions.Count;
             var col = (DateTime.Now - month.StartDate).Days;
             var colSpan = 1;
             var fill = new SolidColorBrush(new Windows.UI.Color()
