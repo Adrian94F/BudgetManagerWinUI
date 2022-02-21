@@ -10,6 +10,8 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
+            <!-- burndown -->
+            
             <controls:WrapPanel HorizontalAlignment="Center">
                 <!-- incomes -->
                 <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
@@ -241,6 +243,8 @@
                     </Grid>
                 </Border>
             </controls:WrapPanel>
+            
+            <!-- categories radio chart -->
         </StackPanel>
     </ScrollViewer>
 </Page>
