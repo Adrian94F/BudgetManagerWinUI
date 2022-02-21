@@ -54,21 +54,12 @@ namespace BudgetManager.Pages
         private enum ExpensesType
         {
             Daily,
+            Monthly,
             All
         };
 
         public IEnumerable<ISeries> Series { get; set; }
         public IEnumerable<ICartesianAxis> XAxis { get; set; }
-            = new Axis[] {
-                new Axis
-                {
-                    Labels = GetLabels(),
-                    LabelsRotation = 0,
-                    ShowSeparatorLines = true,
-                    MinStep = 1,
-                    ForceStepToMin = true,
-                }
-            };
         public IEnumerable<ICartesianAxis> YAxis { get; set; }
             = new Axis[] {
                 new Axis
@@ -89,40 +80,39 @@ namespace BudgetManager.Pages
             return labels;
         }
 
-        private static double[] GetDailyExpenses()
+        private static double?[] GetSumsOfExpenses(ExpensesType type)
         {
-            var dailyExpenses = new double[nOfDays];
+            var expenses = new double?[nOfDays];
+            expenses[0] = null;
             for (var i = 1; i < nOfDays; i++)
             {
-                dailyExpenses[i] = Math.Round((double)AppData.CurrentMonth.GetSumOfDailyExpensesOfDate(AppData.CurrentMonth.StartDate.AddDays(i - 1)), 2);
+                var date = AppData.CurrentMonth.StartDate.AddDays(i - 1);
+                var sum = type == ExpensesType.Daily ? (double)AppData.CurrentMonth.GetSumOfDailyExpensesOfDate(date)
+                                                     : (double)AppData.CurrentMonth.GetSumOfMonthlyExpensesOfDate(date);
+                sum = Math.Round(sum, 2);
+                expenses[i] = sum == 0 ? null : sum;
             }
-            return dailyExpenses;
-        }
-        private static double[] GetMonthlyExpenses()
-        {
-            var monthlyExpenses = new double[nOfDays];
-            monthlyExpenses[0] = Math.Round((double)AppData.CurrentMonth.GetSumOfMonthlyExpenses(), 2);
-            return monthlyExpenses;
+            return expenses;
         }
 
-        private static StackedColumnSeries<double> GetColumnSeries(ExpensesSeries series)
+        private static StackedColumnSeries<double?> GetColumnSeries(ExpensesSeries series)
         {
             var name = "";
-            var values = new double[] { };
+            var values = new double?[] { };
             switch (series)
             {
                 case ExpensesSeries.DailySums:
-                    name = "Codzienne";
-                    values = GetDailyExpenses();
+                    name = "Suma codziennych";
+                    values = GetSumsOfExpenses(ExpensesType.Daily);
                     break;
 
                 case ExpensesSeries.MonthlySum:
-                    name = "Miesięczne";
-                    values = GetMonthlyExpenses();
+                    name = "Suma miesięcznych";
+                    values = GetSumsOfExpenses(ExpensesType.Monthly);
                     break;
             }
 
-            return new StackedColumnSeries<double>
+            return new StackedColumnSeries<double?>
             {
                 Name = name,
                 Values = values,
@@ -232,8 +222,8 @@ namespace BudgetManager.Pages
         {
             var series = new ObservableCollection<ISeries>();
 
-            series.Add(GetColumnSeries(ExpensesSeries.MonthlySum));
             series.Add(GetColumnSeries(ExpensesSeries.DailySums));
+            series.Add(GetColumnSeries(ExpensesSeries.MonthlySum));
 
             if (!onlyDailyExpenses)
             {
@@ -247,9 +237,24 @@ namespace BudgetManager.Pages
             return series;
         }
 
+        private static IEnumerable<ICartesianAxis> GetXAxis(bool simplified)
+        {
+            return new Axis[] {
+                new Axis
+                {
+                    Labels = GetLabels(),
+                    LabelsRotation = 0,
+                    ShowSeparatorLines = true,
+                    MinStep = 1,
+                    ForceStepToMin = !simplified,
+                }
+            };
+        }
+
         private void Plot()
         {
             Series = GetSeries(Simplified);
+            XAxis = GetXAxis(Simplified);
         }
     }
 }
