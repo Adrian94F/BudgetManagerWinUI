@@ -2,6 +2,8 @@
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView.Painting.Effects;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -9,6 +11,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -89,8 +92,7 @@ namespace BudgetManager.Pages
                 var date = AppData.CurrentMonth.StartDate.AddDays(i - 1);
                 var sum = type == ExpensesType.Daily ? (double)AppData.CurrentMonth.GetSumOfDailyExpensesOfDate(date)
                                                      : (double)AppData.CurrentMonth.GetSumOfMonthlyExpensesOfDate(date);
-                sum = Math.Round(sum, 2);
-                expenses[i] = sum == 0 ? null : sum;
+                expenses[i] = Math.Round(sum, 2) == 0 ? null : Math.Round(sum, 0);
             }
             return expenses;
         }
@@ -99,16 +101,23 @@ namespace BudgetManager.Pages
         {
             var name = "";
             var values = new double?[] { };
+            var fillColor = new SKColor(180, 180, 180);
+            var strokeColor = new SKColor(100, 100, 100);
+            var strokeThickness = 2.0f;
             switch (series)
             {
                 case ExpensesSeries.DailySums:
                     name = "Suma codziennych";
                     values = GetSumsOfExpenses(ExpensesType.Daily);
+                    fillColor = new SKColor(255, 215, 0);
+                    strokeColor = new SKColor(230, 194, 0);
                     break;
 
                 case ExpensesSeries.MonthlySum:
                     name = "Suma miesięcznych";
                     values = GetSumsOfExpenses(ExpensesType.Monthly);
+                    fillColor = new SKColor(230, 194, 0);
+                    strokeColor = new SKColor(204, 172, 0);
                     break;
             }
 
@@ -116,6 +125,12 @@ namespace BudgetManager.Pages
             {
                 Name = name,
                 Values = values,
+                Fill = new SolidColorPaint(fillColor),
+                Stroke = new SolidColorPaint
+                {
+                    Color = strokeColor,
+                    StrokeThickness = strokeThickness,
+                },
             };
         }
 
@@ -152,7 +167,7 @@ namespace BudgetManager.Pages
                         break;
                 }
                 yesterdaySum = burnValues[i];
-                burnValues[i] = Math.Round(burnValues[i], 2);
+                burnValues[i] = Math.Round(burnValues[i], 0);
             }
             return burnValues;
         }
@@ -166,7 +181,7 @@ namespace BudgetManager.Pages
             {
                 var a = -(incomeSum - plannedSavings) / (nOfDays - 1);
                 var b = incomeSum;
-                avgBurnValues[i] = Math.Round(a * i + b, 2);
+                avgBurnValues[i] = Math.Round(a * i + b, 0);
             }
             return avgBurnValues;
         }
@@ -175,34 +190,35 @@ namespace BudgetManager.Pages
         {
             var name = "";
             var values = new double[] { };
-            //var stroke = Brushes.Black;
-            //var dashArray = new DoubleCollection();
-            //var fill = Brushes.Transparent;
-            //var pointGeometry = DefaultGeometries.None;
-            var lineSmoothness = 0;
+            var color = new SKColor(180, 180, 180);
+            var strokeThickness = 2.0f;
+            var strokeDashArray = new float[] { 3 * strokeThickness, 2 * strokeThickness };
+            var effect = new DashEffect(new float[] { });
             switch (series)
             {
                 case ExpensesSeries.Burndown:
                     name = "Wszystkie";
                     values = GetBurndown(ExpensesType.All);
-                    //stroke = Brushes.YellowGreen;
-                    break;
-                case ExpensesSeries.AverageBurndown:
-                    name = "Wszystkie (plan)";
-                    values = GetAverageBurndown(ExpensesType.All);
-                    //stroke = Brushes.YellowGreen;
-                    //dashArray = new DoubleCollection { 2 };
+                    color = new SKColor(154, 205, 50);
                     break;
                 case ExpensesSeries.BurndownWithoutMonthlyExpenses:
                     name = "Codzienne";
                     values = GetBurndown(ExpensesType.Daily);
-                    //stroke = Brushes.DodgerBlue;
+                    color = new SKColor(30, 144, 255);
+                    break;
+                case ExpensesSeries.AverageBurndown:
+                    name = "Wszystkie (plan)";
+                    values = GetAverageBurndown(ExpensesType.All);
+                    effect = new DashEffect(strokeDashArray);
+                    strokeThickness = 1.5f;
+                    color = new SKColor(154, 205, 50);
                     break;
                 case ExpensesSeries.AverageBurndownWithoutMonthlyExpenses:
                     name = "Codzienne (plan)";
                     values = GetAverageBurndown(ExpensesType.Daily);
-                    //stroke = Brushes.DodgerBlue;
-                    //dashArray = new DoubleCollection { 2 };
+                    effect = new DashEffect(strokeDashArray);
+                    strokeThickness = 1.5f;
+                    color = new SKColor(30, 144, 255);
                     break;
             }
 
@@ -210,10 +226,15 @@ namespace BudgetManager.Pages
             {
                 Name = name,
                 Values = values,
-                //PointGeometry = pointGeometry,
-                LineSmoothness = lineSmoothness,
-                //Stroke = stroke,
-                //StrokeDashArray = dashArray,
+                GeometrySize = 0,
+                GeometryStroke = null,
+                GeometryFill = null,
+                Stroke = new SolidColorPaint
+                {
+                    Color = color,
+                    StrokeThickness = strokeThickness,
+                    PathEffect = effect,
+                },
                 Fill = null
             };
         }
