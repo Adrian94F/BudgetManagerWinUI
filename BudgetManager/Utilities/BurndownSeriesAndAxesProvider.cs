@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BudgetManager.Utilities
 {
-    internal static class BurndownChartDataProvider
+    internal static class BurndownSeriesAndAxesProvider
     {
         private static readonly int nOfDays = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 2;
 
@@ -220,7 +220,7 @@ namespace BudgetManager.Utilities
             return series;
         }
 
-        public static IEnumerable<ICartesianAxis> GetXAxis(bool simplified)
+        public static IEnumerable<ICartesianAxis> GetXAxes(bool simplified)
         {
             return new Axis[] {
                 new Axis
@@ -234,7 +234,7 @@ namespace BudgetManager.Utilities
             };
         }
 
-        public static IEnumerable<ICartesianAxis> GetYAxis()
+        public static IEnumerable<ICartesianAxis> GetYAxes()
         {
             return new Axis[] {
                 new Axis

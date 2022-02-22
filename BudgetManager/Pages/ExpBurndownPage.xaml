@@ -11,7 +11,7 @@
     <Grid>
         <livecharts:CartesianChart x:Name="BurndownChart"
                                    Series="{x:Bind Series}"
-                                   XAxes="{x:Bind XAxis}"
-                                   YAxes="{x:Bind YAxis}"/>
+                                   XAxes="{x:Bind XAxes}"
+                                   YAxes="{x:Bind YAxes}"/>
     </Grid>
 </Page>

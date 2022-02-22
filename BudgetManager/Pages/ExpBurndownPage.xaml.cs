@@ -45,14 +45,14 @@ namespace BudgetManager.Pages
         public bool Simplified { get; set; }
 
         public IEnumerable<ISeries> Series { get; set; }
-        public IEnumerable<ICartesianAxis> XAxis { get; set; }
-        public IEnumerable<ICartesianAxis> YAxis { get; set; }
+        public IEnumerable<ICartesianAxis> XAxes { get; set; }
+        public IEnumerable<ICartesianAxis> YAxes { get; set; }
 
         private void Plot()
         {
-            Series = BurndownChartDataProvider.GetSeries(Simplified);
-            XAxis = BurndownChartDataProvider.GetXAxis(Simplified);
-            YAxis = BurndownChartDataProvider.GetYAxis();
+            Series = BurndownSeriesAndAxesProvider.GetSeries(Simplified);
+            XAxes = BurndownSeriesAndAxesProvider.GetXAxes(Simplified);
+            YAxes = BurndownSeriesAndAxesProvider.GetYAxes();
         }
     }
 }
