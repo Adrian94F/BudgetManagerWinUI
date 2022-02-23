@@ -54,6 +54,35 @@ namespace BudgetManager.Pages
             }
         }
 
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (AppData.CurrentMonth != null)
+            {
+                await Task.Run(() => CountSums());
+                ShowTableLabels();
+                FillTableWithSumsAndlabels();
+                LoadingControl.IsLoading = false;
+            }
+        }
+        private void ExpensesGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ScrollToToday();
+        }
+
+        private void ScrollToToday()
+        {
+            if (AppData.CurrentMonth == null)
+                return;
+
+            var fullColumnsAfterToday = 1;
+            var lastVisibleColumnPosition = columnWidth * ((DateTime.Today - AppData.CurrentMonth.StartDate).Days + fullColumnsAfterToday);
+            var scrollViewerWidth = ExpensesScrollViewer.ActualWidth;
+            var remainder = (scrollViewerWidth - 1) % columnWidth + 1;
+            var rightTodayMargin = columnWidth + remainder;
+            var offset = lastVisibleColumnPosition - scrollViewerWidth + rightTodayMargin;
+            ExpensesScrollViewer.ScrollToHorizontalOffset(offset);
+        }
+
         private void ScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             var scrolledObject = sender as ScrollViewer;
@@ -75,17 +104,6 @@ namespace BudgetManager.Pages
                 {
                     ExpensesScrollViewer.ScrollToVerticalOffset(scrolledObject.VerticalOffset);
                 }
-            }
-        }
-
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (AppData.CurrentMonth != null)
-            {
-                await Task.Run(() => CountSums());
-                ShowTableLabels();
-                FillTableWithSumsAndlabels();
-                LoadingControl.IsLoading = false;
             }
         }
 
@@ -373,5 +391,6 @@ namespace BudgetManager.Pages
             });
             AddRectangleAt(row, col, rowSpan, colSpan, fill, grid);
         }
+
     }
 }
