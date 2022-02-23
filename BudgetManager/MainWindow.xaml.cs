@@ -119,6 +119,10 @@ namespace BudgetManager
                     ContentFrame.Navigate(typeof(MonthsHistoryPage));
                     break;
 
+                case "history_quarters":
+                    ContentFrame.Navigate(typeof(MonthsHistoryPage));
+                    break;
+
                 case "prev_month":
                     if (IsSelectedMonthPage())
                     {

@@ -90,12 +90,20 @@
                     </NavigationViewItem>
 
                     <NavigationViewItemSeparator/>
-                    
+
                     <NavigationViewItemHeader Content="Wszystkie miesiące"/>
 
                     <NavigationViewItem x:Uid="HistoryNavItem"
-                                        Content="Historia"
+                                        Content="Historia miesięcy"
                                         Tag="history">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE81C;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+
+                    <NavigationViewItem x:Uid="HistoryQuartersNavItem"
+                                        Content="Kwartały"
+                                        Tag="history_quarters">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE81C;"/>
                         </NavigationViewItem.Icon>

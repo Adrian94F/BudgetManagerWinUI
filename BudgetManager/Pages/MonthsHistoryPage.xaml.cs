@@ -28,7 +28,7 @@ namespace BudgetManager.Pages
     /// </summary>
     public sealed partial class MonthsHistoryPage : Page, IPageWithInfo
     {
-        public string header = "Historia";
+        public string header = "Historia miesięcy";
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
