@@ -46,8 +46,6 @@ namespace BudgetManager.Pages
                 var startDate = month.StartDate.ToString("dd.MM.yyyy");
                 var endDate = month.EndDate.ToString("dd.MM.yyyy");
                 header += " " + startDate + "-" + endDate;
-
-                Plot();
             }
         }
 
@@ -59,9 +57,18 @@ namespace BudgetManager.Pages
 
         private void Plot()
         {
-            Series = BurndownSeriesAndAxesProvider.GetSeries(Simplified);
-            XAxes = BurndownSeriesAndAxesProvider.GetXAxes(Simplified);
-            YAxes = BurndownSeriesAndAxesProvider.GetYAxes();
+            BurndownChart.Series = BurndownSeriesAndAxesProvider.GetSeries(Simplified);
+            BurndownChart.XAxes = BurndownSeriesAndAxesProvider.GetXAxes(Simplified);
+            BurndownChart.YAxes = BurndownSeriesAndAxesProvider.GetYAxes();
+            if (!Simplified)
+            {
+                BurndownChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Plot();
         }
     }
 }
