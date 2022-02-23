@@ -45,32 +45,42 @@ namespace BudgetManager.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter != null)
+            if (AppData.CurrentMonth != null)
             {
-                if (e.Parameter is DateTime date)
+                if (e.Parameter != null)
                 {
-                    date_ = date;
-                }
-                else if (e.Parameter is Category category)
-                {
-                    category_ = category;  // AppData.categories.Where( cat => cat.Name.Equals(category) ).First();
-                }
-                else if (e.Parameter is Tuple<DateTime, Category> dateAndCategory)
-                {
-                    date_ = dateAndCategory.Item1;
-                    category_ = dateAndCategory.Item2;
-                }
+                    if (e.Parameter is DateTime date)
+                    {
+                        date_ = date;
+                    }
+                    else if (e.Parameter is Category category)
+                    {
+                        category_ = category;  // AppData.categories.Where( cat => cat.Name.Equals(category) ).First();
+                    }
+                    else if (e.Parameter is Tuple<DateTime, Category> dateAndCategory)
+                    {
+                        date_ = dateAndCategory.Item1;
+                        category_ = dateAndCategory.Item2;
+                    }
 
-                if (date_ != null)
-                {
-                    header += " w dniu " + date_.Value.ToString("dd.MM.yyyy");
+                    if (date_ != null)
+                    {
+                        header += " w dniu " + date_.Value.ToString("dd.MM.yyyy");
+                    }
+                    if (category_ != null)
+                    {
+                        header += " z kategorii " + category_.Name;
+                    }
                 }
-                if (category_ != null)
+                else
                 {
-                    header += " z kategorii " + category_.Name;
+                    var month = AppData.CurrentMonth;
+                    var startDate = month.StartDate.ToString("dd.MM.yyyy");
+                    var endDate = month.EndDate.ToString("dd.MM.yyyy");
+                    header += " " + startDate + "-" + endDate;
                 }
+                FillWithExpenses();
             }
-            FillWithExpenses();
         }
 
         private void FillWithExpenses()

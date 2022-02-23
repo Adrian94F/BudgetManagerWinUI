@@ -36,7 +36,7 @@ namespace BudgetManager.Pages
 
         public void FillPage()
         {
-            if (AppData.months != null && AppData.months.Count > 0)
+            if (AppData.CurrentMonth != null)
             {
                 var month = AppData.CurrentMonth;
                 FillSummaryGrid(month);
@@ -62,7 +62,7 @@ namespace BudgetManager.Pages
             var todayExpenses = month.GetSumOfDailyExpensesOfDate(DateTime.Today);
             var todayExpensesPercent = estimatedExpense != 0 ? todayExpenses / estimatedExpense * 100 : -1;
 
-            header += " dla " + startDate + "-" + endDate;
+            header += " " + startDate + "-" + endDate;
             NetIncomeTextBlock.Text = net.ToString("F") + " zł";
             AddIncomeTextBlock.Text = add.ToString("F") + " zł";
             IncomeSumTextBlock.Text = incSum.ToString("F") + " zł";

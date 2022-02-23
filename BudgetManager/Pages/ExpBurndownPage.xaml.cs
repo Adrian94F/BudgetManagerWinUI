@@ -39,7 +39,16 @@ namespace BudgetManager.Pages
         public ExpBurndownPage()
         {
             this.InitializeComponent();
-            Plot();
+
+            if (AppData.CurrentMonth != null)
+            {
+                var month = AppData.CurrentMonth;
+                var startDate = month.StartDate.ToString("dd.MM.yyyy");
+                var endDate = month.EndDate.ToString("dd.MM.yyyy");
+                header += " " + startDate + "-" + endDate;
+
+                Plot();
+            }
         }
 
         public bool Simplified { get; set; }

@@ -33,6 +33,7 @@ namespace BudgetManager.Pages
         public MonthDetailsPage()
         {
             this.InitializeComponent();
+
             FillPage();
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using BudgetManager.Models;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -31,6 +32,14 @@ namespace BudgetManager.Pages
         public ExpListAndBurndownPage()
         {
             this.InitializeComponent();
+
+            if (AppData.CurrentMonth != null)
+            {
+                var month = AppData.CurrentMonth;
+                var startDate = month.StartDate.ToString("dd.MM.yyyy");
+                var endDate = month.EndDate.ToString("dd.MM.yyyy");
+                header += " " + startDate + "-" + endDate;
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

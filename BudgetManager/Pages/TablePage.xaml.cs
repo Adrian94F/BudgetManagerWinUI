@@ -27,7 +27,7 @@ namespace BudgetManager.Pages
     /// </summary>
     public sealed partial class TablePage : Page, IPageWithInfo
     {
-        public string header = "Tabela";
+        public string header = "Tabela wydatków";
 
         private static List<double> dateSums;
         private static List<double> catSums;
@@ -44,6 +44,14 @@ namespace BudgetManager.Pages
         public TablePage()
         {
             this.InitializeComponent();
+
+            if (AppData.CurrentMonth != null)
+            {
+                var month = AppData.CurrentMonth;
+                var startDate = month.StartDate.ToString("dd.MM.yyyy");
+                var endDate = month.EndDate.ToString("dd.MM.yyyy");
+                header += " " + startDate + "-" + endDate;
+            }
         }
 
         private void ScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
@@ -72,10 +80,13 @@ namespace BudgetManager.Pages
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() => CountSums());
-            ShowTableLabels();
-            FillTableWithSumsAndlabels();
-            LoadingControl.IsLoading = false;
+            if (AppData.CurrentMonth != null)
+            {
+                await Task.Run(() => CountSums());
+                ShowTableLabels();
+                FillTableWithSumsAndlabels();
+                LoadingControl.IsLoading = false;
+            }
         }
 
         private void ShowTableLabels()
