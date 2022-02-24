@@ -84,7 +84,7 @@ namespace BudgetManager.Utilities
                     // fields
                     expense.Add(expenseValueKey, exp.Value);
                     expense.Add(expenseDateKey, exp.Date);
-                    expense.Add(expenseCommentKey, exp.Comment);
+                    expense.Add(expenseCommentKey, exp.Comment ?? "");
                     expense.Add(expenseMonthlyExpenseKey, exp.MonthlyExpense.ToString());
                     expense.Add(expenseCategoryKey, exp.Category.Name);
 
@@ -101,8 +101,8 @@ namespace BudgetManager.Utilities
                 WriteIndented = false,
                 NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
             };
-            var jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(output, options);
-            File.WriteAllBytes(AppSettings.dataPath, jsonUtf8Bytes);
+            var jsonString = JsonSerializer.Serialize(output, options);
+            File.WriteAllTextAsync(AppSettings.dataPath, jsonString);
         }
 
         public static string Read()
@@ -205,7 +205,7 @@ namespace BudgetManager.Utilities
 
                         var value = Decimal.Parse(expenseFromJson[expenseValueKey].ToString(), CultureInfo.InvariantCulture);
                         var date = DateTime.Parse(expenseFromJson[expenseDateKey].ToString());
-                        var comment = expenseFromJson[expenseCommentKey].ToString();
+                        var comment = expenseFromJson[expenseCommentKey]?.ToString();
                         var monthlyExpense = expenseFromJson[expenseMonthlyExpenseKey].ToString().Equals("True")
                             ? true
                             : false;
