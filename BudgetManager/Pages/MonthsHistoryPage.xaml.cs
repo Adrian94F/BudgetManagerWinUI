@@ -29,15 +29,15 @@ namespace BudgetManager.Pages
     /// </summary>
     public sealed partial class MonthsHistoryPage : Page, IPageWithInfo
     {
-        public string header = "Historia miesięcy";
+        public string header = "Historia miesięczna";
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
-        private static readonly int WidthOfMonth = 100;
+        private static readonly int WidthOfMonth = 120;
 
-        public IEnumerable<ISeries> Series { get; set; } = HistoryProvider.GetSeries();
-        public IEnumerable<ICartesianAxis> XAxis { get; set; } = HistoryProvider.GetXAxes();
-        public IEnumerable<ICartesianAxis> YAxis { get; set; } = HistoryProvider.GetYAxes();
+        public IEnumerable<ISeries> Series { get; set; } = MonthsHistoryProvider.GetSeries();
+        public IEnumerable<ICartesianAxis> XAxis { get; set; } = MonthsHistoryProvider.GetXAxes();
+        public IEnumerable<ICartesianAxis> YAxis { get; set; } = MonthsHistoryProvider.GetYAxes();
 
         public MonthsHistoryPage()
         {
@@ -47,7 +47,7 @@ namespace BudgetManager.Pages
 
         private void ChangeGridWidth()
         {
-            HistoryChartGrid.Width = WidthOfMonth * AppData.Months.Count - 1;
+            HistoryChartGrid.MinWidth = WidthOfMonth * AppData.Months.Count - 1;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -108,7 +108,7 @@
                     <NavigationViewItemHeader Content="Wszystkie miesiące"/>
 
                     <NavigationViewItem x:Uid="HistoryNavItem"
-                                        Content="Historia miesięcy"
+                                        Content="Historia miesięczna"
                                         Tag="history">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE81C;"/>
@@ -116,7 +116,7 @@
                     </NavigationViewItem>
 
                     <NavigationViewItem x:Uid="HistoryQuartersNavItem"
-                                        Content="Kwartały"
+                                        Content="Historia kwartalna"
                                         Tag="history_quarters">
                         <NavigationViewItem.Icon>
                             <FontIcon Glyph="&#xE81C;"/>

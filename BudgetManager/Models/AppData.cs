@@ -11,6 +11,7 @@ namespace BudgetManager.Models
     static class AppData
     {
         public static SortedSet<Month> Months = new SortedSet<Month>();
+        public static SortedSet<Quarter> Quarters { get => GetQuarters(); }
         public static HashSet<Category> Categories = new HashSet<Category>();
 
         public static NavigationView NavigationView;
@@ -34,6 +35,36 @@ namespace BudgetManager.Models
         public static bool IsNotEmpty()
         {
             return Months.Count > 0;
+        }
+
+        public static SortedSet<Quarter> GetQuarters()
+        {
+            var quarters = new SortedSet<Quarter>();
+            var monthEnumerator = Months.GetEnumerator();
+            
+            while (monthEnumerator.MoveNext())
+            {
+                var month = monthEnumerator.Current;
+                if (month.StartDate.Month == 1 ||
+                    month.StartDate.Month == 4 ||
+                    month.StartDate.Month == 7 ||
+                    month.StartDate.Month == 10)
+                {
+                    var list = new SortedSet<Month>();
+                    list.Add(month);
+                    if (monthEnumerator.MoveNext())
+                    {
+                        list.Add(monthEnumerator.Current);
+                        if (monthEnumerator.MoveNext())
+                        {
+                            list.Add(monthEnumerator.Current);
+                        }
+                    }
+                    quarters.Add(new Quarter(list));
+                }
+            }
+
+            return quarters;
         }
 
         public static bool IsCategoryRemovable(Category cat)

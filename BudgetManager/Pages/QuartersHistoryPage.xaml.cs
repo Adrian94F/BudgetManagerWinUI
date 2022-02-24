@@ -27,7 +27,7 @@ namespace BudgetManager.Pages
     /// </summary>
     public sealed partial class QuartersHistoryPage : Page, IPageWithInfo
     {
-        public string header = "Historia kwartałów";
+        public string header = "Historia kwartalna";
 
         private static readonly int WidthOfQuarter = 100;
 
@@ -39,13 +39,13 @@ namespace BudgetManager.Pages
             ChangeGridWidth();
         }
 
-        public IEnumerable<ISeries> Series { get; set; } = HistoryProvider.GetSeries();
-        public IEnumerable<ICartesianAxis> XAxis { get; set; } = HistoryProvider.GetXAxes();
-        public IEnumerable<ICartesianAxis> YAxis { get; set; } = HistoryProvider.GetYAxes();
+        public IEnumerable<ISeries> Series { get; set; } = QuartersHistoryProvider.GetSeries();
+        public IEnumerable<ICartesianAxis> XAxis { get; set; } = QuartersHistoryProvider.GetXAxes();
+        public IEnumerable<ICartesianAxis> YAxis { get; set; } = QuartersHistoryProvider.GetYAxes();
 
         private void ChangeGridWidth()
         {
-            HistoryChartGrid.Width = WidthOfQuarter * AppData.Months.Count - 1;
+            HistoryChartGrid.MinWidth = WidthOfQuarter * AppData.Quarters.Count;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BudgetManager.Utilities
 {
-    internal class HistoryProvider
+    internal class MonthsHistoryProvider
     {
         private static readonly int nOfMonths = AppData.Months.Count - 1;
 
