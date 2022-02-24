@@ -161,6 +161,12 @@ namespace BudgetManager.Pages
 
             ExpChanged?.Invoke(this, args);
         }
+        private void ExpDetails_ExpSaved(object sender, EventArgs args)
+        {
+            FillWithExpenses();
+            ExpListSplitView.IsPaneOpen = false;
+            ExpChanged?.Invoke(this, args);
+        }
 
         private void AddExpense()
         {
@@ -172,6 +178,7 @@ namespace BudgetManager.Pages
                     ? new ExpDetails(date_.Value)
                     : new ExpDetails(date_.Value, category_);
             detailsControl.ExpenseChanged += new EventHandler(ExpDetails_ExpChanged);
+            detailsControl.ExpenseSaved += new EventHandler(ExpDetails_ExpSaved);
             ExpListSplitViewPane.Child = detailsControl;
         }
 

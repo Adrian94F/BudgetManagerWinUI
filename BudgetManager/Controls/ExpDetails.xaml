@@ -5,7 +5,8 @@
     xmlns:local="using:BudgetManager.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="UserControl_Loaded">
 
     <ScrollViewer VerticalAlignment="Stretch">
         <Grid>
@@ -46,11 +47,16 @@
                                 MinWidth="100">
                         <TextBlock Text="Wartość"
                            Margin="0, 8"/>
-                        
+
                         <NumberBox x:Name="ValueNumberBox"
                                    Margin="0, 8"
                                    Value="{x:Bind Expense.Value2}"
-                                   ValueChanged="NumberBox_ValueChanged"/>
+                                   ValueChanged="NumberBox_ValueChanged">
+                            <NumberBox.KeyboardAccelerators>
+                                <KeyboardAccelerator Key="Enter"
+                                             Invoked="KeyboardAccelerator_Invoked"/>
+                            </NumberBox.KeyboardAccelerators>
+                        </NumberBox>
                     </StackPanel>
 
                     <StackPanel Margin="16, 0, 0, 0">
@@ -73,7 +79,12 @@
                 <TextBox x:Name="CommentTextBox"
                          Margin="0, 8"
                          Text="{x:Bind Expense.Comment}"
-                         TextChanged="TextBox_TextChanged"/>
+                         TextChanged="TextBox_TextChanged">
+                    <TextBox.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="Enter"
+                                             Invoked="KeyboardAccelerator_Invoked"/>
+                    </TextBox.KeyboardAccelerators>
+                </TextBox>
             </StackPanel>
 
             <StackPanel Grid.Row="1"
@@ -99,6 +110,8 @@
                         Click="RemoveButton_Click">
                     <Button.KeyboardAccelerators>
                         <KeyboardAccelerator Key="Delete"
+                                             Invoked="KeyboardAccelerator_Invoked"/>
+                        <KeyboardAccelerator Key="Enter"
                                              Invoked="KeyboardAccelerator_Invoked"/>
                     </Button.KeyboardAccelerators>
                 </Button>

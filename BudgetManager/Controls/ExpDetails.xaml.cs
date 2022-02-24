@@ -27,6 +27,7 @@ namespace BudgetManager.Controls
         private bool isExpenseNew;
 
         public EventHandler ExpenseChanged { get; set; }
+        public EventHandler ExpenseSaved { get; set; }
 
         private readonly ObservableCollection<Category> expenseCategories = new(AppData.categories);
 
@@ -162,9 +163,13 @@ namespace BudgetManager.Controls
                 AddButton.IsEnabled = isExpenseNew && IsReadyToBeAdded();
             }
 
-            if (!isExpenseNew || onRemoval || onNew)
+            if (!isExpenseNew || onRemoval)
             {
                 ExpenseChanged?.Invoke(this, new EventArgs());
+            }
+            if (onNew)
+            {
+                ExpenseSaved?.Invoke(this, new EventArgs());
             }
         }
 
@@ -188,6 +193,11 @@ namespace BudgetManager.Controls
                     Remove();
                     break;
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ValueNumberBox.Focus(FocusState.Keyboard);
         }
     }
 }
