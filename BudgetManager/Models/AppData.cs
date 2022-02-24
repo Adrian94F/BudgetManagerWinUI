@@ -10,15 +10,15 @@ namespace BudgetManager.Models
 {
     static class AppData
     {
-        public static SortedSet<Month> months = new SortedSet<Month>();
-        public static HashSet<Category> categories = new HashSet<Category>();
+        public static SortedSet<Month> Months = new SortedSet<Month>();
+        public static HashSet<Category> Categories = new HashSet<Category>();
 
-        public static NavigationView navigationView;
-        public static Frame mainFrame;
+        public static NavigationView NavigationView;
+        public static Frame MainFrame;
 
-        public static int currentMonth = -1;
+        private static int currentMonth = -1;
 
-        public static Month CurrentMonth {get => months.ElementAtOrDefault(currentMonth); set => currentMonth = months.ToList().IndexOf(value);}
+        public static Month CurrentMonth {get => Months.ElementAtOrDefault(currentMonth); set => currentMonth = Months.ToList().IndexOf(value);}
 
         public static void Initialize()
         {
@@ -33,12 +33,12 @@ namespace BudgetManager.Models
 
         public static bool IsNotEmpty()
         {
-            return months.Count > 0;
+            return Months.Count > 0;
         }
 
         public static bool IsCategoryRemovable(Category cat)
         {
-            foreach (var month in months)
+            foreach (var month in Months)
             {
                 foreach (var exp in month.Expenses)
                 {
@@ -57,7 +57,7 @@ namespace BudgetManager.Models
 
         internal static void SelectNextMonth()
         {
-            if (currentMonth < months.Count - 1)
+            if (currentMonth < Months.Count - 1)
                 currentMonth++;
         }
     }

@@ -30,8 +30,8 @@ namespace BudgetManager
 
         private void SetUp()
         {
-            AppData.navigationView = NavView;
-            AppData.mainFrame = ContentFrame;
+            AppData.NavigationView = NavView;
+            AppData.MainFrame = ContentFrame;
 
             var appWindow = GetAppWindowForCurrentWindow();
             appWindow.SetIcon("calculator.ico");
@@ -195,13 +195,13 @@ namespace BudgetManager
                 PrimaryButtonText = "Tak",
                 SecondaryButtonText = "Nie",
                 CloseButtonText = "Anuluj",
-                XamlRoot = AppData.navigationView.XamlRoot,
+                XamlRoot = AppData.NavigationView.XamlRoot,
             };
             var saveDialog = new ContentDialog()
             {
                 Title = "Zapisano dane.",
                 CloseButtonText = "Ok",
-                XamlRoot = AppData.navigationView.XamlRoot,
+                XamlRoot = AppData.NavigationView.XamlRoot,
             };
             switch (args.KeyboardAccelerator)
             {

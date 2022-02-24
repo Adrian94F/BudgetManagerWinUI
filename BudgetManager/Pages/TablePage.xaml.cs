@@ -117,7 +117,7 @@ namespace BudgetManager.Pages
         private static void CountSums()
         {
             var nOfColumns = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 1;
-            var nOfRows = AppData.categories.Count;
+            var nOfRows = AppData.Categories.Count;
             
             dateSums = Enumerable.Repeat(0d, nOfColumns).ToList();
             catSums = Enumerable.Repeat(0d, nOfRows).ToList();
@@ -133,7 +133,7 @@ namespace BudgetManager.Pages
             {
                 var dateIndex = (exp.Date - AppData.CurrentMonth.StartDate).Days;
                 dateIndex = dateIndex < 0 ? 0 : dateIndex;
-                var catIndex = AppData.categories.ToList().IndexOf(exp.Category);
+                var catIndex = AppData.Categories.ToList().IndexOf(exp.Category);
 
                 catSums[catIndex] += exp.Value2;
                 dateSums[dateIndex] += exp.Value2;
@@ -143,11 +143,11 @@ namespace BudgetManager.Pages
 
         private void NavigateToExpListPageWithParam(object par)
         {
-            AppData.navigationView.IsBackEnabled = true;
-            AppData.navigationView.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible;
-            AppData.navigationView.IsPaneToggleButtonVisible = false;
-            AppData.mainFrame.Navigate(typeof(ExpListPage), par, new DrillInNavigationTransitionInfo());
-            AppData.navigationView.Header = (AppData.mainFrame.Content as IPageWithInfo).header;
+            AppData.NavigationView.IsBackEnabled = true;
+            AppData.NavigationView.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible;
+            AppData.NavigationView.IsPaneToggleButtonVisible = false;
+            AppData.MainFrame.Navigate(typeof(ExpListPage), par, new DrillInNavigationTransitionInfo());
+            AppData.NavigationView.Header = (AppData.MainFrame.Content as IPageWithInfo).header;
         }
 
         private void FillTableWithSumsAndlabels()
@@ -205,7 +205,7 @@ namespace BudgetManager.Pages
             AddStretchColumn(DaySumsGrid);
 
             var rowIdx = 0;
-            foreach (var cat in AppData.categories)
+            foreach (var cat in AppData.Categories)
             {
                 var row = rowIdx++;
                 CategoriesGrid.RowDefinitions.Add(new RowDefinition());
@@ -245,7 +245,7 @@ namespace BudgetManager.Pages
                 };
                 button.Click += (sender, e) =>
                 {
-                    NavigateToExpListPageWithParam(AppData.categories.ToArray()[row]);
+                    NavigateToExpListPageWithParam(AppData.Categories.ToArray()[row]);
                 };
                 Grid.SetRow(button, row);
                 CategorySumsGrid.Children.Add(button);
@@ -284,7 +284,7 @@ namespace BudgetManager.Pages
                     button.Click += (sender, e) =>
                     {
                         var sumDate = AppData.CurrentMonth.StartDate.AddDays(column);
-                        var category = AppData.categories.ToArray().GetValue(row) as Category;
+                        var category = AppData.Categories.ToArray().GetValue(row) as Category;
                         var param = new Tuple<DateTime, Category>(sumDate, category);
                         NavigateToExpListPageWithParam(param);
                     };

@@ -109,8 +109,8 @@ namespace BudgetManager.Pages
         private void RemoveMonthButton_Click(object sender, RoutedEventArgs e)
         {
             var current = AppData.CurrentMonth;
-            AppData.months.Remove(current);
-            AppData.CurrentMonth = AppData.months.LastOrDefault();
+            AppData.Months.Remove(current);
+            AppData.CurrentMonth = AppData.Months.LastOrDefault();
         }
     }
 

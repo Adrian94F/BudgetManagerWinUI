@@ -29,7 +29,7 @@ namespace BudgetManager.Controls
         public EventHandler ExpenseChanged { get; set; }
         public EventHandler ExpenseSaved { get; set; }
 
-        private readonly ObservableCollection<Category> expenseCategories = new(AppData.categories);
+        private readonly ObservableCollection<Category> expenseCategories = new(AppData.Categories);
 
         public ExpDetails()
         {

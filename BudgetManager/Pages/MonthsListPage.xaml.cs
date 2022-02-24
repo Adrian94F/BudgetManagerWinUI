@@ -41,7 +41,7 @@ namespace BudgetManager.Pages
         private void FillWithMonths()
         {
             var lastYear = 0;
-            foreach (var month in AppData.months.Reverse())
+            foreach (var month in AppData.Months.Reverse())
             {
                 var startYear = month.StartDate.Year;
                 if (startYear != lastYear)

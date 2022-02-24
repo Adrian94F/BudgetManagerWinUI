@@ -40,7 +40,7 @@ namespace BudgetManager.Utilities
 
             // categories
             var categories = new List<object>();
-            foreach (var cat in AppData.categories)
+            foreach (var cat in AppData.Categories)
             {
                 // category
                 categories.Add(cat.Name);
@@ -49,7 +49,7 @@ namespace BudgetManager.Utilities
 
             // billing periods
             var months = new List<object>();
-            foreach (var m in AppData.months)
+            foreach (var m in AppData.Months)
             {
                 var month = new Dictionary<string, object>();
                 // fields
@@ -125,9 +125,9 @@ namespace BudgetManager.Utilities
                     {
                         Name = cat.ToString()
                     };
-                    AppData.categories.Add(category);
+                    AppData.Categories.Add(category);
                 }
-                Logger.Log("read " + AppData.categories.Count + " categories");
+                Logger.Log("read " + AppData.Categories.Count + " categories");
 
                 // months
                 var months = JsonSerializer.Deserialize<List<object>>(dataSet[monthsKey].ToString());
@@ -214,7 +214,7 @@ namespace BudgetManager.Utilities
                         {
                             Name = categoryName
                         };
-                        foreach (var cat in AppData.categories)
+                        foreach (var cat in AppData.Categories)
                             if (cat.Equals(category))
                             {
                                 category = cat;
@@ -232,10 +232,10 @@ namespace BudgetManager.Utilities
                         month.Expenses.Add(expense);
                     }
 
-                    AppData.months.Add(month);
+                    AppData.Months.Add(month);
                 }
-                Logger.Log("read " + AppData.months.Count + " months");
-                AppData.currentMonth = AppData.months.Count - 1;
+                Logger.Log("read " + AppData.Months.Count + " months");
+                AppData.CurrentMonth = AppData.Months.Last();
 
                 return jsonString;
             }

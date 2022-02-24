@@ -45,7 +45,7 @@ namespace BudgetManager.Pages
 
         private void ChangeGridWidth()
         {
-            HistoryChartGrid.Width = WidthOfQuarter * AppData.months.Count - 1;
+            HistoryChartGrid.Width = WidthOfQuarter * AppData.Months.Count - 1;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

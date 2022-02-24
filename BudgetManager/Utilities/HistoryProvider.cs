@@ -13,7 +13,7 @@ namespace BudgetManager.Utilities
 {
     internal class HistoryProvider
     {
-        private static readonly int nOfMonths = AppData.months.Count - 1;
+        private static readonly int nOfMonths = AppData.Months.Count - 1;
 
         public static IEnumerable<ICartesianAxis> GetXAxes()
         {
@@ -42,7 +42,7 @@ namespace BudgetManager.Utilities
             var labels = new string[nOfMonths];
             for (var i = 0; i < nOfMonths; i++)
             {
-                labels[i] = AppData.months.ElementAt(i).StartDate.ToString("dd.MM") + "-" + AppData.months.ElementAt(i).EndDate.ToString("dd.MM");
+                labels[i] = AppData.Months.ElementAt(i).StartDate.ToString("dd.MM") + "-" + AppData.Months.ElementAt(i).EndDate.ToString("dd.MM");
             }
             return labels;
         }
@@ -55,8 +55,8 @@ namespace BudgetManager.Utilities
             var monthBalances = new double[nOfMonths];
             for (var i = 0; i < nOfMonths; i++)
             {
-                monthIncomes[i] = (double)(AppData.months.ElementAt(i).GetSumOfIncomes());
-                monthExpenses[i] = (double)AppData.months.ElementAt(i).GetSumOfExpenses();
+                monthIncomes[i] = (double)(AppData.Months.ElementAt(i).GetSumOfIncomes());
+                monthExpenses[i] = (double)AppData.Months.ElementAt(i).GetSumOfExpenses();
                 monthBalances[i] = Math.Round(monthIncomes[i] - monthExpenses[i], 2);
             }
 

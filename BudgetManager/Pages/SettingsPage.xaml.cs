@@ -44,7 +44,7 @@ namespace BudgetManager.Pages
 
         private void FillWithCategories()
         {
-            var categoriesCollection = new ObservableCollection<Category>(AppData.categories);
+            var categoriesCollection = new ObservableCollection<Category>(AppData.Categories);
             CategoriesDataGrid.ItemsSource = categoriesCollection;
         }
 
@@ -58,7 +58,7 @@ namespace BudgetManager.Pages
 
             if (AppData.IsCategoryRemovable(item))
             {
-                AppData.categories.Remove(item);
+                AppData.Categories.Remove(item);
                 (CategoriesDataGrid.ItemsSource as ObservableCollection<Category>).Remove(item);
             }
             else
@@ -68,7 +68,7 @@ namespace BudgetManager.Pages
                     Title = "Operacja niedozwolona",
                     Content = "Nie można usunąć kategorii, która jest w użytku. Usuń operacje przypisane do tej kategorii lub zmień ich kategorię we wszystkich miesiącach, a następnie spróbuj ponownie.",
                     CloseButtonText = "Ok",
-                    XamlRoot = AppData.navigationView.XamlRoot,
+                    XamlRoot = AppData.NavigationView.XamlRoot,
                 };
                await contentDialog.ShowAsync();
             }
@@ -80,7 +80,7 @@ namespace BudgetManager.Pages
             {
                 Name = "nowa kategoria"
             };
-            AppData.categories.Add(cat);
+            AppData.Categories.Add(cat);
             FillWithCategories();
         }
 
