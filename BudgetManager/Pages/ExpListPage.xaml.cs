@@ -162,7 +162,7 @@ namespace BudgetManager.Pages
             ExpChanged?.Invoke(this, args);
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void AddExpense()
         {
             Logger.Log("add expense clicked");
             ExpListSplitView.IsPaneOpen = true;
@@ -173,6 +173,16 @@ namespace BudgetManager.Pages
                     : new ExpDetails(date_.Value, category_);
             detailsControl.ExpenseChanged += new EventHandler(ExpDetails_ExpChanged);
             ExpListSplitViewPane.Child = detailsControl;
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddExpense();
+        }
+
+        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            AddExpense();
         }
     }
 }

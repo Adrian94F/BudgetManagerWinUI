@@ -61,11 +61,17 @@
                     </ListView>
                 </ScrollViewer>
             </Border>
-            
+
             <Button Content="Dodaj"
                     Grid.Row="1"
                     Margin="16, 0"
-                    Click="AddButton_Click"/>
+                    Click="AddButton_Click">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Modifiers="Control"
+                                         Key="N"
+                                         Invoked="KeyboardAccelerator_Invoked"/>
+                </Button.KeyboardAccelerators>
+            </Button>
         </Grid>
     </SplitView>
 </Page>

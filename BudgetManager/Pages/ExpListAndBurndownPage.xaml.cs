@@ -50,7 +50,7 @@ namespace BudgetManager.Pages
         private void ExpListAndBurndownPage_ExpChanged(object sender, EventArgs e)
         {
             // refresh burndown
-            BurndownFrame.Navigate(typeof(ExpBurndownPage), null, new SuppressNavigationTransitionInfo());
+            (BurndownFrame.Content as ExpBurndownPage).Plot();
         }
     }
 }

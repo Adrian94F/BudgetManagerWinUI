@@ -55,7 +55,7 @@ namespace BudgetManager.Pages
         public IEnumerable<ICartesianAxis> XAxes { get; set; }
         public IEnumerable<ICartesianAxis> YAxes { get; set; }
 
-        private void Plot()
+        public void Plot()
         {
             BurndownChart.Series = BurndownSeriesAndAxesProvider.GetSeries(Simplified);
             BurndownChart.XAxes = BurndownSeriesAndAxesProvider.GetXAxes(Simplified);
