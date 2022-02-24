@@ -11,20 +11,16 @@ Aplikacja umożliwiająca zapisywanie codziennych wydatków i wyświetlanie stat
 - Ustalanie planowanych oszczędności w miesiącu
 - Wyświetlanie szacowanego dziennego limitu wydatków
 - Dostosowywanie początku i końca miesiąca (okresu rozliczeniowego)
+- Przegląd statystyk miesięcznych i kwartalnych
 
 ## TODO
 
-- Zapis danych
-- Pasek menu?
-- Przechodzenie do poprzedniego/następnego miesiąca
-- Skróty klawiszowe
+- Skróty klawiszowe?
 - Ustawienia
   - zmiana ścieżki do danych
-
-- Historia (wykres)
 - Wypalenie:
-  - cały wykres z poprzedniej wersji
   - szacowany dzienny wydatek na każdy dzień
+- RadioChart per kategorie (lub x największych i pozostałe)
 - Raport
 - Zrzut ekranu
 - Cofnij/powtórz wykonaną operację
