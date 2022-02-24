@@ -26,6 +26,11 @@ namespace BudgetManager.Models
             Logger.Log("read " + data.Length + " characters of app data");
         }
 
+        public static void Save()
+        {
+            DataReader.Save();
+        }
+
         public static bool IsNotEmpty()
         {
             return months.Count > 0;

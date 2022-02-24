@@ -32,6 +32,79 @@ namespace BudgetManager.Utilities
         private static readonly string expenseMonthlyExpenseKey = "monthlyExpense";
         private static readonly string expenseCategoryKey = "category";
 
+        public static void Save()
+        {
+            Logger.Log("saving app data");
+
+            var output = new Dictionary<string, object>();
+
+            // categories
+            var categories = new List<object>();
+            foreach (var cat in AppData.categories)
+            {
+                // category
+                categories.Add(cat.Name);
+            }
+            output.Add(categoriesKey, categories);
+
+            // billing periods
+            var months = new List<object>();
+            foreach (var m in AppData.months)
+            {
+                var month = new Dictionary<string, object>();
+                // fields
+                month.Add(monthStartDateKey, m.StartDate);
+                month.Add(monthEndDateKey, m.EndDate);
+                month.Add(monthPlannedSavingsKey, m.PlannedSavings);
+
+                // incomes
+                var incomes = new List<Dictionary<string, object>>();
+
+                foreach (var inc in m.Incomes)
+                {
+                    var income = new Dictionary<string, object>();
+                    income.Add(incomeValueKey, inc.Value);
+                    var type = inc.Type == Income.IncomeType.Salary
+                        ? monthIncomeTypeSalary
+                        : "";
+                    income.Add(incomeTypeKey, type);
+                    if (inc.Comment != null)
+                        income.Add(incomeCommentKey, inc.Comment);
+                    incomes.Add(income);
+                }
+
+
+                month.Add(monthIncomesKey, incomes);
+
+                // expenses
+                var expenses = new List<Dictionary<string, object>>();
+                foreach (var exp in m.Expenses)
+                {
+                    var expense = new Dictionary<string, object>();
+                    // fields
+                    expense.Add(expenseValueKey, exp.Value);
+                    expense.Add(expenseDateKey, exp.Date);
+                    expense.Add(expenseCommentKey, exp.Comment);
+                    expense.Add(expenseMonthlyExpenseKey, exp.MonthlyExpense.ToString());
+                    expense.Add(expenseCategoryKey, exp.Category.Name);
+
+                    expenses.Add(expense);
+                }
+                month.Add(monthExpensesKey, expenses);
+
+                months.Add(month);
+            }
+            output.Add(monthsKey, months);
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = false,
+                NumberHandling = System.Text.Json.Serialization.JsonNumberHandling.WriteAsString
+            };
+            var jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(output, options);
+            File.WriteAllBytes(AppSettings.dataPath, jsonUtf8Bytes);
+        }
+
         public static string Read()
         {
             Logger.Log("reading app data");

@@ -5,19 +5,10 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -33,19 +24,53 @@ namespace BudgetManager
         public MainWindow()
         {
             this.InitializeComponent();
-            AppData.navigationView = NavView;
-            AppData.mainFrame = ContentFrame;
-            SetUpTitleBar();
+            SetUp();
         }
 
-        private void SetUpTitleBar()
+        private void SetUp()
         {
-            var appWindow = this.GetAppWindowForCurrentWindow();
+            AppData.navigationView = NavView;
+            AppData.mainFrame = ContentFrame;
+
+            var appWindow = GetAppWindowForCurrentWindow();
             appWindow.SetIcon("calculator.ico");
             appWindow.Title = "Menedżer Budżetu";
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             appWindow.TitleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
             appWindow.TitleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
+            appWindow.Closing += AppWindow_Closing;
+        }
+
+        private async void AppWindow_Closing(AppWindow sender, AppWindowClosingEventArgs args)
+        {
+            args.Cancel = true;
+            var dialog = new ContentDialog
+            {
+                Title = "Zamykanie aplikacji",
+                Content = "Czy chcesz zapisać wprowadzone zmiany?",
+                DefaultButton = ContentDialogButton.Primary,
+                PrimaryButtonText = "Zapisz",
+                SecondaryButtonText = "Nie zapisuj",
+                CloseButtonText = "Anuluj",
+                XamlRoot = AppData.navigationView.XamlRoot,
+            };
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
+            {
+                dialog.XamlRoot = NavView.XamlRoot;
+            }
+            var result = await dialog.ShowAsync();
+            switch (result)
+            {
+                case ContentDialogResult.Primary:
+                    AppData.Save();
+                    Close();
+                    break;
+                case ContentDialogResult.Secondary:
+                    Close();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
