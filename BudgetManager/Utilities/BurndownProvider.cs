@@ -1,7 +1,9 @@
 ﻿using BudgetManager.Models;
 using LiveChartsCore;
+using LiveChartsCore.Drawing;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Drawing;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.Painting.Effects;
 using SkiaSharp;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace BudgetManager.Utilities
 {
-    internal static class BurndownSeriesAndAxesProvider
+    internal static class BurndownProvider
     {
         private static readonly int nOfDays = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 2;
 
@@ -94,6 +96,46 @@ namespace BudgetManager.Utilities
                     StrokeThickness = strokeThickness,
                 },
             };
+        }
+
+        internal static IEnumerable<Section<SkiaSharpDrawingContext>> GetSections()
+        {
+            var sections = new List<Section<SkiaSharpDrawingContext>>();
+
+            // today
+            var todayOffset = (DateTime.Today - AppData.CurrentMonth.StartDate).Days;
+            var todaySection = new RectangularSection
+            {
+                Fill = new SolidColorPaint
+                {
+                    Color = new SKColor(144, 238, 144, 50),
+                },
+                Xi = 0.5 + todayOffset,
+                Xj = 1.5 + todayOffset,
+            };
+            sections.Add(todaySection);
+
+            // weekends
+            var start = AppData.CurrentMonth.StartDate;
+            int daysUntilSaturday = ((int)DayOfWeek.Saturday - (int)start.DayOfWeek + 7) % 7;
+            var saturday = start.AddDays(daysUntilSaturday);
+            while ((AppData.CurrentMonth.EndDate - saturday).Days >= 0)
+            {
+                var weekendOffset = (saturday - AppData.CurrentMonth.StartDate).Days;
+                var weekendSection = new RectangularSection
+                {
+                    Fill = new SolidColorPaint
+                    {
+                        Color = new SKColor(128, 128, 128, 10),
+                    },
+                    Xi = 0.5 + weekendOffset,
+                    Xj = 2.5 + weekendOffset,
+                };
+                sections.Add(weekendSection);
+                saturday = saturday.AddDays(7);
+            }
+
+            return sections;
         }
 
         private static double GetIncomeSum(ExpensesType type)

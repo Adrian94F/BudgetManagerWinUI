@@ -57,13 +57,14 @@ namespace BudgetManager.Pages
 
         public void Plot()
         {
-            BurndownChart.Series = BurndownSeriesAndAxesProvider.GetSeries(Simplified);
-            BurndownChart.XAxes = BurndownSeriesAndAxesProvider.GetXAxes(Simplified);
-            BurndownChart.YAxes = BurndownSeriesAndAxesProvider.GetYAxes();
+            BurndownChart.Series = BurndownProvider.GetSeries(Simplified);
+            BurndownChart.XAxes = BurndownProvider.GetXAxes(Simplified);
+            BurndownChart.YAxes = BurndownProvider.GetYAxes();
             if (!Simplified)
             {
                 BurndownChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
             }
+            BurndownChart.Sections = BurndownProvider.GetSections();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
