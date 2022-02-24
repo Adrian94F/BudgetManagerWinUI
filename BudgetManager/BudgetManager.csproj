@@ -30,6 +30,7 @@
     <None Remove="Pages\MonthDetailsPage.xaml" />
     <None Remove="Pages\MonthsHistoryPage.xaml" />
     <None Remove="Pages\MonthsListPage.xaml" />
+    <None Remove="Pages\QuartersHistoryPage.xaml" />
     <None Remove="Pages\SettingsPage.xaml" />
     <None Remove="Pages\SummaryPage.xaml" />
     <None Remove="Pages\TablePage.xaml" />
@@ -58,6 +59,12 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22504-preview" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\QuartersHistoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>

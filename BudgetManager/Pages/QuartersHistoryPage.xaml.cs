@@ -2,7 +2,6 @@
 using BudgetManager.Utilities;
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Sketches;
-using LiveChartsCore.SkiaSharpView;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -12,7 +11,6 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,27 +25,27 @@ namespace BudgetManager.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MonthsHistoryPage : Page, IPageWithInfo
+    public sealed partial class QuartersHistoryPage : Page, IPageWithInfo
     {
-        public string header = "Historia miesięcy";
+        public string header = "Historia kwartałów";
+
+        private static readonly int WidthOfQuarter = 100;
 
         string IPageWithInfo.header { get => header; set => header = value; }
 
-        private static readonly int WidthOfMonth = 100;
-
-        public IEnumerable<ISeries> Series { get; set; } = HistoryProvider.GetSeries();
-        public IEnumerable<ICartesianAxis> XAxis { get; set; } = HistoryProvider.GetXAxes();
-        public IEnumerable<ICartesianAxis> YAxis { get; set; } = HistoryProvider.GetYAxes();
-
-        public MonthsHistoryPage()
+        public QuartersHistoryPage()
         {
             this.InitializeComponent();
             ChangeGridWidth();
         }
 
+        public IEnumerable<ISeries> Series { get; set; } = HistoryProvider.GetSeries();
+        public IEnumerable<ICartesianAxis> XAxis { get; set; } = HistoryProvider.GetXAxes();
+        public IEnumerable<ICartesianAxis> YAxis { get; set; } = HistoryProvider.GetYAxes();
+
         private void ChangeGridWidth()
         {
-            HistoryChartGrid.Width = WidthOfMonth * AppData.months.Count - 1;
+            HistoryChartGrid.Width = WidthOfQuarter * AppData.months.Count - 1;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

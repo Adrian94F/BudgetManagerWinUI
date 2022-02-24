@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="BudgetManager.Pages.QuartersHistoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BudgetManager.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:livecharts="using:LiveChartsCore.SkiaSharpView.WinUI"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer x:Name="HistoryScrollViewer"
+                  HorizontalScrollBarVisibility="Visible"
+                  VerticalScrollBarVisibility="Disabled"
+                  VerticalScrollMode="Disabled">
+        <Grid x:Name="HistoryChartGrid"
+              Margin="0, 0, 0, 15">
+            <livecharts:CartesianChart x:Name="HistoryChart"
+                                       Series="{x:Bind Series}"
+                                       XAxes="{x:Bind XAxis}"
+                                       YAxes="{x:Bind YAxis}"/>
+        </Grid>
+    </ScrollViewer>
+</Page>

@@ -113,7 +113,7 @@ namespace BudgetManager
                     break;
 
                 case "history_quarters":
-                    ContentFrame.Navigate(typeof(MonthsHistoryPage));
+                    ContentFrame.Navigate(typeof(QuartersHistoryPage));
                     break;
 
                 case "prev_month":
