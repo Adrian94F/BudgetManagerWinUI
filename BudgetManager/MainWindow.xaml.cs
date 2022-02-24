@@ -43,34 +43,7 @@ namespace BudgetManager
 
         private async void AppWindow_Closing(AppWindow sender, AppWindowClosingEventArgs args)
         {
-            args.Cancel = true;
-            var dialog = new ContentDialog
-            {
-                Title = "Zamykanie aplikacji",
-                Content = "Czy chcesz zapisać wprowadzone zmiany?",
-                DefaultButton = ContentDialogButton.Primary,
-                PrimaryButtonText = "Zapisz",
-                SecondaryButtonText = "Nie zapisuj",
-                CloseButtonText = "Anuluj",
-                XamlRoot = AppData.navigationView.XamlRoot,
-            };
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8))
-            {
-                dialog.XamlRoot = NavView.XamlRoot;
-            }
-            var result = await dialog.ShowAsync();
-            switch (result)
-            {
-                case ContentDialogResult.Primary:
-                    AppData.Save();
-                    Close();
-                    break;
-                case ContentDialogResult.Secondary:
-                    Close();
-                    break;
-                default:
-                    break;
-            }
+            AppData.Save();
         }
 
         private AppWindow GetAppWindowForCurrentWindow()

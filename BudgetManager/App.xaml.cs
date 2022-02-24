@@ -51,7 +51,6 @@ namespace BudgetManager
             m_window.Activate();
         }
 
-
         public static Window m_window;
     }
 }
