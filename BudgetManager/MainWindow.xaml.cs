@@ -188,25 +188,33 @@ namespace BudgetManager
 
         private async void KeyboardAccelerator_Invoked(Microsoft.UI.Xaml.Input.KeyboardAccelerator sender, Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
         {
+            var closeDialog = new ContentDialog()
+            {
+                Title = "Zamykanie aplikacji",
+                Content = "Czy chcesz zapisać wprowadzone zmiany? W przypadku braku zapisu zostaną one utracone.",
+                PrimaryButtonText = "Tak",
+                SecondaryButtonText = "Nie",
+                CloseButtonText = "Anuluj",
+                XamlRoot = AppData.navigationView.XamlRoot,
+            };
+            var saveDialog = new ContentDialog()
+            {
+                Title = "Zapisano dane.",
+                CloseButtonText = "Ok",
+                XamlRoot = AppData.navigationView.XamlRoot,
+            };
             switch (args.KeyboardAccelerator)
             {
                 case { Key: VirtualKey.S, Modifiers: VirtualKeyModifiers.Control }:
                     AppData.Save();
+                    await saveDialog.ShowAsync();
                     break;
                 case { Key: VirtualKey.Print, Modifiers: VirtualKeyModifiers.None }:
                     Screenshot();
                     break;
                 case { Key: VirtualKey.Escape, Modifiers: VirtualKeyModifiers.None }:
-                    var dialog = new ContentDialog()
-                    {
-                        Title = "Zamykanie aplikacji",
-                        Content = "Czy chcesz zapisać wprowadzone zmiany? W przypadku braku zapisu zostaną one utracone.",
-                        PrimaryButtonText = "Tak",
-                        SecondaryButtonText = "Nie",
-                        CloseButtonText = "Anuluj",
-                        XamlRoot = AppData.navigationView.XamlRoot,
-                    };
-                    ContentDialogResult result = await dialog.ShowAsync();
+                    
+                    ContentDialogResult result = await closeDialog.ShowAsync();
                     switch (result)
                     {
                         case ContentDialogResult.Primary:
