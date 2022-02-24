@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using System;
 using System.Linq;
 using Windows.Foundation.Metadata;
+using Windows.System;
 using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -38,12 +39,6 @@ namespace BudgetManager
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             appWindow.TitleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
             appWindow.TitleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
-            appWindow.Closing += AppWindow_Closing;
-        }
-
-        private async void AppWindow_Closing(AppWindow sender, AppWindowClosingEventArgs args)
-        {
-            AppData.Save();
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
@@ -183,7 +178,49 @@ namespace BudgetManager
 
         private void Screenshot_Click(object sender, RoutedEventArgs e)
         {
+            Screenshot();
+        }
 
+        private void Screenshot()
+        {
+
+        }
+
+        private async void KeyboardAccelerator_Invoked(Microsoft.UI.Xaml.Input.KeyboardAccelerator sender, Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
+        {
+            switch (args.KeyboardAccelerator)
+            {
+                case { Key: VirtualKey.S, Modifiers: VirtualKeyModifiers.Control }:
+                    AppData.Save();
+                    break;
+                case { Key: VirtualKey.Print, Modifiers: VirtualKeyModifiers.None }:
+                    Screenshot();
+                    break;
+                case { Key: VirtualKey.Escape, Modifiers: VirtualKeyModifiers.None }:
+                    var dialog = new ContentDialog()
+                    {
+                        Title = "Zamykanie aplikacji",
+                        Content = "Czy chcesz zapisać wprowadzone zmiany? W przypadku braku zapisu zostaną one utracone.",
+                        PrimaryButtonText = "Tak",
+                        SecondaryButtonText = "Nie",
+                        CloseButtonText = "Anuluj",
+                        XamlRoot = AppData.navigationView.XamlRoot,
+                    };
+                    ContentDialogResult result = await dialog.ShowAsync();
+                    switch (result)
+                    {
+                        case ContentDialogResult.Primary:
+                            AppData.Save();
+                            Close();
+                            break;
+                        case ContentDialogResult.Secondary:
+                            Close();
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+            }
         }
     }
 }

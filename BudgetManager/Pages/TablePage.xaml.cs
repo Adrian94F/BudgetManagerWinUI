@@ -183,7 +183,7 @@ namespace BudgetManager.Pages
                 DaySumsGrid.ColumnDefinitions.Add(new ColumnDefinition());
                 button = new Button()
                 {
-                    Content = ((int)sum).ToString(),
+                    Content = sum == 0 ? " " : ((int)sum).ToString(),
                     Width = columnWidth,
                     Margin = margin,
                     BorderThickness = border,
@@ -235,7 +235,7 @@ namespace BudgetManager.Pages
                 CategorySumsGrid.RowDefinitions.Add(new RowDefinition());
                 var button = new Button()
                 {
-                    Content = ((int)sum).ToString(),
+                    Content = sum == 0 ? " " : ((int)sum).ToString(),
                     Width = columnWidth,
                     Margin = margin,
                     BorderThickness = border,

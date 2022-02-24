@@ -9,6 +9,7 @@
 
     <Grid HorizontalAlignment="Stretch"
           Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -16,7 +17,19 @@
 
         <TextBlock Text="Menedżer Budżetu"
                    Grid.Row="0"
-                   Margin="15, 6, 0, 6"/>
+                   Margin="15, 6, 0, 6">
+            <TextBlock.KeyboardAccelerators>
+                <KeyboardAccelerator Key="S"
+                                     Modifiers="Control"
+                                     Invoked="KeyboardAccelerator_Invoked"/>
+                <KeyboardAccelerator Key="Print"
+                                     Modifiers="None"
+                                     Invoked="KeyboardAccelerator_Invoked"/>
+                <KeyboardAccelerator Key="Escape"
+                                     Modifiers="None"
+                                     Invoked="KeyboardAccelerator_Invoked"/>
+            </TextBlock.KeyboardAccelerators>
+        </TextBlock>
         <SplitView x:Name="MainSplitView"
                    IsPaneOpen="False"
                    PanePlacement="Right"
@@ -34,6 +47,7 @@
                             IsBackButtonVisible="Collapsed"
                             IsPaneToggleButtonVisible="True"
                             BackRequested="NavView_BackRequested">
+                
                 <NavigationView.MenuItems>
                     <NavigationViewItemHeader Content="Wybrany miesiąc"/>
 
@@ -166,8 +180,7 @@
                             <Setter Property="Frame.ContextFlyout">
                                 <Setter.Value>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem x:Name="Screenshot"
-                                                        Click="Screenshot_Click"
+                                        <MenuFlyoutItem Click="Screenshot_Click"
                                                         Text="Kopiuj zawartość do schowka">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE114;"/>

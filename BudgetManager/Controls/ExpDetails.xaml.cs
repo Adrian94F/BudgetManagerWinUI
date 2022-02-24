@@ -131,18 +131,27 @@ namespace BudgetManager.Controls
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
+            Remove();
+        }
+
+        private void Remove()
+        {
             AppData.CurrentMonth.Expenses.Remove(Expense);
             OnExpUpdate(onRemoval: true);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            AppData.CurrentMonth.Expenses.Add(Expense);
-            OnExpUpdate();
+            Add();
         }
 
+        private void Add()
+        {
+            AppData.CurrentMonth.Expenses.Add(Expense);
+            OnExpUpdate(onNew: true);
+        }
 
-        private void OnExpUpdate(bool onRemoval = false)
+        private void OnExpUpdate(bool onRemoval = false, bool onNew = false)
         {
             if (!onRemoval)
             {
@@ -150,21 +159,35 @@ namespace BudgetManager.Controls
                 Logger.Log(isExpenseNew ? "new expense" : "existing expense");
 
                 AddButton.Visibility = isExpenseNew ? Visibility.Visible : Visibility.Collapsed;
-                AddButton.IsEnabled = isExpenseNew && isReadyToBeAdded();
+                AddButton.IsEnabled = isExpenseNew && IsReadyToBeAdded();
             }
 
-            if (!isExpenseNew || onRemoval)
+            if (!isExpenseNew || onRemoval || onNew)
             {
                 ExpenseChanged?.Invoke(this, new EventArgs());
             }
         }
 
-        private bool isReadyToBeAdded()
+        private bool IsReadyToBeAdded()
         {
             return DatePicker.SelectedDate != null
                    && ValueNumberBox.Value != 0
                    && ValueNumberBox.Value != double.NaN
                    && CategoryComboBox.SelectedItem != null;
+        }
+
+        private void KeyboardAccelerator_Invoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+        {
+            switch (args.KeyboardAccelerator.Key)
+            {
+                case Windows.System.VirtualKey.Enter:
+                    if (AddButton.Visibility == Visibility.Visible && IsReadyToBeAdded())
+                        Add();
+                    break;
+                case Windows.System.VirtualKey.Delete:
+                    Remove();
+                    break;
+            }
         }
     }
 }

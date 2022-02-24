@@ -85,13 +85,23 @@
                         Content="Dodaj"
                         Visibility="Collapsed"
                         IsEnabled="False"
-                        Click="AddButton_Click"/>
+                        Click="AddButton_Click">
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="Enter"
+                                             Invoked="KeyboardAccelerator_Invoked"/>
+                    </Button.KeyboardAccelerators>
+                </Button>
 
                 <Button Margin="8, 0"
                         VerticalAlignment="Bottom"
                         HorizontalAlignment="Right"
                         Content="Usuń"
-                        Click="RemoveButton_Click"/>
+                        Click="RemoveButton_Click">
+                    <Button.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="Delete"
+                                             Invoked="KeyboardAccelerator_Invoked"/>
+                    </Button.KeyboardAccelerators>
+                </Button>
             </StackPanel>
         </Grid>
     </ScrollViewer>
