@@ -14,7 +14,11 @@ namespace BudgetManager.Models
             Additional
         };
 
-        public decimal Value { get; set; }
+        public decimal Value { get => value_; set => value_ = value; }
+
+        private decimal value_;
+
+        public string ValueStr { get => value_.ToString("F"); set => Decimal.TryParse(value, out value_); }
         public IncomeType Type { get; set; }
         public string Comment { get; set; }
         public bool IsSalary {

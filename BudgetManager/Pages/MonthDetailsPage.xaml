@@ -45,14 +45,13 @@
                     <TextBlock Text="Dochody"
                                Margin="8"
                                Style="{StaticResource BodyTextBlockStyle}"/>
-                    
+
                     <controls:DataGrid x:Name="IncomesDataGrid"
                                        Margin="8"
                                        ItemsSource="{Binding}"
                                        AutoGenerateColumns="False"
                                        SelectionMode="Single"
                                        HorizontalAlignment="Stretch">
-                        
                         <controls:DataGrid.RowStyle>
                             <Style TargetType="controls:DataGridRow">
                                 <Setter Property="controls:DataGridRow.ContextFlyout">
@@ -69,8 +68,7 @@
                         
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn Header="Kwota [zł]"
-                                                         Binding="{Binding Value}"
-                                                         SortDirection="Descending"
+                                                         Binding="{Binding ValueStr}"
                                                          CanUserReorder="False">
                                 <controls:DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
@@ -85,7 +83,6 @@
                             </controls:DataGridTextColumn>
                             <controls:DataGridCheckBoxColumn Header="Wypłata"
                                                              Binding="{Binding IsSalary}"
-                                                             SortDirection="Descending"
                                                              CanUserReorder="False"/>
                             <controls:DataGridTextColumn Header="Komentarz"
                                                          Binding="{Binding Comment}"

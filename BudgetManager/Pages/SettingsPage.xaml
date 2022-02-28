@@ -65,6 +65,7 @@
                             </Setter>
                         </Style>
                     </controls:DataGrid.RowStyle>
+                    
                     <controls:DataGrid.Columns>
                         <controls:DataGridTextColumn Header="Nazwa"
                                                      Binding="{Binding Name}"

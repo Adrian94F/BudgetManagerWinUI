@@ -113,20 +113,4 @@ namespace BudgetManager.Pages
             AppData.CurrentMonth = AppData.Months.LastOrDefault();
         }
     }
-
-    class IncomeDataItem
-    {
-        public string value { get; set; }
-        public bool isSalary { get; set; }
-        public string comment { get; set; }
-        public Income originalIncome { get; set; }
-
-        public IncomeDataItem(Income inc)
-        {
-            value = inc.Value.ToString("F");
-            isSalary = inc.Type == Income.IncomeType.Salary;
-            comment = inc.Comment;
-            originalIncome = inc;
-        }
-    }
 }
