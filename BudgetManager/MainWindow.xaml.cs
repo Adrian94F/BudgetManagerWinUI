@@ -155,6 +155,8 @@ namespace BudgetManager
                     break;
             }
 
+            DisableBackButton();
+
             var page = ContentFrame.Content as IPageWithInfo;
             NavView.Header = page.header;
             Logger.Log("changed page to: " + page.header);
@@ -169,11 +171,16 @@ namespace BudgetManager
         private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             ContentFrame.GoBack(new DrillInNavigationTransitionInfo());
+            DisableBackButton();
+            NavView.Header = (ContentFrame.Content as IPageWithInfo).header;
+            Logger.Log("changed page to: " + NavView.Header);
+        }
+
+        private void DisableBackButton()
+        {
             NavView.IsPaneToggleButtonVisible = true;
             NavView.IsBackEnabled = false;
             NavView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
-            NavView.Header = (ContentFrame.Content as IPageWithInfo).header;
-            Logger.Log("changed page to: " + NavView.Header);
         }
 
         private void Screenshot_Click(object sender, RoutedEventArgs e)
@@ -213,19 +220,26 @@ namespace BudgetManager
                     Screenshot();
                     break;
                 case { Key: VirtualKey.Escape, Modifiers: VirtualKeyModifiers.None }:
-                    
-                    ContentDialogResult result = await closeDialog.ShowAsync();
-                    switch (result)
+                    if (ContentFrame.CanGoBack)
                     {
-                        case ContentDialogResult.Primary:
-                            AppData.Save();
-                            Close();
-                            break;
-                        case ContentDialogResult.Secondary:
-                            Close();
-                            break;
-                        default:
-                            break;
+                        ContentFrame.GoBack();
+                        DisableBackButton();
+                    }
+                    else
+                    {
+                        ContentDialogResult result = await closeDialog.ShowAsync();
+                        switch (result)
+                        {
+                            case ContentDialogResult.Primary:
+                                AppData.Save();
+                                Close();
+                                break;
+                            case ContentDialogResult.Secondary:
+                                Close();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     break;
             }
