@@ -2,6 +2,8 @@
 using LiveChartsCore;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -60,23 +62,47 @@ namespace BudgetManager.Utilities
                 monthBalances[i] = Math.Round(monthIncomes[i] - monthExpenses[i], 2);
             }
 
+            var color = new SKColor(180, 180, 180);
+            var strokeThickness = 2.0f;
             var series = new ObservableCollection<ISeries>
             {
                 new LineSeries<double>
                 {
                     Values = monthIncomes,
+                    GeometrySize = 0,
+                    GeometryStroke = null,
+                    GeometryFill = null,
+                    Stroke = new SolidColorPaint
+                    {
+                        Color = new SKColor(154, 205, 50),
+                        StrokeThickness = 1.5f
+                    },
                     Fill = null,
                     Name = "Suma przychodów"
                 },
                 new LineSeries<double>
                 {
                     Values = monthExpenses,
+                    GeometrySize = 0,
+                    GeometryStroke = null,
+                    GeometryFill = null,
+                    Stroke = new SolidColorPaint
+                    {
+                        Color = new SKColor(255, 0, 0),
+                        StrokeThickness = 1.5f
+                    },
                     Fill = null,
                     Name = "Suma wydatków"
                 },
                 new ColumnSeries<double>
                 {
                     Values = monthBalances,
+                    Fill = new SolidColorPaint(new SKColor(255, 215, 0)),
+                    Stroke = new SolidColorPaint
+                    {
+                        Color = new SKColor(230, 194, 0),
+                        StrokeThickness = 2.0f,
+                    },
                     Name = "Bilans",
                 }
             };
