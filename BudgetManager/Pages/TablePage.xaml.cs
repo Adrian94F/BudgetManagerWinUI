@@ -34,6 +34,7 @@ namespace BudgetManager.Pages
         private static List<List<double>> dateCatSums;
 
         private double columnWidth = 50;
+        private double rowHeight = 24;
         private Thickness padding = new Thickness(5, 1, 5, 1);
         private Thickness margin = new Thickness(1);
         private Thickness border = new Thickness(1);
@@ -64,14 +65,14 @@ namespace BudgetManager.Pages
                 LoadingControl.IsLoading = false;
             }
         }
-        private void ExpensesGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ScrollToToday();
         }
 
         private void ScrollToToday()
         {
-            if (AppData.CurrentMonth == null)
+            if (AppData.CurrentMonth == null || DateTime.Now.CompareTo(AppData.CurrentMonth.EndDate.AddDays(1)) > 0)
                 return;
 
             var fullColumnsAfterToday = 1;

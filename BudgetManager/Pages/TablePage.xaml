@@ -49,6 +49,7 @@
         <ScrollViewer x:Name="DaysScrollViewer"
                       Grid.Row="0"
                       Grid.Column="2"
+                      Height="24"
                       HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollMode="Disabled"
                       ViewChanged="ScrollViewer_ViewChanged">
@@ -58,6 +59,7 @@
         <ScrollViewer x:Name="DaySumsScrollViewer"
                       Grid.Row="1"
                       Grid.Column="2"
+                      Height="24"
                       HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollMode="Disabled"
                       ViewChanged="ScrollViewer_ViewChanged">
@@ -90,7 +92,7 @@
                       Grid.Column="2"
                       ViewChanged="ScrollViewer_ViewChanged">
             <Grid x:Name="ExpensesGrid"
-                  SizeChanged="ExpensesGrid_SizeChanged"/>
+                  SizeChanged="Grid_SizeChanged"/>
         </ScrollViewer>
 
         <controls:Loading x:Name="LoadingControl"
