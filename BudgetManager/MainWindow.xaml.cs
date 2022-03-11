@@ -170,6 +170,11 @@ namespace BudgetManager
 
         private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
+            GoBack();
+        }
+
+        private void GoBack()
+        {
             ContentFrame.GoBack(new DrillInNavigationTransitionInfo());
             DisableBackButton();
             NavView.Header = (ContentFrame.Content as IPageWithInfo).header;
@@ -220,10 +225,9 @@ namespace BudgetManager
                     Screenshot();
                     break;
                 case { Key: VirtualKey.Escape, Modifiers: VirtualKeyModifiers.None }:
-                    if (ContentFrame.CanGoBack)
+                    if (NavView.IsBackEnabled)
                     {
-                        ContentFrame.GoBack();
-                        DisableBackButton();
+                        GoBack();
                     }
                     else
                     {
@@ -232,10 +236,10 @@ namespace BudgetManager
                         {
                             case ContentDialogResult.Primary:
                                 AppData.Save();
-                                Close();
+                                App.Current.Exit();
                                 break;
                             case ContentDialogResult.Secondary:
-                                Close();
+                                App.Current.Exit();
                                 break;
                             default:
                                 break;
