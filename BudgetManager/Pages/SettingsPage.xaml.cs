@@ -34,6 +34,12 @@ namespace BudgetManager.Pages
             this.InitializeComponent();
             FillTextBoxes();
             FillWithCategories();
+            SetTheme();
+        }
+
+        private void SetTheme()
+        {
+            ThemeToggleSwitch.IsOn = this.ActualTheme == ElementTheme.Light;
         }
 
         private void FillTextBoxes()
@@ -88,6 +94,12 @@ namespace BudgetManager.Pages
         {
             AppSettings.defaultFirstDayOfMonth = (int)sender.Value;
             AppSettings.Save();
+        }
+
+        private void ThemeToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            var toggle = sender as ToggleSwitch;
+            (AppData.NavigationView.XamlRoot.Content as Grid).RequestedTheme = toggle.IsOn ? ElementTheme.Light : ElementTheme.Dark;
         }
     }
 }

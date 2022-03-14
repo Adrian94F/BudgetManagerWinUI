@@ -9,6 +9,13 @@
 
     <ScrollViewer>
         <StackPanel>
+            <ToggleSwitch x:Name="ThemeToggleSwitch"
+                          Header="Motyw"
+                          Margin="16"
+                          OnContent="jasny"
+                          OffContent="ciemny"
+                          Toggled="ThemeToggleSwitch_Toggled"/>
+            
             <controls:DockPanel>
                 <StackPanel Margin="8"
                             controls:DockPanel.Dock="Left">
