@@ -10,7 +10,6 @@ Aplikacja umożliwiająca zapisywanie codziennych wydatków i wyświetlanie stat
 - Ustalanie dochodu netto i dochodu dodatkowego
 - Ustalanie planowanych oszczędności w miesiącu
 - Wyświetlanie szacowanego dziennego limitu wydatków
-- Dostosowywanie początku i końca miesiąca (okresu rozliczeniowego)
 - Przegląd statystyk miesięcznych i kwartalnych
 
 ## TODO

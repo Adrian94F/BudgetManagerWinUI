@@ -44,7 +44,6 @@ namespace BudgetManager.Pages
 
         private void FillTextBoxes()
         {
-            DefaultFirstDayOfMonthNumberBox.Value = AppSettings.defaultFirstDayOfMonth;
             PathTextBox.Text = AppSettings.dataPath;
         }
 
@@ -88,12 +87,6 @@ namespace BudgetManager.Pages
             };
             AppData.Categories.Add(cat);
             FillWithCategories();
-        }
-
-        private void DefaultFirstDayOfMonthNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
-        {
-            AppSettings.defaultFirstDayOfMonth = (int)sender.Value;
-            AppSettings.Save();
         }
 
         private void ThemeToggleSwitch_Toggled(object sender, RoutedEventArgs e)
