@@ -75,8 +75,7 @@ namespace BudgetManager.Pages
             if (AppData.CurrentMonth == null || DateTime.Now.CompareTo(AppData.CurrentMonth.EndDate.AddDays(1)) > 0)
                 return;
 
-            var fullColumnsAfterToday = 1;
-            var lastVisibleColumnPosition = columnWidth * ((DateTime.Today - AppData.CurrentMonth.StartDate).Days + fullColumnsAfterToday);
+            var lastVisibleColumnPosition = columnWidth * ((DateTime.Today - AppData.CurrentMonth.StartDate).Days + 4);
             var scrollViewerWidth = ExpensesScrollViewer.ActualWidth;
             var remainder = (scrollViewerWidth - 1) % columnWidth + 1;
             var rightTodayMargin = columnWidth + remainder;

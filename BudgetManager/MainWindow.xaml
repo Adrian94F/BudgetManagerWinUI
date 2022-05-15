@@ -46,6 +46,7 @@
                             IsSettingsVisible="False"
                             IsBackButtonVisible="Collapsed"
                             IsPaneToggleButtonVisible="True"
+                            OpenPaneLength="220"
                             BackRequested="NavView_BackRequested">
                 
                 <NavigationView.MenuItems>
