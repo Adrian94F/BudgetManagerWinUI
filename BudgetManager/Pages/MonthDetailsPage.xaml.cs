@@ -111,6 +111,8 @@ namespace BudgetManager.Pages
             var current = AppData.CurrentMonth;
             AppData.Months.Remove(current);
             AppData.CurrentMonth = AppData.Months.LastOrDefault();
+
+            App.m_window.GoHome();
         }
     }
 }

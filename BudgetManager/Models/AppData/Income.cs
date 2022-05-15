@@ -30,5 +30,12 @@ namespace BudgetManager.Models
         {
             Type = IncomeType.Additional;
         }
+
+        public Income(Income income)
+        {
+            Type = income.Type;
+            Value = income.Value;
+            Comment = income.Comment;
+        }
     }
 }

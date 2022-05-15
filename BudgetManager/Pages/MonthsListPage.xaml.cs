@@ -82,8 +82,34 @@ namespace BudgetManager.Pages
 
         private void NewButton_Click(object sender, RoutedEventArgs e)
         {
-            // create new month
-            // select new month in AppData.CurrentMonth
+            var startDate = AppData.Months.Last().EndDate.AddDays(1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+            HashSet<Income> incomes = new HashSet<Income>();
+            foreach (var income in AppData.Months.Last().Incomes)
+            {
+                incomes.Add(new Income(income));
+            }
+            HashSet<Expense> expenses = new HashSet<Expense>();
+            foreach (var expense in AppData.Months.Last().Expenses)
+            {
+                if (expense.MonthlyExpense)
+                {
+                    expenses.Add(new Expense(expense));
+                }
+            }
+
+            var newMonth = new Month()
+            {
+                StartDate = startDate,
+                EndDate = endDate,
+                Incomes = incomes,
+                Expenses = expenses
+            };
+
+            AppData.Months.Add(newMonth);
+            AppData.CurrentMonth = newMonth;
+
+            MonthSelected?.Invoke(this, new EventArgs());
         }
     }
 }

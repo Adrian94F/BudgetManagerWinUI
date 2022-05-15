@@ -50,6 +50,11 @@ namespace BudgetManager
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
+            GoHome();   
+        }
+
+        public void GoHome()
+        {
             // set the initial SelectedItem 
             foreach (NavigationViewItemBase item in NavView.MenuItems)
             {

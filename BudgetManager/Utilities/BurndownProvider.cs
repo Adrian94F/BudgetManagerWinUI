@@ -94,7 +94,7 @@ namespace BudgetManager.Utilities
                 {
                     Color = strokeColor,
                     StrokeThickness = strokeThickness,
-                },
+                }
             };
         }
 
@@ -281,7 +281,7 @@ namespace BudgetManager.Utilities
             return new Axis[] {
                 new Axis
                 {
-                    Labeler = value => Math.Round(value).ToString()
+                    Labeler = value => Math.Round(value).ToString(),
                 }
             };
         }

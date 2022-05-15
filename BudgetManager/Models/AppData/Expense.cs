@@ -24,6 +24,15 @@ namespace BudgetManager
             MonthlyExpense = false;
             ID = _counter++;
         }
+        public Expense(Expense expense)
+        {
+            Date = expense.Date;
+            Value = expense.Value;
+            MonthlyExpense = expense.MonthlyExpense;
+            Category = expense.Category;
+            Comment = expense.Comment;
+            ID = _counter++;
+        }
 
         public string DateString { get => Date.ToString("dd.MM.yyyy"); }
 
