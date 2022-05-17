@@ -132,7 +132,7 @@ namespace BudgetManager.Pages
             if (e.ClickedItem is ExpenseListViewItem exp && !ExpListSplitView.IsPaneOpen)
             {
                 Logger.Log("clicked expense: " + exp.OriginalExpense.ToString());
-                
+
                 ExpListSplitView.IsPaneOpen = true;
                 var detailsControl = new ExpDetails()
                 {

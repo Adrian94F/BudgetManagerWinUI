@@ -50,7 +50,7 @@ namespace BudgetManager
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-            GoHome();   
+            GoHome();
         }
 
         public void GoHome()

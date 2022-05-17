@@ -21,7 +21,8 @@ namespace BudgetManager.Models
         public string ValueStr { get => value_.ToString("F"); set => Decimal.TryParse(value, out value_); }
         public IncomeType Type { get; set; }
         public string Comment { get; set; }
-        public bool IsSalary {
+        public bool IsSalary
+        {
             get => Type == IncomeType.Salary;
             set => Type = value ? IncomeType.Salary : IncomeType.Additional;
         }

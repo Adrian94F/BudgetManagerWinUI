@@ -19,7 +19,7 @@ namespace BudgetManager.Models
 
         private static int currentMonth = -1;
 
-        public static Month CurrentMonth {get => Months.ElementAtOrDefault(currentMonth); set => currentMonth = Months.ToList().IndexOf(value);}
+        public static Month CurrentMonth { get => Months.ElementAtOrDefault(currentMonth); set => currentMonth = Months.ToList().IndexOf(value); }
 
         public static void Initialize()
         {
@@ -41,7 +41,7 @@ namespace BudgetManager.Models
         {
             var quarters = new SortedSet<Quarter>();
             var monthEnumerator = Months.GetEnumerator();
-            
+
             while (monthEnumerator.MoveNext())
             {
                 var month = monthEnumerator.Current;

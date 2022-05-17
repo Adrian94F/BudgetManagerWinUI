@@ -75,7 +75,7 @@ namespace BudgetManager.Pages
                     CloseButtonText = "Ok",
                     XamlRoot = AppData.NavigationView.XamlRoot,
                 };
-               await contentDialog.ShowAsync();
+                await contentDialog.ShowAsync();
             }
         }
 

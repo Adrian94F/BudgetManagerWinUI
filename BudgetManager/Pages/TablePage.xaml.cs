@@ -119,7 +119,7 @@ namespace BudgetManager.Pages
         {
             var nOfColumns = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 1;
             var nOfRows = AppData.Categories.Count;
-            
+
             dateSums = Enumerable.Repeat(0d, nOfColumns).ToList();
             catSums = Enumerable.Repeat(0d, nOfRows).ToList();
 
@@ -273,7 +273,8 @@ namespace BudgetManager.Pages
                     var content = dateCatSums[row][column] != 0
                         ? ((int)dateCatSums[row][column]).ToString()
                         : " ";
-                    var button = new Button() {
+                    var button = new Button()
+                    {
                         Content = content,
                         Width = columnWidth,
                         Margin = margin,
@@ -326,7 +327,8 @@ namespace BudgetManager.Pages
             {
                 return null;
             }
-            var rect = new Microsoft.UI.Xaml.Shapes.Rectangle() {
+            var rect = new Microsoft.UI.Xaml.Shapes.Rectangle()
+            {
                 Fill = fill,
             };
 
@@ -354,7 +356,8 @@ namespace BudgetManager.Pages
             var rowSpan = grid.RowDefinitions.Count;
             var col = 0;
             var colSpan = 1;
-            var fill = new SolidColorBrush(new Windows.UI.Color() {
+            var fill = new SolidColorBrush(new Windows.UI.Color()
+            {
                 A = 50,
                 R = 128,
                 G = 128,
