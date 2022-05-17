@@ -1,11 +1,6 @@
-﻿using System;
+﻿using BudgetManager.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using BudgetManager.Models;
 
 namespace BudgetManager
 {
@@ -36,8 +31,13 @@ namespace BudgetManager
         {
             var sum = decimal.Zero;
             foreach (var income in Incomes)
+            {
                 if (type == null || income.Type == type)
+                {
                     sum += income.Value;
+                }
+            }
+
             return sum;
         }
 

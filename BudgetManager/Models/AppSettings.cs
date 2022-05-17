@@ -1,14 +1,9 @@
 ﻿using BudgetManager.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace BudgetManager.Models
 {
-    static class AppSettings
+    internal static class AppSettings
     {
         private static string dataPathKey = "data path";
 

@@ -1,6 +1,5 @@
 ﻿using BudgetManager.Models;
 using LiveChartsCore;
-using LiveChartsCore.Drawing;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Drawing;
@@ -10,9 +9,6 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BudgetManager.Utilities
 {

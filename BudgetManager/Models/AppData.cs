@@ -1,14 +1,11 @@
 ﻿using BudgetManager.Utilities;
 using Microsoft.UI.Xaml.Controls;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BudgetManager.Models
 {
-    static class AppData
+    internal static class AppData
     {
         public static SortedSet<Month> Months = new SortedSet<Month>();
         public static SortedSet<Quarter> Quarters { get => GetQuarters(); }
@@ -74,7 +71,9 @@ namespace BudgetManager.Models
                 foreach (var exp in month.Expenses)
                 {
                     if (exp.Category == cat)
+                    {
                         return false;
+                    }
                 }
             }
             return true;

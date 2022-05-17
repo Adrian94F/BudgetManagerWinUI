@@ -8,7 +8,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using System;
 using System.Linq;
-using Windows.Foundation.Metadata;
 using Windows.System;
 using WinRT.Interop;
 

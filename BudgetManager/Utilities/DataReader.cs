@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Windows.Storage;
 
 namespace BudgetManager.Utilities
 {
-    static class DataReader
+    internal static class DataReader
     {
         private static readonly string categoriesKey = "categories";
         private static readonly string monthsKey = "billingPeriods";
@@ -69,7 +66,10 @@ namespace BudgetManager.Utilities
                         : "";
                     income.Add(incomeTypeKey, type);
                     if (inc.Comment != null)
+                    {
                         income.Add(incomeCommentKey, inc.Comment);
+                    }
+
                     incomes.Add(income);
                 }
 
@@ -155,7 +155,10 @@ namespace BudgetManager.Utilities
                             var incomeFromJson = JsonSerializer.Deserialize<Dictionary<string, string>>(inc.ToString());
                             var value = Decimal.Parse(incomeFromJson[incomeValueKey].ToString(), CultureInfo.InvariantCulture);
                             if (value == 0)
+                            {
                                 continue;
+                            }
+
                             var typeString = incomeFromJson[incomeTypeKey];
                             var type = typeString.Equals(monthIncomeTypeSalary)
                                 ? Income.IncomeType.Salary
@@ -183,7 +186,9 @@ namespace BudgetManager.Utilities
                                 Type = Income.IncomeType.Salary
                             };
                             if (income.Value > decimal.Zero)
+                            {
                                 month.Incomes.Add(income);
+                            }
                         }
                         if (monthFromJson.Keys.Contains(monthAdditionalIncomeKey))
                         {
@@ -193,7 +198,9 @@ namespace BudgetManager.Utilities
                                 Type = Income.IncomeType.Additional
                             };
                             if (income.Value > decimal.Zero)
+                            {
                                 month.Incomes.Add(income);
+                            }
                         }
                     }
 
@@ -215,11 +222,13 @@ namespace BudgetManager.Utilities
                             Name = categoryName
                         };
                         foreach (var cat in AppData.Categories)
+                        {
                             if (cat.Equals(category))
                             {
                                 category = cat;
                                 break;
                             }
+                        }
 
                         var expense = new Expense()
                         {
