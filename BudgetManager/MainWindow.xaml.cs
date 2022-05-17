@@ -5,10 +5,12 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using System;
 using System.Linq;
 using Windows.System;
+using Windows.UI.ViewManagement;
 using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -32,12 +34,13 @@ namespace BudgetManager
             AppData.NavigationView = NavView;
             AppData.MainFrame = ContentFrame;
 
+            Title = "Menedżer Budżetu";
+            ExtendsContentIntoTitleBar = true;
+            SetTitleBar(TitleBar);
+
             var appWindow = GetAppWindowForCurrentWindow();
             appWindow.SetIcon("calculator.ico");
-            appWindow.Title = "Menedżer Budżetu";
-            appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
-            appWindow.TitleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
-            appWindow.TitleBar.ButtonInactiveBackgroundColor = Windows.UI.Color.FromArgb(0, 0, 0, 0);
+            appWindow.Title = Title;
         }
 
         private AppWindow GetAppWindowForCurrentWindow()
@@ -204,7 +207,7 @@ namespace BudgetManager
         {
             NavView.IsPaneToggleButtonVisible = true;
             NavView.IsBackEnabled = false;
-            NavView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
+            //NavView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
         }
 
         private void Screenshot_Click(object sender, RoutedEventArgs e)
@@ -265,6 +268,20 @@ namespace BudgetManager
                         }
                     }
                     break;
+            }
+        }
+
+        private void Window_Activated(object sender, WindowActivatedEventArgs args)
+        {
+            if (args.WindowActivationState == WindowActivationState.Deactivated)
+            {
+                AppTitleTextBlock.Foreground =
+                    (SolidColorBrush)App.Current.Resources["WindowCaptionForegroundDisabled"];
+            }
+            else
+            {
+                AppTitleTextBlock.Foreground =
+                    (SolidColorBrush)App.Current.Resources["WindowCaptionForeground"];
             }
         }
     }

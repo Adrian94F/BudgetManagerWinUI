@@ -139,8 +139,6 @@ namespace BudgetManager.Pages
         private void NavigateToExpListPageWithParam(object par)
         {
             AppData.NavigationView.IsBackEnabled = true;
-            AppData.NavigationView.IsBackButtonVisible = NavigationViewBackButtonVisible.Visible;
-            AppData.NavigationView.IsPaneToggleButtonVisible = false;
             AppData.MainFrame.Navigate(typeof(ExpListPage), par, new DrillInNavigationTransitionInfo());
             AppData.NavigationView.Header = (AppData.MainFrame.Content as IPageWithInfo).header;
         }

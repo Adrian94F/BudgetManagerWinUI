@@ -5,31 +5,40 @@
     xmlns:local="using:BudgetManager"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Activated="Window_Activated">
 
     <Grid HorizontalAlignment="Stretch"
           Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Menedżer Budżetu"
-                   Grid.Row="0"
-                   Margin="15, 6, 0, 6">
-            <TextBlock.KeyboardAccelerators>
-                <KeyboardAccelerator Key="S"
-                                     Modifiers="Control"
-                                     Invoked="KeyboardAccelerator_Invoked"/>
-                <KeyboardAccelerator Key="Print"
-                                     Modifiers="None"
-                                     Invoked="KeyboardAccelerator_Invoked"/>
-                <KeyboardAccelerator Key="Escape"
-                                     Modifiers="None"
-                                     Invoked="KeyboardAccelerator_Invoked"/>
-            </TextBlock.KeyboardAccelerators>
-        </TextBlock>
+        <Grid.KeyboardAccelerators>
+            <KeyboardAccelerator Key="S"
+                                 Modifiers="Control"
+                                 Invoked="KeyboardAccelerator_Invoked"/>
+            <KeyboardAccelerator Key="Print"
+                                 Modifiers="None"
+                                 Invoked="KeyboardAccelerator_Invoked"/>
+            <KeyboardAccelerator Key="Escape"
+                                 Modifiers="None"
+                                 Invoked="KeyboardAccelerator_Invoked"/>
+        </Grid.KeyboardAccelerators>
+
+        <Border x:Name="TitleBar"
+                Margin="48, 0, 0, 0"
+                Padding="13"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Grid.Row="1">
+            <TextBlock x:Name="AppTitleTextBlock"
+                       TextWrapping="NoWrap"
+                       Text="Menedżer Budżetu"/>
+        </Border>
+
         <SplitView x:Name="MainSplitView"
                    IsPaneOpen="False"
                    PanePlacement="Right"
@@ -44,7 +53,7 @@
                             Loaded="NavView_Loaded"
                             PaneDisplayMode="Auto"
                             IsSettingsVisible="False"
-                            IsBackButtonVisible="Collapsed"
+                            IsBackButtonVisible="Visible"
                             IsPaneToggleButtonVisible="True"
                             OpenPaneLength="220"
                             BackRequested="NavView_BackRequested">
