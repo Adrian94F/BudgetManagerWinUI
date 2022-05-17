@@ -85,7 +85,7 @@ namespace BudgetManager
             return selectedMonthTags.Contains(item.Tag);
         }
 
-        private void NavView_Navigate(NavigationViewItem item)
+        private async void NavView_Navigate(NavigationViewItem item)
         {
             switch (item.Tag)
             {
@@ -121,23 +121,38 @@ namespace BudgetManager
                     ContentFrame.Navigate(typeof(QuartersHistoryPage));
                     break;
 
+                case "save":
+                    AppData.Save();
+                    var saveDialog = new ContentDialog()
+                    {
+                        Title = "Zapisano dane.",
+                        CloseButtonText = "Ok",
+                        XamlRoot = AppData.NavigationView.XamlRoot,
+                    };
+                    await saveDialog.ShowAsync();
+                    break;
+
                 case "prev_month":
                     if (IsSelectedMonthPage())
                     {
-                        AppData.SelectPreviousMonth();
-                        ContentFrame.Navigate(ContentFrame.Content.GetType(),
-                                              null,
-                                              new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+                        if (AppData.SelectPreviousMonth())
+                        {
+                            ContentFrame.Navigate(ContentFrame.Content.GetType(),
+                                                  null,
+                                                  new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+                        }
                     }
                     break;
 
                 case "next_month":
                     if (IsSelectedMonthPage())
                     {
-                        AppData.SelectNextMonth();
-                        ContentFrame.Navigate(ContentFrame.Content.GetType(),
+                        if (AppData.SelectNextMonth())
+                        {
+                            ContentFrame.Navigate(ContentFrame.Content.GetType(),
                                               null,
                                               new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                        }
                     }
                     break;
 

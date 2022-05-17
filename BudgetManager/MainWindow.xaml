@@ -135,6 +135,15 @@
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>-->
 
+                    <NavigationViewItem x:Uid="SaveNavItem"
+                                        Content="Zapisz"
+                                        Tag="save"
+                                        SelectsOnInvoked="false">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE74E;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+
                     <NavigationViewItem x:Uid="PrevMonthNavItem"
                                         Content="Poprzedni"
                                         Tag="prev_month"

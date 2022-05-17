@@ -65,6 +65,7 @@ namespace BudgetManager.Pages
                 LoadingControl.IsLoading = false;
             }
         }
+
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ScrollToToday();

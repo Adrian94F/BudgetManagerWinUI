@@ -80,16 +80,24 @@ namespace BudgetManager.Models
             return true;
         }
 
-        internal static void SelectPreviousMonth()
+        internal static bool SelectPreviousMonth()
         {
             if (currentMonth != 0)
+            {
                 currentMonth--;
+                return true;
+            }
+            return false;
         }
 
-        internal static void SelectNextMonth()
+        internal static bool SelectNextMonth()
         {
             if (currentMonth < Months.Count - 1)
+            {
                 currentMonth++;
+                return true;
+            }
+            return false;
         }
     }
 }
