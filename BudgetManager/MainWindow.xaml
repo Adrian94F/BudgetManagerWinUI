@@ -49,14 +49,15 @@
             </SplitView.Pane>
 
             <NavigationView x:Name="NavView"
+                            BackRequested="NavView_BackRequested"
+                            IsBackButtonVisible="Visible"
+                            IsBackEnabled ="False"
+                            IsPaneToggleButtonVisible="True"
+                            IsSettingsVisible="False"
                             ItemInvoked="NavView_ItemInvoked"
                             Loaded="NavView_Loaded"
-                            PaneDisplayMode="Auto"
-                            IsSettingsVisible="False"
-                            IsBackButtonVisible="Visible"
-                            IsPaneToggleButtonVisible="True"
                             OpenPaneLength="220"
-                            BackRequested="NavView_BackRequested">
+                            PaneDisplayMode="Auto">
                 
                 <NavigationView.MenuItems>
                     <NavigationViewItemHeader Content="Wybrany miesiąc"/>

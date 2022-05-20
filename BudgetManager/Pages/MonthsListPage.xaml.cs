@@ -84,7 +84,9 @@ namespace BudgetManager.Pages
             {
                 if (expense.MonthlyExpense)
                 {
-                    expenses.Add(new Expense(expense));
+                    var newExp = new Expense(expense);
+                    newExp.Date = newExp.Date.AddMonths(1);
+                    expenses.Add(newExp);
                 }
             }
 

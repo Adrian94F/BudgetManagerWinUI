@@ -8,7 +8,7 @@
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d">
 
-    <controls:DockPanel>
+    <controls:DockPanel Margin="0, 36, 0, 0">
         <Button x:Name="NewButton"
                 Margin="16, 8"
                 controls:DockPanel.Dock="Top"

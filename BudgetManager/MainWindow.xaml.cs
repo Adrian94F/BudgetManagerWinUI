@@ -205,9 +205,7 @@ namespace BudgetManager
 
         private void DisableBackButton()
         {
-            NavView.IsPaneToggleButtonVisible = true;
             NavView.IsBackEnabled = false;
-            //NavView.IsBackButtonVisible = NavigationViewBackButtonVisible.Collapsed;
         }
 
         private void Screenshot_Click(object sender, RoutedEventArgs e)
@@ -251,7 +249,7 @@ namespace BudgetManager
                     {
                         GoBack();
                     }
-                    else
+                    /*else
                     {
                         ContentDialogResult result = await closeDialog.ShowAsync();
                         switch (result)
@@ -266,7 +264,7 @@ namespace BudgetManager
                             default:
                                 break;
                         }
-                    }
+                    }*/
                     break;
             }
         }
