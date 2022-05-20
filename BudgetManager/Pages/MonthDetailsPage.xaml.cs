@@ -28,8 +28,8 @@ namespace BudgetManager.Pages
         private void FillPage()
         {
             var month = AppData.CurrentMonth;
-            StartDatePicker.SelectedDate = month.StartDate;
-            EndDatePicker.SelectedDate = month.EndDate;
+            StartDatePicker.Date = month.StartDate;
+            EndDatePicker.Date = month.EndDate;
             PlannedSavingsNumberBox.Value = decimal.ToDouble(month.PlannedSavings);
             if (month.Expenses.Count == 0)
             {
@@ -58,30 +58,27 @@ namespace BudgetManager.Pages
             FillIncomesTable();
         }
 
-        private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        private void DatePicker_DateChanged(object sender, CalendarDatePickerDateChangedEventArgs e)
         {
-            var picker = sender as DatePicker;
-            var date = picker.SelectedDate;
+            var picker = sender as CalendarDatePicker;
+            var date = picker.Date;
             switch (picker.Name)
             {
                 case "StartDatePicker":
                     if (date <= AppData.CurrentMonth.EndDate)
                     {
-                        AppData.CurrentMonth.StartDate = picker.SelectedDate.Value.Date;
+                        AppData.CurrentMonth.StartDate = date.Value.Date;
                         return;
                     }
                     break;
                 case "EndDatePicker":
                     if (date >= AppData.CurrentMonth.StartDate)
                     {
-                        AppData.CurrentMonth.EndDate = picker.SelectedDate.Value.Date;
+                        AppData.CurrentMonth.EndDate = date.Value.Date;
                         return;
                     }
                     break;
             }
-            var oldDate = e.OldDate;
-            picker.SelectedDate = oldDate;
-            picker.Date = oldDate;
         }
 
         private void PlannedSavingsNumberBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)

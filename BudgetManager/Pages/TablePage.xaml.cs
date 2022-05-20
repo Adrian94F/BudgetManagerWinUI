@@ -26,7 +26,6 @@ namespace BudgetManager.Pages
         private static List<List<double>> dateCatSums;
 
         private double columnWidth = 50;
-        private double rowHeight = 24;
         private Thickness padding = new Thickness(5, 1, 5, 1);
         private Thickness margin = new Thickness(1);
         private Thickness border = new Thickness(1);

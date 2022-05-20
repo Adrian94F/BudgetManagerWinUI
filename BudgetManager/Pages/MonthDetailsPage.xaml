@@ -8,29 +8,40 @@
     mc:Ignorable="d">
 
     <ScrollViewer>
-        <StackPanel HorizontalAlignment="Stretch">
+        <StackPanel HorizontalAlignment="Stretch"
+                    MaxWidth="600">
             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                     VerticalAlignment="Top"
                     Margin="16"
                     CornerRadius="8"
                     BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <controls:WrapPanel Margin="8">
-                    <StackPanel>
+                <controls:WrapPanel>
+                    <StackPanel Margin="8">
                         <TextBlock Text="Początek"
                                    Margin="8"
                                    Style="{StaticResource BodyTextBlockStyle}"/>
-                        <DatePicker x:Name="StartDatePicker"
-                                    Margin="8"
-                                    DateChanged="DatePicker_DateChanged"/>
+                        <CalendarDatePicker x:Name="StartDatePicker"
+                                            Margin="8"
+                                            DateChanged="DatePicker_DateChanged"/>
                     </StackPanel>
-                    <StackPanel>
+
+                    <StackPanel Margin="8">
                         <TextBlock Text="Koniec"
                                    Margin="8"
                                    Style="{StaticResource BodyTextBlockStyle}"/>
-                        <DatePicker x:Name="EndDatePicker"
-                                    Margin="8"
-                                    DateChanged="DatePicker_DateChanged"/>
+                        <CalendarDatePicker x:Name="EndDatePicker"
+                                            Margin="8"
+                                            DateChanged="DatePicker_DateChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="8">
+                        <TextBlock Text="Planowane oszczędności"
+                               Margin="8"
+                               Style="{StaticResource BodyTextBlockStyle}"/>
+                        <NumberBox x:Name="PlannedSavingsNumberBox"
+                               Margin="8"
+                               ValueChanged="PlannedSavingsNumberBox_ValueChanged"/>
                     </StackPanel>
                 </controls:WrapPanel>
             </Border>
@@ -65,7 +76,7 @@
                                 </Setter>
                             </Style>
                         </controls:DataGrid.RowStyle>
-                        
+
                         <controls:DataGrid.Columns>
                             <controls:DataGridTextColumn Header="Kwota [zł]"
                                                          Binding="{Binding ValueStr}"
@@ -90,27 +101,10 @@
                                                          Width="*"/>
                         </controls:DataGrid.Columns>
                     </controls:DataGrid>
-                    
+
                     <Button Click="AddIncomeButton_Click"
                             Margin="8"
                             Content="Dodaj"/>
-                </StackPanel>
-            </Border>
-
-            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
-                    VerticalAlignment="Top"
-                    Margin="16"
-                    CornerRadius="8"
-                    BorderThickness="1"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <StackPanel Margin="8"
-                            HorizontalAlignment="Left">
-                    <TextBlock Text="Planowane oszczędności"
-                               Margin="8"
-                               Style="{StaticResource BodyTextBlockStyle}"/>
-                    <NumberBox x:Name="PlannedSavingsNumberBox"
-                               Margin="8"
-                               ValueChanged="PlannedSavingsNumberBox_ValueChanged"/>
                 </StackPanel>
             </Border>
 

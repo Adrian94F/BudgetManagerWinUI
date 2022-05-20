@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid.KeyboardAccelerators>
+        <!--<Grid.KeyboardAccelerators>
             <KeyboardAccelerator Key="S"
                                  Modifiers="Control"
                                  Invoked="KeyboardAccelerator_Invoked"/>
@@ -26,7 +26,7 @@
             <KeyboardAccelerator Key="Escape"
                                  Modifiers="None"
                                  Invoked="KeyboardAccelerator_Invoked"/>
-        </Grid.KeyboardAccelerators>
+        </Grid.KeyboardAccelerators>-->
 
         <Border x:Name="TitleBar"
                 Margin="48, 0, 0, 0"
