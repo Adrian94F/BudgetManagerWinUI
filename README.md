@@ -14,14 +14,13 @@ Aplikacja umożliwiająca zapisywanie codziennych wydatków i wyświetlanie stat
 
 ## TODO
 
-- Skróty klawiszowe?
+- Skróty klawiszowe
 - Ustawienia
   - zmiana ścieżki do danych
 - Wypalenie:
   - szacowany dzienny wydatek na każdy dzień
 - RadioChart per kategorie (lub x największych i pozostałe)
 - Raport
-- Zrzut ekranu
 - Cofnij/powtórz wykonaną operację
 - Sortowanie / zmiana kolejności kategorii
 - Najczęściej używane kategorie na górze listy rozwijanej
