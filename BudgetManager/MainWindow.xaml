@@ -66,7 +66,8 @@
                                         Content="Podsumowanie"
                                         Tag="home">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE10F;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/home.png"/>
+                            <!-- Glyph="&#xE10F;"/> -->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
                     
@@ -74,15 +75,17 @@
                                         Content="Tabela"
                                         Tag="table">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE138;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/table.png"/>
+                            <!--<FontIcon Glyph="&#xE138;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
                     
-                    <NavigationViewItem x:Uid="ListavItem"
+                    <NavigationViewItem x:Uid="ListNavItem"
                                         Content="Lista wydatków"
                                         Tag="exp_list">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xEA37;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/list.png"/>
+                            <!--<FontIcon Glyph="&#xEA37;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -90,7 +93,8 @@
                                         Content="Wypalenie"
                                         Tag="exp_burndown">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE9D2;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/burndown.png"/>
+                            <!--<FontIcon Glyph="&#xE9D2;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -98,11 +102,12 @@
                                         Content="Lista i wypalenie"
                                         Tag="exp_list_and_burndown">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xEA37;&#xE9D2;">
+                            <ImageIcon Source="ms-appx:///Assets/Icons/list_burndown.png"/>
+                            <!--<FontIcon Glyph="&#xEA37;&#xE9D2;">
                                 <FontIcon.Clip>
                                     <RectangleGeometry Rect="5, 0, 28, 28"/>
                                 </FontIcon.Clip>
-                            </FontIcon>
+                            </FontIcon>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -110,7 +115,8 @@
                                         Content="Szczegóły"
                                         Tag="month_details">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xED43;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/details.png"/>
+                            <!--<FontIcon Glyph="&#xED43;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -122,7 +128,8 @@
                                         Content="Historia miesięczna"
                                         Tag="history">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE81C;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/months.png"/>
+                            <!--<FontIcon Glyph="&#xE81C;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -130,7 +137,8 @@
                                         Content="Historia kwartalna"
                                         Tag="history_quarters">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE81C;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/quarters.png"/>
+                            <!--<FontIcon Glyph="&#xE81C;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
                 </NavigationView.MenuItems>
@@ -150,7 +158,8 @@
                                         Tag="save"
                                         SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE74E;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/save.png"/>
+                            <!--<FontIcon Glyph="&#xE74E;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -159,7 +168,8 @@
                                         Tag="prev_month"
                                         SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE76B;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/prev.png"/>
+                            <!--<FontIcon Glyph="&#xE76B;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -168,7 +178,8 @@
                                         Tag="next_month"
                                         SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE76C;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/next.png"/>
+                            <!--<FontIcon Glyph="&#xE76C;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
@@ -177,14 +188,20 @@
                                         Tag="months_list"
                                         SelectsOnInvoked="false">
                         <NavigationViewItem.Icon>
-                            <FontIcon Glyph="&#xE787;"/>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/calendar.png"/>
+                            <!--<FontIcon Glyph="&#xE787;"/>-->
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
 
                     <NavigationViewItem x:Uid="SettingsNavItem"
-                                        Icon="Setting"
                                         Content="Ustawienia"
-                                        Tag="settings"/>
+                                        Tag="settings">
+
+                        <NavigationViewItem.Icon>
+                            <ImageIcon Source="ms-appx:///Assets/Icons/settings.png"/>
+                            <!-- Settings -->
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
                 </NavigationView.FooterMenuItems>
 
                 <Frame x:Name="ContentFrame"
@@ -203,7 +220,8 @@
                                         <MenuFlyoutItem Click="Screenshot_Click"
                                                         Text="Kopiuj zawartość do schowka">
                                             <MenuFlyoutItem.Icon>
-                                                <FontIcon Glyph="&#xE114;"/>
+                                                <ImageIcon Source="ms-appx:///Assets/Icons/clipboard.png"/>
+                                                <!--<FontIcon Glyph="&#xE114;"/>-->
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
                                     </MenuFlyout>
