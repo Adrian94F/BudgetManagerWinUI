@@ -7,10 +7,18 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Media.Imaging;
 using System;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.System;
-using Windows.UI.ViewManagement;
+using Windows.UI.Composition;
 using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -213,9 +221,29 @@ namespace BudgetManager
             Screenshot();
         }
 
-        private void Screenshot()
+        private async void Screenshot()
         {
+            var element = ContentFrame;
+            var bg = element.Background;
+            element.Background = ContentFrame.ActualTheme == ElementTheme.Light ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
 
+            var renderTargetBitmap = new RenderTargetBitmap();
+            await renderTargetBitmap.RenderAsync(element);
+            element.Background = bg;
+
+            var pixels = await renderTargetBitmap.GetPixelsAsync();
+            var stream = new InMemoryRandomAccessStream();
+            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+            byte[] bytes = pixels.ToArray();
+            encoder.SetPixelData(BitmapPixelFormat.Bgra8,
+                                    BitmapAlphaMode.Ignore,
+                                    (uint)element.ActualWidth, (uint)element.ActualHeight,
+                                    96, 96, bytes);
+            await encoder.FlushAsync();
+
+            var dp = new DataPackage();
+            dp.SetBitmap(RandomAccessStreamReference.CreateFromStream(stream));
+            Clipboard.SetContent(dp);
         }
 
         private async void KeyboardAccelerator_Invoked(Microsoft.UI.Xaml.Input.KeyboardAccelerator sender, Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
