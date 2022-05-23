@@ -12,13 +12,14 @@
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <DefaultLanguage>pl-PL</DefaultLanguage>
     <ApplicationIcon>calculator.ico</ApplicationIcon>
+    <Authors>Adrian Frydmański</Authors>
+    <Company>frydm_n</Company>
+    <Version>2.0.0</Version>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>calculator.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="Assets\BadgeLogo.scale-100.png" />
-    <Content Remove="Assets\BadgeLogo.scale-125.png" />
-    <Content Remove="Assets\BadgeLogo.scale-150.png" />
-    <Content Remove="Assets\BadgeLogo.scale-200.png" />
-    <Content Remove="Assets\BadgeLogo.scale-400.png" />
+    <Content Remove="Assets\Icons\calculator.png" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Controls\ExpDetails.xaml" />
@@ -42,12 +43,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="calculator.ico" />
   </ItemGroup>
 
@@ -59,6 +54,20 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22504-preview" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Icons\calculator.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
