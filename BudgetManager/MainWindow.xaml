@@ -16,17 +16,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--<Grid.KeyboardAccelerators>
-            <KeyboardAccelerator Key="S"
-                                 Modifiers="Control"
-                                 Invoked="KeyboardAccelerator_Invoked"/>
-            <KeyboardAccelerator Key="Print"
-                                 Modifiers="None"
-                                 Invoked="KeyboardAccelerator_Invoked"/>
-            <KeyboardAccelerator Key="Escape"
-                                 Modifiers="None"
-                                 Invoked="KeyboardAccelerator_Invoked"/>
-        </Grid.KeyboardAccelerators>-->
+        <Grid>
+            <Grid.KeyboardAccelerators>
+                <KeyboardAccelerator Key="Escape"
+                                     Modifiers="None"
+                                     Invoked="KeyboardAccelerator_Invoked"/>
+            </Grid.KeyboardAccelerators>
+        </Grid>
 
         <Border x:Name="TitleBar"
                 Margin="48, 0, 0, 0"
@@ -161,6 +157,11 @@
                             <ImageIcon Source="ms-appx:///Assets/Icons/save.png"/>
                             <!--<FontIcon Glyph="&#xE74E;"/>-->
                         </NavigationViewItem.Icon>
+                        <NavigationViewItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="S"
+                                 Modifiers="Control"
+                                 Invoked="KeyboardAccelerator_Invoked"/>
+                        </NavigationViewItem.KeyboardAccelerators>
                     </NavigationViewItem>
 
                     <NavigationViewItem x:Uid="PrevMonthNavItem"
@@ -171,6 +172,10 @@
                             <ImageIcon Source="ms-appx:///Assets/Icons/prev.png"/>
                             <!--<FontIcon Glyph="&#xE76B;"/>-->
                         </NavigationViewItem.Icon>
+                        <NavigationViewItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="PageUp"
+                                 Invoked="KeyboardAccelerator_Invoked"/>
+                        </NavigationViewItem.KeyboardAccelerators>
                     </NavigationViewItem>
 
                     <NavigationViewItem x:Uid="NextMonthNavItem"
@@ -181,6 +186,10 @@
                             <ImageIcon Source="ms-appx:///Assets/Icons/next.png"/>
                             <!--<FontIcon Glyph="&#xE76C;"/>-->
                         </NavigationViewItem.Icon>
+                        <NavigationViewItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="PageDown"
+                                 Invoked="KeyboardAccelerator_Invoked"/>
+                        </NavigationViewItem.KeyboardAccelerators>
                     </NavigationViewItem>
 
                     <NavigationViewItem x:Uid="MonthsNavItem"

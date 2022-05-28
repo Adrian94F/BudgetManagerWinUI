@@ -12,6 +12,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics.Imaging;
 using Windows.Storage;
@@ -132,38 +133,15 @@ namespace BudgetManager
                     break;
 
                 case "save":
-                    AppData.Save();
-                    var saveDialog = new ContentDialog()
-                    {
-                        Title = "Zapisano dane.",
-                        CloseButtonText = "Ok",
-                        XamlRoot = AppData.NavigationView.XamlRoot,
-                    };
-                    await saveDialog.ShowAsync();
+                    Save();
                     break;
 
                 case "prev_month":
-                    if (IsSelectedMonthPage())
-                    {
-                        if (AppData.SelectPreviousMonth())
-                        {
-                            ContentFrame.Navigate(ContentFrame.Content.GetType(),
-                                                  null,
-                                                  new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
-                        }
-                    }
+                    PreviousMonth();
                     break;
 
                 case "next_month":
-                    if (IsSelectedMonthPage())
-                    {
-                        if (AppData.SelectNextMonth())
-                        {
-                            ContentFrame.Navigate(ContentFrame.Content.GetType(),
-                                              null,
-                                              new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
-                        }
-                    }
+                    NextMonth();
                     break;
 
                 case "months_list":
@@ -190,6 +168,28 @@ namespace BudgetManager
             var page = ContentFrame.Content as IPageWithInfo;
             NavView.Header = page.header;
             Logger.Log("changed page to: " + page.header);
+        }
+
+        private void PreviousMonth()
+        {
+            if (IsSelectedMonthPage() && AppData.SelectPreviousMonth())
+            {
+                ContentFrame.Navigate(
+                    ContentFrame.Content.GetType(),
+                    null,
+                    new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft });
+            }
+        }
+
+        private void NextMonth()
+        {
+            if (IsSelectedMonthPage() && AppData.SelectNextMonth())
+            {
+                ContentFrame.Navigate(
+                    ContentFrame.Content.GetType(),
+                    null,
+                    new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            }
         }
 
         private void MonthsList_MonthSelected(object sender, EventArgs args)
@@ -246,53 +246,33 @@ namespace BudgetManager
             Clipboard.SetContent(dp);
         }
 
-        private async void KeyboardAccelerator_Invoked(Microsoft.UI.Xaml.Input.KeyboardAccelerator sender, Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
+        private async Task Save()
         {
-            var closeDialog = new ContentDialog()
-            {
-                Title = "Zamykanie aplikacji",
-                Content = "Czy chcesz zapisać wprowadzone zmiany? W przypadku braku zapisu zostaną one utracone.",
-                PrimaryButtonText = "Tak",
-                SecondaryButtonText = "Nie",
-                CloseButtonText = "Anuluj",
-                XamlRoot = AppData.NavigationView.XamlRoot,
-            };
+            AppData.Save();
             var saveDialog = new ContentDialog()
             {
                 Title = "Zapisano dane.",
                 CloseButtonText = "Ok",
                 XamlRoot = AppData.NavigationView.XamlRoot,
             };
+            await saveDialog.ShowAsync();
+        }
+
+        private async void KeyboardAccelerator_Invoked(Microsoft.UI.Xaml.Input.KeyboardAccelerator sender, Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)
+        {
             switch (args.KeyboardAccelerator)
             {
                 case { Key: VirtualKey.S, Modifiers: VirtualKeyModifiers.Control }:
-                    AppData.Save();
-                    await saveDialog.ShowAsync();
-                    break;
-                case { Key: VirtualKey.Print, Modifiers: VirtualKeyModifiers.None }:
-                    Screenshot();
+                    await Save();
                     break;
                 case { Key: VirtualKey.Escape, Modifiers: VirtualKeyModifiers.None }:
                     if (NavView.IsBackEnabled)
                     {
                         GoBack();
                     }
-                    /*else
-                    {
-                        ContentDialogResult result = await closeDialog.ShowAsync();
-                        switch (result)
-                        {
-                            case ContentDialogResult.Primary:
-                                AppData.Save();
-                                App.Current.Exit();
-                                break;
-                            case ContentDialogResult.Secondary:
-                                App.Current.Exit();
-                                break;
-                            default:
-                                break;
-                        }
-                    }*/
+                    break;
+                case { Key: VirtualKey.PageUp, Modifiers: VirtualKeyModifiers.None }:
+                    AppData.SelectPreviousMonth();
                     break;
             }
         }

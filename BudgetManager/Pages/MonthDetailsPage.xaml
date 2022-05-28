@@ -37,11 +37,11 @@
 
                     <StackPanel Margin="8">
                         <TextBlock Text="Planowane oszczędności"
-                               Margin="8"
-                               Style="{StaticResource BodyTextBlockStyle}"/>
+                                   Margin="8"
+                                   Style="{StaticResource BodyTextBlockStyle}"/>
                         <NumberBox x:Name="PlannedSavingsNumberBox"
-                               Margin="8"
-                               ValueChanged="PlannedSavingsNumberBox_ValueChanged"/>
+                                   Margin="8"
+                                   ValueChanged="PlannedSavingsNumberBox_ValueChanged"/>
                     </StackPanel>
                 </controls:WrapPanel>
             </Border>
