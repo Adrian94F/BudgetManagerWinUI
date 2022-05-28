@@ -71,14 +71,11 @@ namespace BudgetManager.Controls
             ValueNumberBox.Focus(FocusState.Pointer);
         }
 
-        private void DatePicker_DateChanged(object sender, DatePickerValueChangedEventArgs e)
+        private void DatePicker_DateChanged(object sender, CalendarDatePickerDateChangedEventArgs e)
         {
-            var picker = sender as DatePicker;
-            var dateTimeOffset = picker.SelectedDate;
-            if (dateTimeOffset != null)
+            if (e.NewDate.HasValue)
             {
-                var date = dateTimeOffset.Value.Date;
-                Expense.Date = date;
+                Expense.Date = e.NewDate.Value.DateTime;
                 OnExpUpdate();
             }
         }
@@ -165,7 +162,7 @@ namespace BudgetManager.Controls
 
         private bool IsReadyToBeAdded()
         {
-            return DatePicker.SelectedDate != null
+            return DatePicker.Date != null
                    && ValueNumberBox.Value != 0
                    && ValueNumberBox.Value != double.NaN
                    && CategoryComboBox.SelectedItem != null;

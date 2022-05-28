@@ -27,11 +27,10 @@
                 <controls:DockPanel HorizontalAlignment="Stretch"
                                     LastChildFill="False"
                                     Margin="0, 8">
-                    <DatePicker x:Name="DatePicker"
-                                controls:DockPanel.Dock="Left"
-                                SelectedDate="{x:Bind Expense.Date}"
-                                Date="{x:Bind Expense.Date}"
-                                DateChanged="DatePicker_DateChanged"/>
+                    <CalendarDatePicker x:Name="DatePicker"
+                                        controls:DockPanel.Dock="Left"
+                                        Date="{x:Bind Expense.Date}"
+                                        DateChanged="DatePicker_DateChanged"/>
 
                     <CheckBox x:Name="MonthlyCheckBox"
                               controls:DockPanel.Dock="Right"
