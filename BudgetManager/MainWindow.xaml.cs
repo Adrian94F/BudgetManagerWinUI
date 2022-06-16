@@ -163,8 +163,6 @@ namespace BudgetManager
                     break;
             }
 
-            DisableBackButton();
-
             var page = ContentFrame.Content as IPageWithInfo;
             NavView.Header = page.header;
             Logger.Log("changed page to: " + page.header);
@@ -205,15 +203,12 @@ namespace BudgetManager
 
         private void GoBack()
         {
-            ContentFrame.GoBack(new DrillInNavigationTransitionInfo());
-            DisableBackButton();
+            if (ContentFrame.CanGoBack)
+            {
+                ContentFrame.GoBack(new DrillInNavigationTransitionInfo());
+            }
             NavView.Header = (ContentFrame.Content as IPageWithInfo).header;
             Logger.Log("changed page to: " + NavView.Header);
-        }
-
-        private void DisableBackButton()
-        {
-            NavView.IsBackEnabled = false;
         }
 
         private void Screenshot_Click(object sender, RoutedEventArgs e)
@@ -266,13 +261,13 @@ namespace BudgetManager
                     await Save();
                     break;
                 case { Key: VirtualKey.Escape, Modifiers: VirtualKeyModifiers.None }:
-                    if (NavView.IsBackEnabled)
-                    {
-                        GoBack();
-                    }
+                    GoBack();
                     break;
                 case { Key: VirtualKey.PageUp, Modifiers: VirtualKeyModifiers.None }:
-                    AppData.SelectPreviousMonth();
+                    PreviousMonth();
+                    break;
+                case { Key: VirtualKey.PageDown, Modifiers: VirtualKeyModifiers.None }:
+                    NextMonth();
                     break;
             }
         }

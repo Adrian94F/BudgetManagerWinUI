@@ -25,6 +25,7 @@ namespace BudgetManager.Pages
         private static List<double> catSums;
         private static List<List<double>> dateCatSums;
 
+        private bool expChanged = false;
         private double columnWidth = 50;
         private Thickness padding = new Thickness(5, 1, 5, 1);
         private Thickness margin = new Thickness(1);
@@ -46,15 +47,20 @@ namespace BudgetManager.Pages
             }
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (AppData.CurrentMonth != null)
             {
-                await Task.Run(() => CountSums());
-                ShowTableLabels();
-                FillTableWithSumsAndlabels();
-                LoadingControl.IsLoading = false;
+                FillPage();
             }
+        }
+
+        private async void FillPage()
+        {
+            await Task.Run(() => CountSums());
+            ShowTableLabels();
+            FillTableWithSumsAndlabels();
+            LoadingControl.IsLoading = false;
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -108,6 +114,13 @@ namespace BudgetManager.Pages
             TextBlock11.Visibility = Visibility.Visible;
         }
 
+        private void HideTableLabels()
+        {
+            TextBlock01.Visibility = Visibility.Collapsed;
+            TextBlock10.Visibility = Visibility.Collapsed;
+            TextBlock11.Visibility = Visibility.Collapsed;
+        }
+
         private static void CountSums()
         {
             var nOfColumns = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 1;
@@ -137,9 +150,48 @@ namespace BudgetManager.Pages
 
         private void NavigateToExpListPageWithParam(object par)
         {
-            AppData.NavigationView.IsBackEnabled = true;
-            AppData.MainFrame.Navigate(typeof(ExpListPage), par, new DrillInNavigationTransitionInfo());
-            AppData.NavigationView.Header = (AppData.MainFrame.Content as IPageWithInfo).header;
+            ExpTableSplitView.IsPaneOpen = true;
+            var frame = new Frame();
+            frame.Navigate(typeof(ExpListPage), par, new DrillInNavigationTransitionInfo());
+            ((ExpListPage)frame.Content).ExpChanged += TablePage_ExpChanged;
+            ExpTableSplitViewPane.Child = frame;
+            //AppData.NavigationView.IsBackEnabled = true;
+            //AppData.MainFrame.Navigate(typeof(ExpListPage), par, new DrillInNavigationTransitionInfo());
+            //AppData.NavigationView.Header = (AppData.MainFrame.Content as IPageWithInfo).header;
+        }
+
+        private void TablePage_ExpChanged(object sender, EventArgs e)
+        {
+            expChanged = true;
+        }
+
+        private void ExpTableSplitView_PaneClosed(SplitView sender, object args)
+        {
+            if (expChanged)
+            {
+                expChanged = false;
+                FillPage();
+            }
+        }
+
+        private void ExpTableSplitView_PaneClosing(SplitView sender, SplitViewPaneClosingEventArgs args)
+        {
+            if (expChanged)
+            {
+                HideTableLabels();
+                DaysGrid.Children.Clear();
+                DaysGrid.ColumnDefinitions.Clear();
+                DaySumsGrid.Children.Clear();
+                DaySumsGrid.ColumnDefinitions.Clear();
+                CategoriesGrid.Children.Clear();
+                CategoriesGrid.ColumnDefinitions.Clear();
+                CategorySumsGrid.Children.Clear();
+                CategorySumsGrid.RowDefinitions.Clear();
+                ExpensesGrid.Children.Clear();
+                ExpensesGrid.RowDefinitions.Clear();
+                ExpensesGrid.ColumnDefinitions.Clear();
+                LoadingControl.IsLoading = true;
+            }
         }
 
         private void FillTableWithSumsAndlabels()
@@ -386,6 +438,5 @@ namespace BudgetManager.Pages
             });
             AddRectangleAt(row, col, rowSpan, colSpan, fill, grid);
         }
-
     }
 }

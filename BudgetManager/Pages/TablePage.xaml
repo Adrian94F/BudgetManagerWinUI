@@ -8,103 +8,126 @@
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
     Loaded="Page_Loaded">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"
-                            MaxWidth="300"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <SplitView x:Name="ExpTableSplitView"
+               IsPaneOpen="False"
+               PanePlacement="Right"
+               DisplayMode="Overlay"
+               OpenPaneLength="600"
+               PaneBackground="Transparent"
+               PaneClosing="ExpTableSplitView_PaneClosing"
+               PaneClosed="ExpTableSplitView_PaneClosed">
+        <SplitView.Pane>
+            <Border x:Name="ExpTableSplitViewPane"
+                    Background="{ThemeResource FlyoutBackgroundThemeBrush}"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="0, 0, 0, 16"
+                    Margin="0"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"/>
+        </SplitView.Pane>
+
+        <Grid Padding="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"
+                                  MaxWidth="300"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
 
-        <TextBlock x:Name="TextBlock01"
-                   Grid.Row="1"
-                   Text="Kategoria"
-                   Padding="4, 0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Visibility="Collapsed"/>
-        <TextBlock x:Name="TextBlock10"
-                   Grid.Column="1"
-                   Text="Data"
-                   Padding="4, 0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Visibility="Collapsed"/>
-        <TextBlock x:Name="TextBlock11"
-                   Grid.Row="1"
-                   Grid.Column="1"
-                   Text="Suma"
-                   Padding="4, 0"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"
-                   Visibility="Collapsed"/>
+            <TextBlock x:Name="TextBlock01"
+                       Grid.Row="1"
+                       Text="Kategoria"
+                       Padding="8, 0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed"/>
+            <TextBlock x:Name="TextBlock10"
+                       Grid.Column="1"
+                       Text="Data"
+                       Padding="8, 0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed"/>
+            <TextBlock x:Name="TextBlock11"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Text="Suma"
+                       Padding="8, 0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed"/>
 
 
-        <ScrollViewer x:Name="DaysScrollViewer"
-                      Grid.Row="0"
-                      Grid.Column="2"
-                      Height="24"
-                      HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollMode="Disabled"
-                      ViewChanged="ScrollViewer_ViewChanged">
-            <Grid x:Name="DaysGrid"/>
-        </ScrollViewer>
+            <ScrollViewer x:Name="DaysScrollViewer"
+                          Grid.Row="0"
+                          Grid.Column="2"
+                          Height="24"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollMode="Disabled"
+                          ViewChanged="ScrollViewer_ViewChanged">
+                <Grid x:Name="DaysGrid"/>
+            </ScrollViewer>
 
-        <ScrollViewer x:Name="DaySumsScrollViewer"
-                      Grid.Row="1"
-                      Grid.Column="2"
-                      Height="24"
-                      HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollMode="Disabled"
-                      ViewChanged="ScrollViewer_ViewChanged">
-            <Grid x:Name="DaySumsGrid"/>
-        </ScrollViewer>
+            <ScrollViewer x:Name="DaySumsScrollViewer"
+                          Grid.Row="1"
+                          Grid.Column="2"
+                          Height="24"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollMode="Disabled"
+                          ViewChanged="ScrollViewer_ViewChanged">
+                <Grid x:Name="DaySumsGrid"/>
+            </ScrollViewer>
 
-        <ScrollViewer x:Name="CategoriesScrollViewer"
-                      Grid.Row="2"
-                      Grid.Column="0"
-                      HorizontalScrollMode="Disabled"
-                      VerticalScrollBarVisibility="Hidden"
-                      ViewChanged="ScrollViewer_ViewChanged">
-            <Grid x:Name="CategoriesGrid"/>
-        </ScrollViewer>
+            <ScrollViewer x:Name="CategoriesScrollViewer"
+                          Grid.Row="2"
+                          Grid.Column="0"
+                          HorizontalScrollMode="Disabled"
+                          VerticalScrollBarVisibility="Hidden"
+                          ViewChanged="ScrollViewer_ViewChanged">
+                <Grid x:Name="CategoriesGrid"/>
+            </ScrollViewer>
 
-        <ScrollViewer x:Name="CategorySumsScrollViewer"
-                      Grid.Row="2"
-                      Grid.Column="1"
-                      HorizontalScrollMode="Disabled"
-                      VerticalScrollBarVisibility="Hidden"
-                      ViewChanged="ScrollViewer_ViewChanged">
-            <Grid x:Name="CategorySumsGrid"/>
-        </ScrollViewer>
+            <ScrollViewer x:Name="CategorySumsScrollViewer"
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          HorizontalScrollMode="Disabled"
+                          VerticalScrollBarVisibility="Hidden"
+                          ViewChanged="ScrollViewer_ViewChanged">
+                <Grid x:Name="CategorySumsGrid"/>
+            </ScrollViewer>
 
-        <ScrollViewer x:Name="ExpensesScrollViewer"
-                      HorizontalScrollBarVisibility="Visible"
-                      VerticalAlignment="Stretch"
-                      VerticalScrollBarVisibility="Visible"
-                      Grid.Row="2"
-                      Grid.Column="2"
-                      ViewChanged="ScrollViewer_ViewChanged">
-            <Grid x:Name="ExpensesGrid"
-                  SizeChanged="Grid_SizeChanged"/>
-        </ScrollViewer>
+            <ScrollViewer x:Name="ExpensesScrollViewer"
+                          HorizontalScrollBarVisibility="Visible"
+                          VerticalAlignment="Stretch"
+                          VerticalScrollBarVisibility="Visible"
+                          Grid.Row="2"
+                          Grid.Column="2"
+                          ViewChanged="ScrollViewer_ViewChanged">
+                <Grid x:Name="ExpensesGrid"
+                      SizeChanged="Grid_SizeChanged"/>
+            </ScrollViewer>
 
-        <controls:Loading x:Name="LoadingControl"
-                          IsLoading="True"
-                          Grid.RowSpan="3"
-                          Grid.ColumnSpan="3">
-            <StackPanel Padding="12">
-                <ProgressRing IsActive="True"
+            <controls:Loading x:Name="LoadingControl"
+                              IsLoading="True"
+                              Grid.RowSpan="3"
+                              Grid.ColumnSpan="3">
+                <StackPanel Padding="12">
+                    <ProgressRing IsActive="True"
                               Margin="8"/>
-                <TextBlock Text="Ładowanie"
-                           VerticalAlignment="Center" />
-            </StackPanel>
-        </controls:Loading>
-    </Grid>
+                    <TextBlock Text="Ładowanie"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </controls:Loading>
+        </Grid>
+    </SplitView>
 </Page>

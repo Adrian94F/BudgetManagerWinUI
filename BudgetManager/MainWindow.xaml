@@ -25,11 +25,11 @@
         </Grid>
 
         <Border x:Name="TitleBar"
-                Margin="48, 0, 0, 0"
-                Padding="13"
+                Margin="8, 0, 0, 0"
+                Padding="8"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Top"
-                Grid.Row="1">
+                Grid.Row="0">
             <TextBlock x:Name="AppTitleTextBlock"
                        TextWrapping="NoWrap"
                        Text="Menedżer Budżetu"/>
@@ -46,8 +46,7 @@
 
             <NavigationView x:Name="NavView"
                             BackRequested="NavView_BackRequested"
-                            IsBackButtonVisible="Visible"
-                            IsBackEnabled ="False"
+                            IsBackButtonVisible="Collapsed"
                             IsPaneToggleButtonVisible="True"
                             IsSettingsVisible="False"
                             ItemInvoked="NavView_ItemInvoked"

@@ -12,7 +12,7 @@
                IsPaneOpen="False"
                PanePlacement="Right"
                DisplayMode="Overlay"
-               OpenPaneLength="500"
+               OpenPaneLength="400"
                PaneBackground="Transparent">
         <SplitView.Pane>
             <Border x:Name="ExpListSplitViewPane"
