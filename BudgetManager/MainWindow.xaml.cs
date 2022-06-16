@@ -9,17 +9,13 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics.Imaging;
-using Windows.Storage;
-using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.System;
-using Windows.UI.Composition;
 using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
