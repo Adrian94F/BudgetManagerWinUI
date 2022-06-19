@@ -2,6 +2,8 @@
 
 Aplikacja umożliwiająca zapisywanie codziennych wydatków i wyświetlanie statystyk.
 
+![menu główne](./doc/1.png)
+
 ## Funkcje
 
 - Kontrola wykorzystania planowanego miesięcznego budżetu
@@ -11,6 +13,14 @@ Aplikacja umożliwiająca zapisywanie codziennych wydatków i wyświetlanie stat
 - Ustalanie planowanych oszczędności w miesiącu
 - Wyświetlanie szacowanego dziennego limitu wydatków
 - Przegląd statystyk miesięcznych i kwartalnych
+
+![tablica wydatków](./doc/2.png)
+
+![wypalenie](./doc/3.png)
+
+![historia miesięczna](./doc/4.png)
+
+![historia kwartalna](./doc/5.png)
 
 ## TODO
 
