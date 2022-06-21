@@ -2,6 +2,7 @@
 using BudgetManager.Utilities;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using System;
 using System.Collections.ObjectModel;
@@ -11,6 +12,20 @@ using System.Collections.ObjectModel;
 
 namespace BudgetManager.Controls
 {
+    public class TimeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return new DateTimeOffset(((DateTime)value).ToUniversalTime());
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return value != null ? ((DateTimeOffset)value).DateTime : DateTime.Now;
+        }
+    }
+
     public sealed partial class ExpDetails : UserControl
     {
         public Expense Expense { get; set; }

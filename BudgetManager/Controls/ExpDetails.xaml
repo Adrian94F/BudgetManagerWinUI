@@ -7,6 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     mc:Ignorable="d"
     Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <local:TimeConverter x:Key="TimeConverter"/>
+    </UserControl.Resources>
 
     <ScrollViewer VerticalAlignment="Stretch">
         <Grid>
@@ -29,7 +32,7 @@
                                     Margin="0, 8">
                     <CalendarDatePicker x:Name="DatePicker"
                                         controls:DockPanel.Dock="Left"
-                                        Date="{x:Bind Expense.Date}"
+                                        Date="{x:Bind Expense.Date, Mode=TwoWay, Converter={StaticResource TimeConverter}}"
                                         DateChanged="DatePicker_DateChanged"/>
 
                     <CheckBox x:Name="MonthlyCheckBox"
