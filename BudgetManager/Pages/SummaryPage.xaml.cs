@@ -45,9 +45,9 @@ namespace BudgetManager.Pages
             var balance = incSum - expSum - savings;
             var isActualMonth = (DateTime.Today - month.StartDate).Days >= 0 && (month.EndDate - DateTime.Today).Days >= 0;
             var daysLeft = (month.EndDate - DateTime.Today).Days + 1;
-            var balanceWithoutToday = balance + month.GetSumOfAllExpensesOfDate(DateTime.Today);
-            var estimatedExpense = balanceWithoutToday >= 0 ? (isActualMonth ? Math.Round(balanceWithoutToday / daysLeft, 2) : Math.Round(balance, 2)) : 0;
             var todayExpenses = month.GetSumOfDailyExpensesOfDate(DateTime.Today);
+            var balanceWithoutToday = balance + todayExpenses;
+            var estimatedExpense = balanceWithoutToday >= 0 ? (isActualMonth ? Math.Round(balanceWithoutToday / daysLeft, 2) : Math.Round(balance, 2)) : 0;
             var todayExpensesPercent = estimatedExpense != 0 ? todayExpenses / estimatedExpense * 100 : -1;
 
             header += " " + startDate + "-" + endDate;
