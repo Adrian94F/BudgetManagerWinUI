@@ -14,7 +14,10 @@ namespace BudgetManager.Utilities
 {
     internal static class BurndownProvider
     {
-        private static readonly int nOfDays = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 2;
+        private static int nOfDays()
+        {
+            return (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 2;
+        }
 
         private enum ExpensesSeries
         {
@@ -33,9 +36,9 @@ namespace BudgetManager.Utilities
         };
         private static string[] GetLabels()
         {
-            var labels = new string[nOfDays];
+            var labels = new string[nOfDays()];
             labels[0] = "";
-            for (var i = 1; i < nOfDays; i++)
+            for (var i = 1; i < nOfDays(); i++)
             {
                 labels[i] = AppData.CurrentMonth.StartDate.AddDays(i - 1).ToString("dd");
             }
@@ -45,9 +48,9 @@ namespace BudgetManager.Utilities
 
         private static double?[] GetSumsOfExpenses(ExpensesType type)
         {
-            var expenses = new double?[nOfDays];
+            var expenses = new double?[nOfDays()];
             expenses[0] = null;
-            for (var i = 1; i < nOfDays; i++)
+            for (var i = 1; i < nOfDays(); i++)
             {
                 var date = AppData.CurrentMonth.StartDate.AddDays(i - 1);
                 var sum = type == ExpensesType.Daily ? (double)AppData.CurrentMonth.GetSumOfDailyExpensesOfDate(date)
@@ -150,11 +153,11 @@ namespace BudgetManager.Utilities
 
         private static double[] GetBurndown(ExpensesType type)
         {
-            var burnValues = new double[nOfDays];
+            var burnValues = new double[nOfDays()];
             var incomeSum = GetIncomeSum(type);
 
             var yesterdaySum = burnValues[0] = incomeSum;
-            for (var i = 1; i < nOfDays; i++)
+            for (var i = 1; i < nOfDays(); i++)
             {
                 burnValues[i] = yesterdaySum;
                 switch (type)
@@ -174,12 +177,12 @@ namespace BudgetManager.Utilities
 
         private static double[] GetAverageBurndown(ExpensesType type)
         {
-            var avgBurnValues = new double[nOfDays];
+            var avgBurnValues = new double[nOfDays()];
             var incomeSum = GetIncomeSum(type);
             var plannedSavings = (double)AppData.CurrentMonth.PlannedSavings;
-            for (var i = 0; i < nOfDays; i++)
+            for (var i = 0; i < nOfDays(); i++)
             {
-                var a = -(incomeSum - plannedSavings) / (nOfDays - 1);
+                var a = -(incomeSum - plannedSavings) / (nOfDays() - 1);
                 var b = incomeSum;
                 avgBurnValues[i] = Math.Round(a * i + b, 0);
             }
