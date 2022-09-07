@@ -16,7 +16,7 @@ namespace BudgetManager.Utilities
     {
         private static int nOfDays()
         {
-            return (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 2;
+            return (AppData.SelectedMonth.EndDate - AppData.SelectedMonth.StartDate).Days + 2;
         }
 
         private enum ExpensesSeries
@@ -40,7 +40,7 @@ namespace BudgetManager.Utilities
             labels[0] = "";
             for (var i = 1; i < nOfDays(); i++)
             {
-                labels[i] = AppData.CurrentMonth.StartDate.AddDays(i - 1).ToString("dd");
+                labels[i] = AppData.SelectedMonth.StartDate.AddDays(i - 1).ToString("dd");
             }
 
             return labels;
@@ -52,9 +52,9 @@ namespace BudgetManager.Utilities
             expenses[0] = null;
             for (var i = 1; i < nOfDays(); i++)
             {
-                var date = AppData.CurrentMonth.StartDate.AddDays(i - 1);
-                var sum = type == ExpensesType.Daily ? (double)AppData.CurrentMonth.GetSumOfDailyExpensesOfDate(date)
-                                                     : (double)AppData.CurrentMonth.GetSumOfMonthlyExpensesOfDate(date);
+                var date = AppData.SelectedMonth.StartDate.AddDays(i - 1);
+                var sum = type == ExpensesType.Daily ? (double)AppData.SelectedMonth.GetSumOfDailyExpensesOfDate(date)
+                                                     : (double)AppData.SelectedMonth.GetSumOfMonthlyExpensesOfDate(date);
                 expenses[i] = Math.Round(sum, 2) == 0 ? null : Math.Round(sum, 0);
             }
             return expenses;
@@ -102,7 +102,7 @@ namespace BudgetManager.Utilities
             var sections = new List<Section<SkiaSharpDrawingContext>>();
 
             // today
-            var todayOffset = (DateTime.Today - AppData.CurrentMonth.StartDate).Days;
+            var todayOffset = (DateTime.Today - AppData.SelectedMonth.StartDate).Days;
             var todaySection = new RectangularSection
             {
                 Fill = new SolidColorPaint
@@ -115,12 +115,12 @@ namespace BudgetManager.Utilities
             sections.Add(todaySection);
 
             // weekends
-            var start = AppData.CurrentMonth.StartDate;
+            var start = AppData.SelectedMonth.StartDate;
             int daysUntilSaturday = ((int)DayOfWeek.Saturday - (int)start.DayOfWeek + 7) % 7;
             var saturday = start.AddDays(daysUntilSaturday);
-            while ((AppData.CurrentMonth.EndDate - saturday).Days >= 0)
+            while ((AppData.SelectedMonth.EndDate - saturday).Days >= 0)
             {
-                var weekendOffset = (saturday - AppData.CurrentMonth.StartDate).Days;
+                var weekendOffset = (saturday - AppData.SelectedMonth.StartDate).Days;
                 var weekendSection = new RectangularSection
                 {
                     Fill = new SolidColorPaint
@@ -139,11 +139,11 @@ namespace BudgetManager.Utilities
 
         private static double GetIncomeSum(ExpensesType type)
         {
-            var sum = (double)(AppData.CurrentMonth.GetSumOfIncomes());
+            var sum = (double)(AppData.SelectedMonth.GetSumOfIncomes());
             switch (type)
             {
                 case ExpensesType.Daily:
-                    sum -= (double)AppData.CurrentMonth.GetSumOfMonthlyExpenses();
+                    sum -= (double)AppData.SelectedMonth.GetSumOfMonthlyExpenses();
                     break;
                 case ExpensesType.All:
                     break;
@@ -163,10 +163,10 @@ namespace BudgetManager.Utilities
                 switch (type)
                 {
                     case ExpensesType.Daily:
-                        burnValues[i] -= (double)AppData.CurrentMonth.GetSumOfDailyExpensesOfDate(AppData.CurrentMonth.StartDate.AddDays(i - 1));
+                        burnValues[i] -= (double)AppData.SelectedMonth.GetSumOfDailyExpensesOfDate(AppData.SelectedMonth.StartDate.AddDays(i - 1));
                         break;
                     case ExpensesType.All:
-                        burnValues[i] -= (double)AppData.CurrentMonth.GetSumOfAllExpensesOfDate(AppData.CurrentMonth.StartDate.AddDays(i - 1));
+                        burnValues[i] -= (double)AppData.SelectedMonth.GetSumOfAllExpensesOfDate(AppData.SelectedMonth.StartDate.AddDays(i - 1));
                         break;
                 }
                 yesterdaySum = burnValues[i];
@@ -179,7 +179,7 @@ namespace BudgetManager.Utilities
         {
             var avgBurnValues = new double[nOfDays()];
             var incomeSum = GetIncomeSum(type);
-            var plannedSavings = (double)AppData.CurrentMonth.PlannedSavings;
+            var plannedSavings = AppData.SelectedMonth.IsCurrent() ? (double)AppData.SelectedMonth.PlannedSavings : 0.0;
             for (var i = 0; i < nOfDays(); i++)
             {
                 var a = -(incomeSum - plannedSavings) / (nOfDays() - 1);

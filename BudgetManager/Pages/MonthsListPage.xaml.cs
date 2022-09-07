@@ -45,7 +45,7 @@ namespace BudgetManager.Pages
                     MonthsListView.Items.Add(item);
                 }
                 MonthsListView.Items.Add(month);
-                if (AppData.CurrentMonth == month)
+                if (AppData.SelectedMonth == month)
                 {
                     MonthsListView.SelectedItem = month;
                 }
@@ -57,7 +57,7 @@ namespace BudgetManager.Pages
             if (e.ClickedItem is Month month)
             {
                 Logger.Log("clicked month: " + month.ToString());
-                AppData.CurrentMonth = month;
+                AppData.SelectedMonth = month;
                 MonthSelected?.Invoke(this, new EventArgs());
             }
         }
@@ -66,7 +66,7 @@ namespace BudgetManager.Pages
         {
             if (e.AddedItems.First() is not Month)
             {
-                MonthsListView.SelectedItem = AppData.CurrentMonth;
+                MonthsListView.SelectedItem = AppData.SelectedMonth;
             }
         }
 
@@ -99,7 +99,7 @@ namespace BudgetManager.Pages
             };
 
             AppData.Months.Add(newMonth);
-            AppData.CurrentMonth = newMonth;
+            AppData.SelectedMonth = newMonth;
 
             MonthSelected?.Invoke(this, new EventArgs());
         }

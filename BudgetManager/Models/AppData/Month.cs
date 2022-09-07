@@ -27,6 +27,12 @@ namespace BudgetManager
             return start + "-" + end;
         }
 
+        public bool IsCurrent()
+        {
+            var now = DateTime.Now;
+            return now >= StartDate && now <= EndDate;
+        }
+
         public decimal GetSumOfIncomes(Income.IncomeType? type = null)
         {
             var sum = decimal.Zero;

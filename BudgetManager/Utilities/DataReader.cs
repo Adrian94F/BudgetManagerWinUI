@@ -244,7 +244,7 @@ namespace BudgetManager.Utilities
                     AppData.Months.Add(month);
                 }
                 Logger.Log("read " + AppData.Months.Count + " months");
-                AppData.CurrentMonth = AppData.Months.Last();
+                AppData.SelectedMonth = AppData.Months.Last();
 
                 return jsonString;
             }

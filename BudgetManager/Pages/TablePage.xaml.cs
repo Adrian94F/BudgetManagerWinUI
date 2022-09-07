@@ -38,9 +38,9 @@ namespace BudgetManager.Pages
         {
             this.InitializeComponent();
 
-            if (AppData.CurrentMonth != null)
+            if (AppData.SelectedMonth != null)
             {
-                var month = AppData.CurrentMonth;
+                var month = AppData.SelectedMonth;
                 var startDate = month.StartDate.ToString("dd.MM.yyyy");
                 var endDate = month.EndDate.ToString("dd.MM.yyyy");
                 header += " " + startDate + "-" + endDate;
@@ -49,7 +49,7 @@ namespace BudgetManager.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (AppData.CurrentMonth != null)
+            if (AppData.SelectedMonth != null)
             {
                 FillPage();
             }
@@ -70,12 +70,12 @@ namespace BudgetManager.Pages
 
         private void ScrollToToday()
         {
-            if (AppData.CurrentMonth == null || DateTime.Now.CompareTo(AppData.CurrentMonth.EndDate.AddDays(1)) > 0)
+            if (AppData.SelectedMonth == null || DateTime.Now.CompareTo(AppData.SelectedMonth.EndDate.AddDays(1)) > 0)
             {
                 return;
             }
 
-            var lastVisibleColumnPosition = columnWidth * ((DateTime.Today - AppData.CurrentMonth.StartDate).Days + 4);
+            var lastVisibleColumnPosition = columnWidth * ((DateTime.Today - AppData.SelectedMonth.StartDate).Days + 4);
             var scrollViewerWidth = ExpensesScrollViewer.ActualWidth;
             var remainder = (scrollViewerWidth - 1) % columnWidth + 1;
             var rightTodayMargin = columnWidth + remainder;
@@ -123,7 +123,7 @@ namespace BudgetManager.Pages
 
         private static void CountSums()
         {
-            var nOfColumns = (AppData.CurrentMonth.EndDate - AppData.CurrentMonth.StartDate).Days + 1;
+            var nOfColumns = (AppData.SelectedMonth.EndDate - AppData.SelectedMonth.StartDate).Days + 1;
             var nOfRows = AppData.Categories.Count;
 
             dateSums = Enumerable.Repeat(0d, nOfColumns).ToList();
@@ -136,9 +136,9 @@ namespace BudgetManager.Pages
                 dateCatSums.Add(emptyRow);
             }
 
-            foreach (var exp in AppData.CurrentMonth.Expenses)
+            foreach (var exp in AppData.SelectedMonth.Expenses)
             {
-                var dateIndex = (exp.Date - AppData.CurrentMonth.StartDate).Days;
+                var dateIndex = (exp.Date - AppData.SelectedMonth.StartDate).Days;
                 dateIndex = dateIndex < 0 ? 0 : dateIndex;
                 var catIndex = AppData.Categories.ToList().IndexOf(exp.Category);
 
@@ -196,12 +196,12 @@ namespace BudgetManager.Pages
 
         private void FillTableWithSumsAndlabels()
         {
-            AddWeekendsRectangles(DaysGrid, AppData.CurrentMonth);
-            AddWeekendsRectangles(DaySumsGrid, AppData.CurrentMonth);
-            AddTodayRectangle(DaysGrid, AppData.CurrentMonth);
-            AddTodayRectangle(DaySumsGrid, AppData.CurrentMonth);
+            AddWeekendsRectangles(DaysGrid, AppData.SelectedMonth);
+            AddWeekendsRectangles(DaySumsGrid, AppData.SelectedMonth);
+            AddTodayRectangle(DaysGrid, AppData.SelectedMonth);
+            AddTodayRectangle(DaySumsGrid, AppData.SelectedMonth);
 
-            var date = AppData.CurrentMonth.StartDate;
+            var date = AppData.SelectedMonth.StartDate;
             var colIdx = 0;
             foreach (var sum in dateSums)
             {
@@ -300,8 +300,8 @@ namespace BudgetManager.Pages
             {
                 ExpensesGrid.RowDefinitions.Add(new RowDefinition());
             }
-            AddWeekendsRectangles(ExpensesGrid, AppData.CurrentMonth);
-            AddTodayRectangle(ExpensesGrid, AppData.CurrentMonth);
+            AddWeekendsRectangles(ExpensesGrid, AppData.SelectedMonth);
+            AddTodayRectangle(ExpensesGrid, AppData.SelectedMonth);
 
             var catIdx = 0;
             while (catIdx < dateCatSums.Count)
@@ -328,7 +328,7 @@ namespace BudgetManager.Pages
                     };
                     button.Click += (sender, e) =>
                     {
-                        var sumDate = AppData.CurrentMonth.StartDate.AddDays(column);
+                        var sumDate = AppData.SelectedMonth.StartDate.AddDays(column);
                         var category = AppData.Categories.ToArray().GetValue(row) as Category;
                         var param = new Tuple<DateTime, Category>(sumDate, category);
                         NavigateToExpListPageWithParam(param);

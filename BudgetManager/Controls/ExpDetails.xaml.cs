@@ -139,7 +139,7 @@ namespace BudgetManager.Controls
 
         private void Remove()
         {
-            AppData.CurrentMonth.Expenses.Remove(Expense);
+            AppData.SelectedMonth.Expenses.Remove(Expense);
             OnExpUpdate(onRemoval: true);
         }
 
@@ -150,7 +150,7 @@ namespace BudgetManager.Controls
 
         private void Add()
         {
-            AppData.CurrentMonth.Expenses.Add(Expense);
+            AppData.SelectedMonth.Expenses.Add(Expense);
             OnExpUpdate(onNew: true);
         }
 
@@ -158,7 +158,7 @@ namespace BudgetManager.Controls
         {
             if (!onRemoval)
             {
-                isExpenseNew = !AppData.CurrentMonth.Expenses.Contains(Expense);
+                isExpenseNew = !AppData.SelectedMonth.Expenses.Contains(Expense);
                 Logger.Log(isExpenseNew ? "new expense" : "existing expense");
 
                 AddButton.Visibility = isExpenseNew ? Visibility.Visible : Visibility.Collapsed;

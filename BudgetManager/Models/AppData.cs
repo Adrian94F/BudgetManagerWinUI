@@ -14,9 +14,9 @@ namespace BudgetManager.Models
         public static NavigationView NavigationView;
         public static Frame MainFrame;
 
-        private static int currentMonth = -1;
+        private static int selectedMonth = -1;
 
-        public static Month CurrentMonth { get => Months.ElementAtOrDefault(currentMonth); set => currentMonth = Months.ToList().IndexOf(value); }
+        public static Month SelectedMonth { get => Months.ElementAtOrDefault(selectedMonth); set => selectedMonth = Months.ToList().IndexOf(value); }
 
         public static void Initialize()
         {
@@ -81,9 +81,9 @@ namespace BudgetManager.Models
 
         internal static bool SelectPreviousMonth()
         {
-            if (currentMonth != 0)
+            if (selectedMonth != 0)
             {
-                currentMonth--;
+                selectedMonth--;
                 return true;
             }
             return false;
@@ -91,9 +91,9 @@ namespace BudgetManager.Models
 
         internal static bool SelectNextMonth()
         {
-            if (currentMonth < Months.Count - 1)
+            if (selectedMonth < Months.Count - 1)
             {
-                currentMonth++;
+                selectedMonth++;
                 return true;
             }
             return false;

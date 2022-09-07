@@ -21,9 +21,9 @@ namespace BudgetManager.Pages
         {
             this.InitializeComponent();
 
-            if (AppData.CurrentMonth != null)
+            if (AppData.SelectedMonth != null)
             {
-                var month = AppData.CurrentMonth;
+                var month = AppData.SelectedMonth;
                 var startDate = month.StartDate.ToString("dd.MM.yyyy");
                 var endDate = month.EndDate.ToString("dd.MM.yyyy");
                 header += " " + startDate + "-" + endDate;

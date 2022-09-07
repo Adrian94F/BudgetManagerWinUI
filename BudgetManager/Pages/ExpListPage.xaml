@@ -44,7 +44,8 @@
                 <ScrollViewer Grid.Row="0"
                               VerticalScrollBarVisibility="Auto"
                               VerticalAlignment="Stretch"
-                              VerticalContentAlignment="Top">
+                              VerticalContentAlignment="Top"
+                              x:Name="ExpListScrollViewer">
                     <ListView x:Name="ExpListListView"
                               IsItemClickEnabled="True"
                               ItemClick="ExpListListView_ItemClick"

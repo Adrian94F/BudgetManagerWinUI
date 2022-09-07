@@ -35,7 +35,8 @@
                                             DateChanged="DatePicker_DateChanged"/>
                     </StackPanel>
 
-                    <StackPanel Margin="8">
+                    <StackPanel Margin="8"
+                                x:Name="PlanedSavingsStackPanel">
                         <TextBlock Text="Planowane oszczędności"
                                    Margin="8"
                                    Style="{StaticResource BodyTextBlockStyle}"/>

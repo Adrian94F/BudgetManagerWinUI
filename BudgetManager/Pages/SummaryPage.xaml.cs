@@ -24,9 +24,9 @@ namespace BudgetManager.Pages
 
         public void FillPage()
         {
-            if (AppData.CurrentMonth != null)
+            if (AppData.SelectedMonth != null)
             {
-                var month = AppData.CurrentMonth;
+                var month = AppData.SelectedMonth;
                 FillSummaryGrid(month);
             }
         }
@@ -41,7 +41,7 @@ namespace BudgetManager.Pages
             var expSum = month.GetSumOfExpenses();
             var monthlyExpSum = month.GetSumOfMonthlyExpenses();
             var dailyExpSum = expSum - monthlyExpSum;
-            var savings = month.PlannedSavings;
+            var savings = month.IsCurrent() ? month.PlannedSavings : Decimal.Zero;
             var balance = incSum - expSum - savings;
             var isActualMonth = (DateTime.Today - month.StartDate).Days >= 0 && (month.EndDate - DateTime.Today).Days >= 0;
             var daysLeft = (month.EndDate - DateTime.Today).Days + 1;
@@ -59,7 +59,7 @@ namespace BudgetManager.Pages
             MonthlyExpensesSumTextBlock.Text = monthlyExpSum.ToString("F") + " zł";
             ExpensesSumTextBlock.Text = expSum.ToString("F") + " zł";
             ExpensesSumTextBlock2.Text = expSum.ToString("F") + " zł";
-            PlannedSavingsTextBlock.Text = savings.ToString("F") + " zł";
+            PlannedSavingsTextBlock.Text = month.IsCurrent() ? (savings.ToString("F") + " zł") : "-";
             BalanceTextBlock.Text = (balance > 0 ? "+" : "") + balance.ToString("F") + " zł";
             DaysLeftTextBlock.Text = isActualMonth ? daysLeft.ToString() : "-";
             EstimatedDailyExpenseTextBlock.Text = isActualMonth ? estimatedExpense.ToString("F") + " zł" : "-";

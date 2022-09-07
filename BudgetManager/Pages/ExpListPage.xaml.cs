@@ -22,7 +22,7 @@ namespace BudgetManager.Pages
 
         public event EventHandler ExpChanged;
 
-        private Month month_ = AppData.CurrentMonth;
+        private Month month_ = AppData.SelectedMonth;
         private DateTime? date_ = null;
         private Category category_ = null;
 
@@ -36,7 +36,7 @@ namespace BudgetManager.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (AppData.CurrentMonth != null)
+            if (AppData.SelectedMonth != null)
             {
                 if (e.Parameter != null)
                 {
@@ -65,7 +65,7 @@ namespace BudgetManager.Pages
                 }
                 else
                 {
-                    var month = AppData.CurrentMonth;
+                    var month = AppData.SelectedMonth;
                     var startDate = month.StartDate.ToString("dd.MM.yyyy");
                     var endDate = month.EndDate.ToString("dd.MM.yyyy");
                     header += " " + startDate + "-" + endDate;
@@ -76,6 +76,8 @@ namespace BudgetManager.Pages
 
         private void FillWithExpenses()
         {
+            ListViewHeaderItem today;
+            var yOffset = 0.0;
             var expenses = new SortedSet<Expense>(date_ == null
                 ? category_ == null
                     ? month_.Expenses
@@ -106,6 +108,14 @@ namespace BudgetManager.Pages
                             Content = day,
                         };
                         ExpListListView.Items.Add(item);
+                        if (exp.Date.CompareTo(DateTime.Now) < 0)
+                        {
+                            today = item;
+                        }
+                        else
+                        {
+                            yOffset += item.ActualHeight;
+                        }
                     }
 
                     var expItem = new ExpenseListViewItem()
@@ -114,7 +124,10 @@ namespace BudgetManager.Pages
                     };
 
                     ExpListListView.Items.Add(expItem);
+                    yOffset += expItem.ActualHeight;
                 }
+
+                ExpListScrollViewer.ScrollToVerticalOffset(yOffset);
             }
         }
 
@@ -144,7 +157,7 @@ namespace BudgetManager.Pages
             var details = sender as ExpDetails;
             if (details != null)
             {
-                if (!AppData.CurrentMonth.Expenses.Contains(details.Expense))
+                if (!AppData.SelectedMonth.Expenses.Contains(details.Expense))
                 {
                     ExpListSplitView.IsPaneOpen = false;
                 }

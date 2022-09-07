@@ -13,7 +13,7 @@ namespace BudgetManager.Models
             }
             StartDate = months.First().StartDate;
             EndDate = months.Last().EndDate;
-            if (months.Last() == AppData.CurrentMonth)
+            if (months.Last() == AppData.SelectedMonth)
             {
                 months.Remove(months.Last());
             }
