@@ -9,28 +9,12 @@
 
     <ScrollViewer>
         <StackPanel>
-            <controls:DockPanel>
-                <ToggleSwitch x:Name="ThemeToggleSwitch"
+            <ToggleSwitch x:Name="ThemeToggleSwitch"
                           Header="Motyw"
                           Margin="16"
                           OnContent="jasny"
                           OffContent="ciemny"
                           Toggled="ThemeToggleSwitch_Toggled"/>
-                
-                <StackPanel Margin="8">
-                    <TextBlock Text="Ścieżka do pliku z danymi"
-                               Margin="8"/>
-                    <controls:DockPanel>
-                        <Button x:Name="ChangePathButton"
-                                Margin="8"
-                                controls:DockPanel.Dock="Right"
-                                Content="Zmień"
-                                Click="ChangePathButton_Click"/>
-                        <TextBox x:Name="PathTextBox"
-                                 Margin="8"/>
-                    </controls:DockPanel>
-                </StackPanel>
-            </controls:DockPanel>
 
             <controls:DockPanel Margin="8">
                 <TextBlock Text="Kategorie"

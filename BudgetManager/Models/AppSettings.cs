@@ -7,7 +7,7 @@ namespace BudgetManager.Models
     {
         private static string dataPathKey = "data path";
 
-        public static string dataPath = "C:\\Users\\adria\\Dropbox\\BudgetManager\\dataset.json";
+        public static string dataPath = "C:\\Users\\adria\\OneDrive\\Dokumenty\\Budget Manager\\dataset.json";
 
         public static void Save()
         {

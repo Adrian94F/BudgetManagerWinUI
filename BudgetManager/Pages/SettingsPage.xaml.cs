@@ -21,7 +21,6 @@ namespace BudgetManager.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
-            FillTextBoxes();
             FillWithCategories();
             SetTheme();
         }
@@ -31,19 +30,11 @@ namespace BudgetManager.Pages
             ThemeToggleSwitch.IsOn = this.ActualTheme == ElementTheme.Light;
         }
 
-        private void FillTextBoxes()
-        {
-            PathTextBox.Text = AppSettings.dataPath;
-        }
 
         private void FillWithCategories()
         {
             var categoriesCollection = new ObservableCollection<Category>(AppData.Categories);
             CategoriesDataGrid.ItemsSource = categoriesCollection;
-        }
-
-        private async void ChangePathButton_Click(object sender, RoutedEventArgs e)
-        {
         }
 
         private async void DeleteCategory_Click(object sender, RoutedEventArgs e)
