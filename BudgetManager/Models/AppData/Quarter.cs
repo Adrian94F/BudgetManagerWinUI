@@ -7,13 +7,6 @@ namespace BudgetManager.Models
     {
         public Quarter(SortedSet<Month> months)
         {
-            foreach (var m in months)
-            {
-                if (m.IsCurrent())
-                {
-                    months.Remove(m);
-                }
-            }
             if (months.Count == 0 || months.Count > 3)
             {
                 return;

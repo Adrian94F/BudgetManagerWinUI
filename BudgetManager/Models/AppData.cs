@@ -39,7 +39,7 @@ namespace BudgetManager.Models
             var quarters = new SortedSet<Quarter>();
             var monthEnumerator = Months.GetEnumerator();
 
-            while (monthEnumerator.MoveNext())
+            while (monthEnumerator.MoveNext() && !monthEnumerator.Current.IsCurrent())
             {
                 var month = monthEnumerator.Current;
                 if (month.StartDate.Month == 1 ||
