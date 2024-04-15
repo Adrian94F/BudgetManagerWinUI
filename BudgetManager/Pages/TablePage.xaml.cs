@@ -140,6 +140,10 @@ namespace BudgetManager.Pages
             {
                 var dateIndex = (exp.Date - AppData.SelectedMonth.StartDate).Days;
                 dateIndex = dateIndex < 0 ? 0 : dateIndex;
+                if (dateIndex >= nOfColumns)
+                {
+                    continue;  // hotfix
+                }
                 var catIndex = AppData.Categories.ToList().IndexOf(exp.Category);
 
                 catSums[catIndex] += exp.Value2;
