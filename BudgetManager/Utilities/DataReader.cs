@@ -15,6 +15,7 @@ namespace BudgetManager.Utilities
         private static readonly string monthStartDateKey = "start";
         private static readonly string monthEndDateKey = "end";
         private static readonly string monthIncomesKey = "incomes";
+        private static readonly string incomeDateKey = "date";
         private static readonly string incomeValueKey = "value";
         private static readonly string incomeTypeKey = "type";
         private static readonly string monthIncomeTypeSalary = "salary";
@@ -69,6 +70,7 @@ namespace BudgetManager.Utilities
                     {
                         income.Add(incomeCommentKey, inc.Comment);
                     }
+                    income.Add(incomeDateKey, inc.Date != null ? inc.Date : "");
 
                     incomes.Add(income);
                 }
@@ -166,12 +168,16 @@ namespace BudgetManager.Utilities
                             var comment = incomeFromJson.Keys.Contains(incomeCommentKey)
                                 ? incomeFromJson[incomeCommentKey]
                                 : "";
+                            DateTime? date = (incomeFromJson.Keys.Contains(incomeDateKey) && incomeFromJson[incomeDateKey] != "")
+                                ? DateTime.Parse(incomeFromJson[incomeDateKey].ToString())
+                                : null;
 
                             var income = new Income()
                             {
                                 Value = value,
                                 Type = type,
-                                Comment = comment
+                                Comment = comment,
+                                Date = date
                             };
                             month.Incomes.Add(income);
                         }

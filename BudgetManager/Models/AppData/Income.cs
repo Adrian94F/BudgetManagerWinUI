@@ -9,6 +9,7 @@ namespace BudgetManager.Models
             Salary,
             Additional
         };
+        public DateTime? Date { get; set; }
 
         public decimal Value { get => value_; set => value_ = value; }
 
@@ -33,6 +34,7 @@ namespace BudgetManager.Models
             Type = income.Type;
             Value = income.Value;
             Comment = income.Comment;
+            Date = income.Date;
         }
     }
 }
